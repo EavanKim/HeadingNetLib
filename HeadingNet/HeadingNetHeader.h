@@ -23,3 +23,4 @@
 #include "HeadingDefine.h"
 #include "HeadingBuffer.h"
 #include "HeadingSession.h"
+#include "HeadingFunction.h"

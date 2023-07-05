@@ -149,6 +149,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="HeadingBuffer.cpp" />
+    <ClCompile Include="HeadingFunction.cpp" />
     <ClCompile Include="HeadingNet.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
