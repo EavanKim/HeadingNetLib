@@ -40,4 +40,6 @@ namespace Heading
 	typedef SendStruct<100, 43> TestBuffer;
 	typedef SendStruct<1000, 1000> ChatBuffer;
 #pragma pack(pop)
+
+	typedef std::vector<Header*>					packetBuff;
 }

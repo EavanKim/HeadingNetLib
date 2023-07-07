@@ -22,8 +22,6 @@ namespace Heading
 		std::string		LastError	= "";
 	};
 
-	typedef std::vector<Header*>					packetBuff;
-
 	struct sessionInfo
 	{
 		uint64_t		key			= 0;
