@@ -1,4 +1,5 @@
 #pragma once
+#define WIN32_LEAN_AND_MEAN
 
 #include <iostream>
 #include <stdint.h>
@@ -11,14 +12,15 @@
 
 #include <Windows.h>
 
-#include <string>
-
-#include <unordered_map>
-#include <vector>
-
 #include <memory>
+#include <string>
+#include <stdexcept>
 
-#include <WinSock2.h>
+#include <thread>
+#include <vector>
+#include <unordered_map>
+#include <string>
+#include <queue>
 
 #include "HeadingDefine.h"
 #include "HeadingBuffer.h"

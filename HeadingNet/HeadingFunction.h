@@ -27,9 +27,75 @@ namespace Heading
 	{
 		return std::string();
 	}
+
+
+	static void			WSAErrorString	( _In_			int				_code
+										, _Out_			std::string&	_string )
+	{
+		switch( _code )
+		{
+			case WSA_WAIT_FAILED: // WSA_INFINITE
+				_string = std::string("WSA_WAIT_FAILED");
+				break;
+			case WSA_IO_PENDING:
+				_string = std::string( "WSA_IO_PENDING" );
+				break;
+			case WSA_IO_INCOMPLETE:
+				_string = std::string( "WSA_IO_INCOMPLETE" );
+				break;
+			case WSA_INVALID_HANDLE:
+				_string = std::string( "WSA_INVALID_HANDLE" );
+				break;
+			case WSA_NOT_ENOUGH_MEMORY:
+				_string = std::string( "WSA_NOT_ENOUGH_MEMORY" );
+				break;
+			case WSA_OPERATION_ABORTED:
+				_string = std::string( "WSA_OPERATION_ABORTED" );
+				break;
+			case WSA_MAXIMUM_WAIT_EVENTS:
+				_string = std::string( "WSA_MAXIMUM_WAIT_EVENTS" );
+				break;
+			case WSA_INVALID_PARAMETER:
+				_string = std::string( "WSA_INVALID_PARAMETER" );
+				break;
+			case WSA_WAIT_EVENT_0:
+				_string = std::string( "WSA_WAIT_EVENT_0" );
+				break;
+			case WSA_WAIT_IO_COMPLETION:
+				_string = std::string( "WSA_WAIT_IO_COMPLETION" );
+				break;
+			case WSA_WAIT_TIMEOUT:
+				_string = std::string( "WSA_WAIT_TIMEOUT" );
+				break;
+			case WSANOTINITIALISED:
+				_string = std::string( "WSANOTINITIALISED" );
+				break;
+			case WSASYSNOTREADY:
+				_string = std::string( "WSASYSNOTREADY" );
+				break;
+			case WSAVERNOTSUPPORTED:
+				_string = std::string( "WSAVERNOTSUPPORTED" );
+				break;
+			case WSAEINPROGRESS:
+				_string = std::string( "WSASYSNOTREADY" );
+				break;
+			case WSAEPROCLIM:
+				_string = std::string( "WSAEPROCLIM" );
+				break;
+			case WSAEFAULT:
+				_string = std::string( "WSAEFAULT" );
+				break;
+			default:
+				_string = std::string( "default" );
+				break;
+		}
+	}
+
 	static void			start			( _In_			WSAData&		_data	)
 	{
-		WSAStartup( MAKEWORD( 0, 0 ), &_data );
+		std::string str;
+		WSAErrorString( WSAStartup( MAKEWORD( 2, 2 ), &_data ), str );
+		printf( "Heading::string Error %s \n", str.c_str());
 	}
 
 	static void			end				()
@@ -42,19 +108,23 @@ namespace Heading
 	static bool			createInfo		( _Inout_		connectionInfo& _connInfo )
 	{
 		addrinfo createData = {};
+
 		SecureZeroMemory( ( PVOID )&createData, sizeof( addrinfo ) );
+
 		createData.ai_family = AF_UNSPEC;
 		createData.ai_socktype = SOCK_STREAM;
 		createData.ai_protocol = IPPROTO_TCP;
 
-		int result = getaddrinfo( _connInfo.ip.c_str(), _connInfo.port.c_str(), &createData, &_connInfo.info );
+		int result = getaddrinfo( _connInfo.ip.c_str(), _connInfo.port.c_str(), &createData, &_connInfo.info);
 		if( S_OK == result )
 		{
 			return true;
 		}
 
-		_connInfo.err.errWSA = WSAGetLastError();
-		_connInfo.err.errOS = GetLastError();
+		std::string errString;
+		WSAErrorString( WSAGetLastError(), errString );
+		printf( "createInfo Fail : %s \n", errString.c_str());
+		int winerror = GetLastError();
 
 		return false;
 	}
