@@ -25,18 +25,25 @@ namespace Heading
 		void RecvData();
 		void SendData();
 
+		// 기본 기능
+		volatile	LONG64				m_threadAlive		= 0;
+					WSAEVENT			m_event				= INVALID_HANDLE_VALUE;
+					SOCKET				m_sock				= INVALID_SOCKET;
+					SOCKADDR_IN			m_info				= {};
 
-		volatile	LONG64				m_threadAlive	= 0;
-					WSAEVENT			m_event			= INVALID_HANDLE_VALUE;
-					SOCKET				m_sock			= INVALID_SOCKET;
-					SOCKADDR_IN			m_info			= {};
-					WSANETWORKEVENTS	m_eventStruct	= {};
-					Buffer				m_socketBuffer	= {};
-					packetBuff			m_recvPackets	= {};
-					packetBuff			m_sendPackets	= {};
+					// 기존 내용
+					Buffer				m_socketBuffer		= {};
+					packetBuff			m_recvPackets		= {};
+					packetBuff			m_sendPackets		= {};
+
+					// WSA 에서 사용하는 내용들
+					WSANETWORKEVENTS	m_eventStruct		= {};
+					WSABuffer			m_WSAsocketBuffer	= {};
+					WSApacketBuff		m_WSArecvPackets	= {};
+					WSApacketBuff		m_WSAsendPackets	= {};
 	};
 
-	typedef std::unordered_map<SOCKET, CEventSession*> ActiveEventSessionMap;
-	typedef std::vector<CEventSession*> FreeEventSessionList;
+	typedef std::unordered_map<SOCKET, CEventSession*>	ActiveEventSessionMap;
+	typedef std::vector<CEventSession*>					FreeEventSessionList;
 }
 

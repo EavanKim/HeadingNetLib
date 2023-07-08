@@ -58,8 +58,8 @@ namespace Heading
 				break;
 			}
 
-			//RecvData();
-			//SendData();
+			RecvData( );
+			SendData( );
 		}
 
 		return 0;
@@ -77,19 +77,28 @@ namespace Heading
 
 	void CEventSession::WSARecvData( LPWSAOVERLAPPED _overraped )
 	{
-		char* buffer = nullptr;
-		uint64_t length = 0;
-		m_socketBuffer.get_buffer( &buffer, &length );
-		WSARecv( m_sock, ( LPWSABUF ) buffer, 1, ( LPDWORD ) &length, 0, _overraped, CEventSession::WSARecvCallback );
+		LPWSABUF buf;
+		m_WSAsocketBuffer.get_buffer( &buf );
+		DWORD readResult;
+		int result = WSARecv( m_sock, buf, 1, &readResult, 0, _overraped, CEventSession::WSARecvCallback );
+		m_WSAsocketBuffer.commit( readResult );
+
+		m_WSAsocketBuffer.get_data( &m_WSArecvPackets );
 	}
 
 	void CEventSession::WSASendData( LPWSAOVERLAPPED _overraped )
 	{
 		// TODO : 이걸 하나로 묶어서 보내는게 더 경제적일 것 같기는 한 데 방법이 있을지 고민 해 보기
-		for( Header* packet : m_sendPackets )
+		for( WSAHeader* packet : m_WSAsendPackets )
 		{
-			WSASend( m_sock, ( char* ) packet, 1, ( LPDWORD ) &packet->length, 0, _overraped, CEventSession::WSASendCallback );
+			LPWSABUF buf = new WSABUF( ); // LPWSABUF 배열을 들고있는게 가장 효과적일 듯...
+			buf->len = packet->length;
+			buf->buf = ( char* ) packet;
+			WSASend( m_sock, buf, 1, ( LPDWORD ) &packet->length, 0, _overraped, CEventSession::WSASendCallback );
+			delete buf;
 		}
+
+		m_WSAsendPackets.clear( );
 	}
 
 	void CEventSession::RecvData( )
@@ -112,6 +121,6 @@ namespace Heading
 			delete packet;
 		}
 
-		m_sendPackets.clear();
+		m_sendPackets.clear( );
 	}
 }
