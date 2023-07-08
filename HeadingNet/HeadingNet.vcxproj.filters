@@ -36,6 +36,15 @@
     <ClInclude Include="HeadingFunction.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="CSelect.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="CSession.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="CEventSelect.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="HeadingNet.cpp">
@@ -48,6 +57,15 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="HeadingFunction.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="CSelect.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="CSession.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="CEventSelect.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>

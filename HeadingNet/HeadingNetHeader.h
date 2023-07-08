@@ -25,4 +25,9 @@
 #include "HeadingDefine.h"
 #include "HeadingBuffer.h"
 #include "HeadingSession.h"
+
+#include "CSession.h"
+#include "CSelect.h"
+#include "CEventSelect.h"
+
 #include "HeadingFunction.h"

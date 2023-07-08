@@ -147,6 +147,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="CEventSelect.h" />
+    <ClInclude Include="CSelect.h" />
+    <ClInclude Include="CSession.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="HeadingBuffer.h" />
     <ClInclude Include="HeadingDefine.h" />
@@ -156,6 +159,9 @@
     <ClInclude Include="pch.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="CEventSelect.cpp" />
+    <ClCompile Include="CSelect.cpp" />
+    <ClCompile Include="CSession.cpp" />
     <ClCompile Include="HeadingBuffer.cpp" />
     <ClCompile Include="HeadingFunction.cpp" />
     <ClCompile Include="HeadingNet.cpp" />
