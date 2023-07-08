@@ -67,27 +67,27 @@ namespace Heading
 		}
 		while( S_OK != returnValue );
 
-		m_selectEvent = WSACreateEvent();
-		WSAEventSelect( m_sock, m_selectEvent, FD_ACCEPT | FD_CLOSE );
+		m_connectEvent = WSACreateEvent();
+		WSAEventSelect( m_sock, m_connectEvent, FD_ACCEPT | FD_CLOSE ); // 여기가 아마 Event와 묶이는 부분
 		if( SOCKET_ERROR == listen( m_sock, 5 ) )
 			return false;
 
 		return true;
 	}
 
-	void CEventSelect::setupSelect( bool _read, bool _write )
-	{
-		readSelect = _read;
-		writeSelect = _write;
-	}
-
 	void CEventSelect::Do_Select()
 	{
+		DWORD index = WSAWaitForMultipleEvents(m_selectEvent.size(), m_selectEvent.data(), false, 0, false);
+
+
+		
+		bool result = WSAResetEvent(m_selectEvent[index - WSA_WAIT_EVENT_0]);
 
 	}
 
 	void CEventSelect::Update_Receive()
 	{
+
 	}
 
 	void CEventSelect::Accept_NewSession()

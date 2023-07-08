@@ -148,6 +148,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="CEventSelect.h" />
+    <ClInclude Include="CEventSession.h" />
     <ClInclude Include="CSelect.h" />
     <ClInclude Include="CSession.h" />
     <ClInclude Include="framework.h" />
@@ -160,6 +161,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CEventSelect.cpp" />
+    <ClCompile Include="CEventSession.cpp" />
     <ClCompile Include="CSelect.cpp" />
     <ClCompile Include="CSession.cpp" />
     <ClCompile Include="HeadingBuffer.cpp" />

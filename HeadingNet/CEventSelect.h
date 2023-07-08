@@ -10,7 +10,6 @@ namespace Heading
 
 		void SetupAddrInfo();
 		bool bind();
-		void setupSelect( bool _read = false, bool _write = false );
 		void Do_Select();
 
 	private:
@@ -18,14 +17,15 @@ namespace Heading
 		void Accept_NewSession();
 		void Update_Send();
 
-		bool		readSelect = false;
-		bool		writeSelect = false;
-
-		uint16_t	m_port			= 0;
-		SOCKET		m_sock			= INVALID_SOCKET;
-		SOCKADDR_IN m_info			= {};
-		WSAEVENT	m_selectEvent	= {};
-		CSessionMap	m_sessionMap	= {};
+		uint16_t				m_port				= 0;
+		SOCKET					m_sock				= INVALID_SOCKET;
+		SOCKADDR_IN				m_info				= {};
+		DWORD					m_eventCount		= {};
+		DWORD					m_bytesTransferred	= {};
+		WSAEVENT				m_connectEvent		= {};
+		WSAOVERLAPPED			m_acceptOverlapped	= {};
+		std::vector<WSAEVENT>	m_selectEvent		= {};
+		CSessionMap				m_sessionMap		= {};
 	};
 }
 

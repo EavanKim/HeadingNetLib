@@ -28,6 +28,7 @@
 
 #include "CSession.h"
 #include "CSelect.h"
+#include "CEventSession.h"
 #include "CEventSelect.h"
 
 #include "HeadingFunction.h"
