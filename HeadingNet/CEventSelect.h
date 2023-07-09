@@ -25,7 +25,8 @@ namespace Heading
 		WSAEVENT				m_connectEvent		= {};
 		WSAOVERLAPPED			m_acceptOverlapped	= {};
 		std::vector<WSAEVENT>	m_selectEvent		= {};
-		CSessionMap				m_sessionMap		= {};
+		ActiveEventSessionMap	m_sessionMap		= {};
+		FreeEventSessionList	m_freeList			= {};
 	};
 }
 

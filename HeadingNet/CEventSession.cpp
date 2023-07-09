@@ -14,9 +14,12 @@ namespace Heading
 
 	void CEventSession::BindEvent( SOCKET _sock )
 	{
-		m_sock = _sock;
-		m_event = WSACreateEvent( );
-		int result = WSAEventSelect( m_sock, m_event, 0 );
+		if(INVALID_SOCKET != _sock )
+		{
+			m_sock = _sock;
+			m_event = WSACreateEvent( );
+			int result = WSAEventSelect( m_sock, m_event, 0 );
+		}
 	}
 
 	void CEventSession::ReleaseEvent( )
@@ -39,10 +42,12 @@ namespace Heading
 		}
 	}
 
-	void CEventSession::Update( LPWSAOVERLAPPED _overraped )
+	void CEventSession::Accept( SOCKET _acceptSock, std::vector<WSAEVENT>& _selectEvent, ActiveEventSessionMap& _sessionMap )
 	{
-		WSARecvData( _overraped );
-		WSASendData( _overraped );
+		INT length = 0;
+		BindEvent(WSAAccept( _acceptSock, ( sockaddr* ) &m_info, &length, NULL, NULL ));
+		_selectEvent.push_back(m_event);
+		_sessionMap.insert(std::make_pair(m_sock, this));
 	}
 
 	int CEventSession::Update( void* _ptr )

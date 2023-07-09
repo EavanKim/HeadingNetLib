@@ -62,7 +62,7 @@ namespace Heading
 					continue;
 				}
 				printf( "connect failed with error: %d\n", err );
-				return INVALID_SOCKET;
+				return false;
 			}
 		}
 		while( S_OK != returnValue );
@@ -85,14 +85,35 @@ namespace Heading
 
 	void CEventSelect::Update_Receive()
 	{
-
+		ActiveEventSessionMap::iterator iter = m_sessionMap.begin();
+		for(;m_sessionMap.end() != iter; ++iter)
+		{
+			iter->second->WSARecvData(&m_acceptOverlapped);
+		}
 	}
 
 	void CEventSelect::Accept_NewSession()
 	{
+		CEventSession* newSession = nullptr;
+		if( m_freeList.size() )
+		{
+			newSession = m_freeList.back();
+			m_freeList.pop_back();
+		}
+		else
+		{
+			newSession = new CEventSession();
+		}
+
+		newSession->Accept(m_sock, m_selectEvent, m_sessionMap);
 	}
 
 	void CEventSelect::Update_Send()
 	{
+		ActiveEventSessionMap::iterator iter = m_sessionMap.begin();
+		for(;m_sessionMap.end() != iter; ++iter)
+		{
+			iter->second->WSASendData(&m_acceptOverlapped);
+		}
 	}
 }

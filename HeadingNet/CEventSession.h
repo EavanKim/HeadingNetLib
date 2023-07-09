@@ -11,17 +11,16 @@ namespace Heading
 		void BindEvent( SOCKET _sock );
 		void ReleaseEvent( );
 
-		// 단순 선형 업데이트
-		void Update( LPWSAOVERLAPPED _overraped );
+		void Accept( SOCKET _acceptSock, std::vector<WSAEVENT>& _selectEvent, ActiveEventSessionMap& _sessionMap );
 
 		// Event 단위로 관리하는 단일 Thread 할당된 Update일 경우
 		int Update( void* _ptr );
+		void WSARecvData( LPWSAOVERLAPPED _overraped );
+		void WSASendData( LPWSAOVERLAPPED _overraped );
 
 	private:
 		static void WSARecvCallback( IN DWORD dwError, IN DWORD cbTransferred, IN LPWSAOVERLAPPED lpOverlapped, IN DWORD dwFlags);
 		static void WSASendCallback( IN DWORD dwError, IN DWORD cbTransferred, IN LPWSAOVERLAPPED lpOverlapped, IN DWORD dwFlags);
-		void WSARecvData( LPWSAOVERLAPPED _overraped );
-		void WSASendData( LPWSAOVERLAPPED _overraped );
 		void RecvData();
 		void SendData();
 
