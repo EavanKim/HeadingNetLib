@@ -14,7 +14,7 @@ namespace Heading
 
 	private:
 		void Update_Receive();
-		void Accept_NewSession();
+		void Accept_NewSession( long _NetworkEventType );
 		void Update_Send();
 
 		uint16_t				m_port				= 0;

@@ -27,7 +27,6 @@
 #include "HeadingSession.h"
 
 // Class화 작업 내용들
-#include "WSABuffer.h"
 #include "CSession.h"
 #include "CSelect.h"
 #include "CEventSession.h"

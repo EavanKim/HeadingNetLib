@@ -88,11 +88,11 @@ namespace Heading
 		ActiveEventSessionMap::iterator iter = m_sessionMap.begin();
 		for(;m_sessionMap.end() != iter; ++iter)
 		{
-			iter->second->WSARecvData(&m_acceptOverlapped);
+			iter->second->RecvData();
 		}
 	}
 
-	void CEventSelect::Accept_NewSession()
+	void CEventSelect::Accept_NewSession( long _NetworkEventType )
 	{
 		CEventSession* newSession = nullptr;
 		if( m_freeList.size() )
@@ -105,7 +105,7 @@ namespace Heading
 			newSession = new CEventSession();
 		}
 
-		newSession->Accept(m_sock, m_selectEvent, m_sessionMap);
+		newSession->Accept(_NetworkEventType);
 	}
 
 	void CEventSelect::Update_Send()
@@ -113,7 +113,7 @@ namespace Heading
 		ActiveEventSessionMap::iterator iter = m_sessionMap.begin();
 		for(;m_sessionMap.end() != iter; ++iter)
 		{
-			iter->second->WSASendData(&m_acceptOverlapped);
+			iter->second->SendData();
 		}
 	}
 }

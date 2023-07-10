@@ -158,7 +158,6 @@
     <ClInclude Include="HeadingNetHeader.h" />
     <ClInclude Include="HeadingSession.h" />
     <ClInclude Include="pch.h" />
-    <ClInclude Include="WSABuffer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CEventSelect.cpp" />
@@ -174,7 +173,6 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="WSABuffer.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

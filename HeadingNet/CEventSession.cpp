@@ -9,16 +9,16 @@ namespace Heading
 
 	CEventSession::~CEventSession( )
 	{
-
+		ReleaseEvent( );
 	}
 
-	void CEventSession::BindEvent( SOCKET _sock )
+	void CEventSession::BindEvent( SOCKET _sock, long _NetworkEventType )
 	{
-		if(INVALID_SOCKET != _sock )
+		if( INVALID_SOCKET != _sock )
 		{
-			m_sock = _sock;
+			m_session = _sock;
 			m_event = WSACreateEvent( );
-			int result = WSAEventSelect( m_sock, m_event, 0 );
+			int result = WSAEventSelect( m_session, m_event, _NetworkEventType );
 		}
 	}
 
@@ -34,76 +34,64 @@ namespace Heading
 				m_event = INVALID_HANDLE_VALUE;
 			}
 
-			if( INVALID_SOCKET != m_sock )
+			if( INVALID_SOCKET != m_session )
 			{
-				closesocket( m_sock );
-				m_sock = INVALID_SOCKET;
+				closesocket( m_session );
+				m_session = INVALID_SOCKET;
 			}
 		}
 	}
 
-	void CEventSession::Accept( SOCKET _acceptSock, std::vector<WSAEVENT>& _selectEvent, ActiveEventSessionMap& _sessionMap )
+	void CEventSession::SetUpSessionType( bool _read, bool _write, bool _accept )
 	{
-		INT length = 0;
-		BindEvent(WSAAccept( _acceptSock, ( sockaddr* ) &m_info, &length, NULL, NULL ));
-		_selectEvent.push_back(m_event);
-		_sessionMap.insert(std::make_pair(m_sock, this));
+		if( _read )
+			m_sessionTypeFlag |= FD_READ;
+		if( _write )
+			m_sessionTypeFlag |= FD_WRITE;
+		if( _accept )
+			m_sessionTypeFlag |= FD_ACCEPT;
+
+		m_sessionTypeFlag |= FD_CLOSE;
 	}
 
-	int CEventSession::Update( void* _ptr )
+	CEventSession* CEventSession::Accept( long _NetworkEventType )
 	{
-		while( 0 != InterlockedCompareExchange64( &m_threadAlive, 0, 0 ) )
+		CEventSession* result = new CEventSession( );
+		INT length = 0;
+		BindEvent( WSAAccept( m_session, ( sockaddr* ) &m_info, &length, NULL, NULL ), _NetworkEventType );
+
+		if( INVALID_SOCKET == result->m_session )
 		{
-			WaitForSingleObject( m_event, INFINITE );
+			delete result;
+			result = nullptr;
+		}
 
-			// 혹시 이벤트에서 깼는데 Thread가 정리당하는 중이라면
-			if( 0 == InterlockedCompareExchange64( &m_threadAlive, 0, 0 ) )
-			{
-				// 탈출
-				break;
-			}
+		return result;
+	}
 
+	void CEventSession::EnumNetworkEvents( )
+	{
+		int EventsResult = WSAEnumNetworkEvents( m_session, m_event, &m_sessionEvents );
+		if( SOCKET_ERROR == EventsResult )
+		{
+			// error
+			return;
+		}
+
+		if( m_sessionEvents.lNetworkEvents & FD_ACCEPT )
+		{
+			Accept( m_sessionTypeFlag );
+		}
+
+		if( m_sessionEvents.lNetworkEvents & FD_READ )
+		{
 			RecvData( );
+		}
+
+		if( m_sessionEvents.lNetworkEvents & FD_WRITE )
+		{
 			SendData( );
 		}
-
-		return 0;
-	}
-
-	void CEventSession::WSARecvCallback( IN DWORD dwError, IN DWORD cbTransferred, IN LPWSAOVERLAPPED lpOverlapped, IN DWORD dwFlags )
-	{
-
-	}
-
-	void CEventSession::WSASendCallback( IN DWORD dwError, IN DWORD cbTransferred, IN LPWSAOVERLAPPED lpOverlapped, IN DWORD dwFlags )
-	{
-
-	}
-
-	void CEventSession::WSARecvData( LPWSAOVERLAPPED _overraped )
-	{
-		LPWSABUF buf;
-		m_WSAsocketBuffer.get_buffer( &buf );
-		DWORD readResult;
-		int result = WSARecv( m_sock, buf, 1, &readResult, 0, _overraped, CEventSession::WSARecvCallback );
-		m_WSAsocketBuffer.commit( readResult );
-
-		m_WSAsocketBuffer.get_data( &m_WSArecvPackets );
-	}
-
-	void CEventSession::WSASendData( LPWSAOVERLAPPED _overraped )
-	{
-		// TODO : 이걸 하나로 묶어서 보내는게 더 경제적일 것 같기는 한 데 방법이 있을지 고민 해 보기
-		for( WSAHeader* packet : m_WSAsendPackets )
-		{
-			LPWSABUF buf = new WSABUF( ); // LPWSABUF 배열을 들고있는게 가장 효과적일 듯...
-			buf->len = packet->length;
-			buf->buf = ( char* ) packet;
-			WSASend( m_sock, buf, 1, ( LPDWORD ) &packet->length, 0, _overraped, CEventSession::WSASendCallback );
-			delete buf;
-		}
-
-		m_WSAsendPackets.clear( );
 	}
 
 	void CEventSession::RecvData( )
@@ -111,7 +99,7 @@ namespace Heading
 		char* buffer = nullptr;
 		uint64_t length = 0;
 		m_socketBuffer.get_buffer( &buffer, &length );
-		int result = ::recv( m_sock, buffer, length, 0 );
+		int result = ::recv( m_session, buffer, length, 0 );
 		m_socketBuffer.commit( result );
 
 		m_socketBuffer.get_data( &m_recvPackets );
@@ -122,7 +110,7 @@ namespace Heading
 		// TODO : 이걸 하나로 묶어서 보내는게 더 경제적일 것 같기는 한 데 방법이 있을지 고민 해 보기
 		for( Header* packet : m_sendPackets )
 		{
-			::send( m_sock, ( char* ) packet, packet->length, 0 );
+			::send( m_session, ( char* ) packet, packet->length, 0 );
 			delete packet;
 		}
 

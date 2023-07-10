@@ -15,17 +15,18 @@ namespace Heading
 	class Buffer
 	{
 	public:
-		Buffer();
-		Buffer( uint64_t _sessionKey );
-		Buffer( Buffer& _copy );
-		Buffer( Buffer&& _move );
-		~Buffer();
+				Buffer		(							);
+				Buffer		( uint64_t		_sessionKey );
+				Buffer		( Buffer&		_copy		);
+				Buffer		( Buffer&&		_move		);
+				~Buffer		(							);
 
-		void commit( uint64_t _length );
+		void	commit		( uint64_t		_length		);
 
-		bool	get_buffer	( char** _buffer, uint64_t* _length );	// 버퍼가 읽을 수 있는 상태일 때 true와 함께 정보를 반환합니다.
-		Header* get_data	(									);											// 데이터를 한 개만 읽습니다.
-		void	get_data	( packetBuff* _datas				);						// 모든 데이터를 읽어서 꺼냅니다.
+		bool	get_buffer	( char**		_buffer
+							, uint64_t*		_length		);	// 버퍼가 읽을 수 있는 상태일 때 true와 함께 정보를 반환합니다.
+		Header* get_data	(							);											// 데이터를 한 개만 읽습니다.
+		void	get_data	( packetBuff*	_datas		);						// 모든 데이터를 읽어서 꺼냅니다.
 
 	private:
 		uint64_t	m_sessionKey	= 0;		// 어느 세션에 속한 버퍼인지의 기록입니다.
