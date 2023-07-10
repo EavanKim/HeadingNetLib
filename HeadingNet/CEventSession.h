@@ -1,4 +1,5 @@
 #pragma once
+
 namespace Heading
 {
 	class CEventSession

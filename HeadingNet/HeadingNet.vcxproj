@@ -147,6 +147,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="20230711_SeperateAccept\CAccepter.h" />
+    <ClInclude Include="20230711_SeperateAccept\CChat_Mgr.h" />
+    <ClInclude Include="20230711_SeperateAccept\CAcceptSession.h" />
+    <ClInclude Include="20230711_SeperateAccept\CChatSession.h" />
     <ClInclude Include="CEventSelect.h" />
     <ClInclude Include="CEventSession.h" />
     <ClInclude Include="CSelect.h" />
@@ -160,6 +164,10 @@
     <ClInclude Include="pch.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="20230711_SeperateAccept\CAccepter.cpp" />
+    <ClCompile Include="20230711_SeperateAccept\CChat_Mgr.cpp" />
+    <ClCompile Include="20230711_SeperateAccept\CAcceptSession.cpp" />
+    <ClCompile Include="20230711_SeperateAccept\CChatSession.cpp" />
     <ClCompile Include="CEventSelect.cpp" />
     <ClCompile Include="CEventSession.cpp" />
     <ClCompile Include="CSelect.cpp" />

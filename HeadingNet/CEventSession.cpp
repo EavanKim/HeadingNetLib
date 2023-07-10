@@ -1,119 +1,123 @@
 #include "pch.h"
 
+
 namespace Heading
 {
-	CEventSession::CEventSession( )
+	CEventSelect::CEventSelect( uint16_t _port )
+		: m_port( _port )
 	{
 
 	}
 
-	CEventSession::~CEventSession( )
+	CEventSelect::~CEventSelect()
 	{
-		ReleaseEvent( );
 	}
 
-	void CEventSession::BindEvent( SOCKET _sock, long _NetworkEventType )
+	void CEventSelect::SetupAddrInfo()
 	{
-		if( INVALID_SOCKET != _sock )
+		sockaddr_storage storage;
+		memset( &storage, 0, sizeof storage );
+		// The socket address to be passed to bind
+		m_info.sin_family = AF_INET;
+		m_info.sin_addr.s_addr = htonl( INADDR_ANY );
+		m_info.sin_port = htons( m_port );
+	}
+
+	bool CEventSelect::bind()
+	{
+		int returnValue = 0;
+		int loopCounter = 0;
+
+		// 새로 바인딩하면 초기화해버리기
+		if( INVALID_SOCKET != m_sock )
 		{
-			m_session = _sock;
-			m_event = WSACreateEvent( );
-			int result = WSAEventSelect( m_session, m_event, _NetworkEventType );
+			closesocket( m_sock );
+			m_sock = INVALID_SOCKET;
+			return false;
 		}
-	}
 
-	void CEventSession::ReleaseEvent( )
-	{
-		InterlockedExchange64( &m_threadAlive, 0 );
-
-		if( SetEvent( m_event ) )
+		do
 		{
-			if( INVALID_HANDLE_VALUE != m_event )
+			if( 5 < loopCounter )
 			{
-				CloseHandle( m_event );
-				m_event = INVALID_HANDLE_VALUE;
+				int winerror = GetLastError();
+				// exception 객체 생성되면 throw하면서 에러 정보 송신
+				return false;
 			}
 
-			if( INVALID_SOCKET != m_session )
+			m_sock = socket( AF_INET, SOCK_STREAM, IPPROTO_TCP );
+			if( INVALID_SOCKET == m_sock )
 			{
-				closesocket( m_session );
-				m_session = INVALID_SOCKET;
+				continue;
+			}
+
+			returnValue = ::bind( m_sock, ( SOCKADDR* )&m_info, sizeof( m_info ) );
+			if( returnValue == SOCKET_ERROR )
+			{
+				int err = 0;
+				if( WSAECONNREFUSED == ( err = WSAGetLastError() ) )
+				{
+					closesocket( m_sock );
+					m_sock = INVALID_SOCKET;
+					continue;
+				}
+				printf( "connect failed with error: %d\n", err );
+				return false;
 			}
 		}
+		while( S_OK != returnValue );
+
+		m_connectEvent = WSACreateEvent();
+		WSAEventSelect( m_sock, m_connectEvent, FD_ACCEPT | FD_CLOSE ); // 여기가 아마 Event와 묶이는 부분
+		if( SOCKET_ERROR == listen( m_sock, 5 ) )
+			return false;
+
+		return true;
 	}
 
-	void CEventSession::SetUpSessionType( bool _read, bool _write, bool _accept )
+	void CEventSelect::Do_Select()
 	{
-		if( _read )
-			m_sessionTypeFlag |= FD_READ;
-		if( _write )
-			m_sessionTypeFlag |= FD_WRITE;
-		if( _accept )
-			m_sessionTypeFlag |= FD_ACCEPT;
+		DWORD index = WSAWaitForMultipleEvents(m_selectEvent.size(), m_selectEvent.data(), false, 0, false);
 
-		m_sessionTypeFlag |= FD_CLOSE;
+		ActiveEventSessionMap::iterator session = m_sessionMap.find(m_selectEvent[index - WSA_WAIT_EVENT_0]);
+		if(m_sessionMap.end() != session)
+		{
+			session->second->EnumNetworkEvents();
+		}
+
 	}
 
-	CEventSession* CEventSession::Accept( long _NetworkEventType )
+	void CEventSelect::Update_Receive()
 	{
-		CEventSession* result = new CEventSession( );
-		INT length = 0;
-		BindEvent( WSAAccept( m_session, ( sockaddr* ) &m_info, &length, NULL, NULL ), _NetworkEventType );
-
-		if( INVALID_SOCKET == result->m_session )
+		ActiveEventSessionMap::iterator iter = m_sessionMap.begin();
+		for(;m_sessionMap.end() != iter; ++iter)
 		{
-			delete result;
-			result = nullptr;
-		}
-
-		return result;
-	}
-
-	void CEventSession::EnumNetworkEvents( )
-	{
-		int EventsResult = WSAEnumNetworkEvents( m_session, m_event, &m_sessionEvents );
-		if( SOCKET_ERROR == EventsResult )
-		{
-			// error
-			return;
-		}
-
-		if( m_sessionEvents.lNetworkEvents & FD_ACCEPT )
-		{
-			Accept( m_sessionTypeFlag );
-		}
-
-		if( m_sessionEvents.lNetworkEvents & FD_READ )
-		{
-			RecvData( );
-		}
-
-		if( m_sessionEvents.lNetworkEvents & FD_WRITE )
-		{
-			SendData( );
+			iter->second->RecvData();
 		}
 	}
 
-	void CEventSession::RecvData( )
+	void CEventSelect::Accept_NewSession( long _NetworkEventType )
 	{
-		char* buffer = nullptr;
-		uint64_t length = 0;
-		m_socketBuffer.get_buffer( &buffer, &length );
-		int result = ::recv( m_session, buffer, length, 0 );
-		m_socketBuffer.commit( result );
-
-		m_socketBuffer.get_data( &m_recvPackets );
-	}
-
-	void CEventSession::SendData( )
-	{
-		// TODO : 이걸 하나로 묶어서 보내는게 더 경제적일 것 같기는 한 데 방법이 있을지 고민 해 보기
-		for( Header* packet : m_sendPackets )
+		CEventSession* newSession = nullptr;
+		if( m_freeList.size() )
 		{
-			::send( m_session, ( char* ) packet, packet->length, 0 );
-			delete packet;
+			newSession = m_freeList.back();
+			m_freeList.pop_back();
+		}
+		else
+		{
+			newSession = new CEventSession();
 		}
 
-		m_sendPackets.clear( );
+		newSession->Accept(_NetworkEventType);
+	}
+
+	void CEventSelect::Update_Send()
+	{
+		ActiveEventSessionMap::iterator iter = m_sessionMap.begin();
+		for(;m_sessionMap.end() != iter; ++iter)
+		{
+			iter->second->SendData();
+		}
 	}
 }

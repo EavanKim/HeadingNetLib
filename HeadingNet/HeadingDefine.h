@@ -4,6 +4,14 @@
 
 namespace Heading
 {
+	enum ENUM_SESSION_PRIORITY
+	{
+		ENUM_SESSION_PRIORITY_REST_IN_PEACE,
+		ENUM_SESSION_PRIORITY_NOMAL,
+		ENUM_SESSION_PRIORITY_NEED_HARD_WORK,
+		ENUM_SESSION_PRIORITY_MAX
+	};
+
 //이 객체 하나당 1session.
 // 작업자가 알아보기 쉬운 이름입니다.
 	enum ENUM_SESSION_TYPE
@@ -42,4 +50,5 @@ namespace Heading
 #pragma pack(pop)
 
 	typedef std::vector<Header*>		packetBuff;
+	typedef std::vector<SOCKET>			SocketList;
 }
