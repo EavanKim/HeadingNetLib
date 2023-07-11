@@ -2,10 +2,11 @@
 
 namespace Heading
 {
-	class CChat_Mgr
+	class CChatter
 	{
 	public:
-
+		CChatter();
+		~CChatter();
 
 	private:
 

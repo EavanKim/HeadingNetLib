@@ -36,6 +36,6 @@
 #include "20230711_SeperateAccept/CAcceptSession.h"
 #include "20230711_SeperateAccept/CChatSession.h"
 #include "20230711_SeperateAccept/CAccepter.h"
-#include "20230711_SeperateAccept/CChat_Mgr.h"
+#include "20230711_SeperateAccept/CChatter.h"
 
 #include "HeadingFunction.h"
