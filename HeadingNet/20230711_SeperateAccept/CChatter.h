@@ -8,6 +8,8 @@ namespace Heading
 		CChatter();
 		~CChatter();
 
+		void Do_Update();
+
 	private:
 
 	};

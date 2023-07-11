@@ -66,6 +66,9 @@
     <ClInclude Include="20230711_SeperateAccept\CEventBaseSession.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="20230711_SeperateAccept\CEventSelecter.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="HeadingNet.cpp">
@@ -108,6 +111,9 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="20230711_SeperateAccept\CEventBaseSession.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="20230711_SeperateAccept\CEventSelecter.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
