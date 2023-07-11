@@ -13,9 +13,10 @@ namespace Heading
 		void Do_Select();
 		bool Get_NewSocket( OUT SocketList& _newSocket );
 
-		uint64_t			m_acceptsSize	= 0;
-		AcceptSessionMap	m_accepts		= {};
-		SocketList			m_newSockets	= {};
+		uint64_t				m_acceptsSize						= 0;
+		AcceptSessionEventMap	m_accepts							= {};
+		SocketList				m_newSockets						= {};
+		WSAEVENT				m_events[WSA_MAXIMUM_WAIT_EVENTS]	= {};
 	};
 }
 

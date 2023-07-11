@@ -51,4 +51,5 @@ namespace Heading
 
 	typedef std::vector<Header*>		packetBuff;
 	typedef std::vector<SOCKET>			SocketList;
+	typedef std::vector<WSAEVENT>		EventList;
 }

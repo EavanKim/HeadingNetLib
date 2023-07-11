@@ -32,6 +32,7 @@
 #include "CEventSession.h"
 #include "CEventSelect.h"
 
+#include "20230711_SeperateAccept/CEventBaseSession.h"
 #include "20230711_SeperateAccept/CAcceptSession.h"
 #include "20230711_SeperateAccept/CChatSession.h"
 #include "20230711_SeperateAccept/CAccepter.h"
