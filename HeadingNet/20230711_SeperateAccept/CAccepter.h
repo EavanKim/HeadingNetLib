@@ -10,10 +10,9 @@ namespace Heading
 		// WSA_MAXIMUM_WAIT_EVENTS 를 넘어가거나 bind 실패하면 false
 		bool Set_NewAcceptPort( uint16_t _port );
 
-		void Do_Update( );
+		void Do_Select( );
 
 	private:
-		void Do_Select( );
 		bool Get_NewSocket( OUT SocketList& _newSocket );
 
 		// Accepter를 Select 용으로만 사용하고 Events 맵은 전체에서 사용하는게 맞을지 고민...

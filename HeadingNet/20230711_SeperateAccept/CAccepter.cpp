@@ -41,11 +41,6 @@ namespace Heading
 		return false;
 	}
 
-	void CAccepter::Do_Update( )
-	{
-
-	}
-
 	void CAccepter::Do_Select( )
 	{
 		DWORD ret = WSAWaitForMultipleEvents( m_accepts.size( ), m_events, FALSE, 0, TRUE );
