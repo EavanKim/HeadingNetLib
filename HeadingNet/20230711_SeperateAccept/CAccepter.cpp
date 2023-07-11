@@ -113,7 +113,12 @@ namespace Heading
 					sockaddr_in info = {}; // 얻어질까 과연
 					SOCKET newsock = iter->second->CreateConnect( info );
 					if( INVALID_SOCKET != newsock )
-						m_newSockets.push_back( newsock );
+					{
+						CreatedSocketInfo NewInfo;
+						NewInfo.AcceptPort = iter->second->Get_Port();
+						NewInfo.Sock = newsock;
+						m_newSockets.push_back( NewInfo );
+					}
 				}
 			}
 			break;
@@ -125,7 +130,7 @@ namespace Heading
 		}
 	}
 
-	bool CAccepter::Get_NewSocket( OUT SocketList& _newSocket )
+	bool CAccepter::Get_NewSocket( OUT NewSocketList& _newSocket )
 	{
 		m_newSockets.swap( _newSocket );
 		if( 0 != _newSocket.size( ) )

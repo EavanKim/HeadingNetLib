@@ -12,12 +12,18 @@ namespace Heading
 		ENUM_SESSION_PRIORITY_MAX
 	};
 
-//이 객체 하나당 1session.
-// 작업자가 알아보기 쉬운 이름입니다.
+	//이 객체 하나당 1session.
+	// 작업자가 알아보기 쉬운 이름입니다.
 	enum ENUM_SESSION_TYPE
 	{
 		ENUM_SESSION_SYNC,
 		ENUM_SESSION_PER_THREAD
+	};
+
+	struct CreatedSocketInfo
+	{
+		uint16_t AcceptPort;
+		SOCKET Sock;
 	};
 
 #pragma pack(push, 1)
@@ -49,7 +55,8 @@ namespace Heading
 	typedef SendStruct<1000, 1000> ChatBuffer;
 #pragma pack(pop)
 
-	typedef std::vector<Header*>		packetBuff;
-	typedef std::vector<SOCKET>			SocketList;
-	typedef std::vector<WSAEVENT>		EventList;
+	typedef std::vector<Header*>			packetBuff;
+	typedef std::vector<SOCKET>				SocketList;
+	typedef std::vector<CreatedSocketInfo>	NewSocketList;
+	typedef std::vector<WSAEVENT>			EventList;
 }

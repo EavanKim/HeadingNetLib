@@ -13,7 +13,7 @@ namespace Heading
 
 		void Do_Select( );
 
-		bool Get_NewSocket( OUT SocketList& _newSocket );
+		bool Get_NewSocket( OUT NewSocketList& _newSocket );
 
 	private:
 		uint8_t					m_size								= 0;
@@ -22,7 +22,7 @@ namespace Heading
 		// Client만 MAX넘지 않게 처리하도록 Chat 매니저에서는 외부의 EventMap을 받아서 Select
 		// 안그러면 클라 64개 넘어가면 터지니까 문제...
 		AcceptSessionEventMap	m_accepts							= {};
-		SocketList				m_newSockets						= {};
+		NewSocketList			m_newSockets						= {};
 		WSAEVENT				m_events[WSA_MAXIMUM_WAIT_EVENTS]	= {};
 	};
 }
