@@ -68,4 +68,9 @@ namespace Heading
 		int length = sizeof( _info );
 		return ::accept( m_sock, ( struct sockaddr* )&_info, &length );
 	}
+
+	uint16_t CAcceptSession::Get_Port( )
+	{
+		return m_listenPort;
+	}
 }

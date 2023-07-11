@@ -12,6 +12,8 @@ namespace Heading
 
 		SOCKET CreateConnect( sockaddr_in& _info );
 
+		uint16_t Get_Port();
+
 	private:
 		uint16_t	m_listenPort	= 0;
 	};

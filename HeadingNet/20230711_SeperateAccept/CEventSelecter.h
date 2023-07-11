@@ -12,7 +12,7 @@ namespace Heading
 		bool Set_NewEvents( WSAEVENT _newEventHandle );
 		void Set_RemoveEvents( WSAEVENT _newEventHandle );
 
-		void Do_Update( );
+		void Do_Update( ChatSessionEventMap& _sessionMap );
 
 	private:
 		uint8_t	 m_size								= 0;

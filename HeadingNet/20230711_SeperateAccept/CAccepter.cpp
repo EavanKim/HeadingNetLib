@@ -30,12 +30,44 @@ namespace Heading
 		if( session->Bind( ) )
 		{
 			m_accepts.insert( std::make_pair( session->Get_Event( ), session ) );
+			m_events[ m_size ] = session->Get_Event( );
+			++m_size;
 			return true;
 		}
 		else
 		{
 			delete session;
 			session = nullptr;
+		}
+
+		return false;
+	}
+
+	bool CAccepter::Set_CloseAcceptPort( uint16_t _port )
+	{
+		WSAEVENT Target = INVALID_HANDLE_VALUE;
+		for( AcceptSessionEventMap::iterator iter = m_accepts.begin( ); m_accepts.end( ) != iter; ++iter )
+		{
+			if( iter->second->Get_Port( ) == _port )
+			{
+				iter->second->Release( );
+				Target = iter->first;
+				break;
+			}
+		}
+
+		if( INVALID_HANDLE_VALUE != Target )
+		{
+			for( uint8_t seek = 0; WSA_MAXIMUM_WAIT_EVENTS > seek; ++seek )
+			{
+				if( m_events[ seek ] == Target )
+				{
+					--m_size;
+					m_events[ seek ] = m_events[ m_size ];
+				}
+			}
+
+			m_accepts.erase( Target );
 		}
 
 		return false;
@@ -60,7 +92,7 @@ namespace Heading
 		// https://learn.microsoft.com/en-us/windows/win32/api/winsock2/nf-winsock2-wsawaitformultipleevents
 		// https://www.joinc.co.kr/w/man/4100/WASWaitForMultipleEvents 예제에 WaitForMultipleEvents의 리턴값이 에러가 아니라면 
 		// 해당 리턴값에서 WSA_WAIT_EVENT_0을 뺀 값이 대상 인덱스
-		for( INT seek = ret - WSA_WAIT_EVENT_0; WSA_MAXIMUM_WAIT_EVENTS > seek; ++seek )
+		for( INT seek = ret - WSA_WAIT_EVENT_0; m_size > seek; ++seek )
 		{
 			// 대기하지 않고 이벤트 검사를 한 결과확인
 			// 0번인 처음 seek는 무조건 set 상태지만 일단 검사해버린다.

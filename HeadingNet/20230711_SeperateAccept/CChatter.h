@@ -11,7 +11,7 @@ namespace Heading
 		void Do_Update();
 
 	private:
-
+		ChatSessionEventMap m_clients = {};
 	};
 }
 
