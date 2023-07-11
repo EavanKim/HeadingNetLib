@@ -1,10 +1,14 @@
 #pragma once
-class CChat_Mgr
+
+namespace Heading
 {
-public:
+	class CChat_Mgr
+	{
+	public:
 
 
-private:
-	
-};
+	private:
+
+	};
+}
 
