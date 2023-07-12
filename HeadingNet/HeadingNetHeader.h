@@ -33,9 +33,9 @@
 #include "CEventSelect.h"
 
 #include "20230711_SeperateAccept/CEventBaseSession.h"
-#include "20230711_SeperateAccept/CAcceptSession.h"
-#include "20230711_SeperateAccept/CClientSession.h"
 #include "20230711_SeperateAccept/CAccepter.h"
+#include "20230711_SeperateAccept/CClientSession.h"
+#include "20230711_SeperateAccept/CAcceptManager.h"
 #include "20230711_SeperateAccept/CEventSelecter.h"
 #include "20230711_SeperateAccept/CChatter.h"
 

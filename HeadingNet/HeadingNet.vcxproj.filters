@@ -48,13 +48,13 @@
     <ClInclude Include="CEventSession.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="20230711_SeperateAccept\CAccepter.h">
+    <ClInclude Include="20230711_SeperateAccept\CAcceptManager.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="20230711_SeperateAccept\CChatter.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="20230711_SeperateAccept\CAcceptSession.h">
+    <ClInclude Include="20230711_SeperateAccept\CAccepter.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="20230711_SeperateAccept\CClientSession.h">
@@ -95,13 +95,13 @@
     <ClCompile Include="CEventSession.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="20230711_SeperateAccept\CAccepter.cpp">
+    <ClCompile Include="20230711_SeperateAccept\CAcceptManager.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="20230711_SeperateAccept\CChatter.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="20230711_SeperateAccept\CAcceptSession.cpp">
+    <ClCompile Include="20230711_SeperateAccept\CAccepter.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="20230711_SeperateAccept\CClientSession.cpp">
