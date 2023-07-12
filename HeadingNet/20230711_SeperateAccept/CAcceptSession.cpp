@@ -5,6 +5,10 @@ namespace Heading
 	CAcceptSession::CAcceptSession( uint16_t _listenPort )
 		: m_listenPort( _listenPort )
 	{
+		// The socket address to be passed to bind
+		m_info.sin_family = AF_INET;
+		m_info.sin_addr.s_addr = htonl( INADDR_ANY );
+		m_info.sin_port = htons( m_listenPort );
 	}
 
 	CAcceptSession::~CAcceptSession( )
@@ -24,36 +28,26 @@ namespace Heading
 			return false;
 		}
 
-		do
+		m_sock = socket( AF_INET, SOCK_STREAM, IPPROTO_TCP );
+		if( INVALID_SOCKET == m_sock )
 		{
-			if( 5 < loopCounter )
-			{
-				int winerror = GetLastError();
-				// exception 객체 생성되면 throw하면서 에러 정보 송신
-				return false;
-			}
-
-			m_sock = socket( AF_INET, SOCK_STREAM, IPPROTO_TCP );
-			if( INVALID_SOCKET == m_sock )
-			{
-				continue;
-			}
-
-			returnValue = ::bind( m_sock, ( SOCKADDR* )&m_info, sizeof( m_info ) );
-			if( returnValue == SOCKET_ERROR )
-			{
-				int err = 0;
-				if( WSAECONNREFUSED == ( err = WSAGetLastError() ) )
-				{
-					closesocket( m_sock );
-					m_sock = INVALID_SOCKET;
-					continue;
-				}
-				printf( "connect failed with error: %d\n", err );
-				return false;
-			}
+			return false;
 		}
-		while( S_OK != returnValue );
+
+		returnValue = ::bind( m_sock, ( SOCKADDR* ) &m_info, sizeof( m_info ) );
+		if( returnValue == SOCKET_ERROR )
+		{
+			int err = 0;
+			if( WSAECONNREFUSED == ( err = WSAGetLastError( ) ) )
+			{
+				closesocket( m_sock );
+				m_sock = INVALID_SOCKET;
+
+				return false;
+			}
+			printf( "connect failed with error: %d\n", err );
+			return false;
+		}
 
 		m_event = WSACreateEvent();
 		WSAEventSelect( m_sock, m_event, FD_ACCEPT | FD_CLOSE ); // 여기가 아마 Event와 묶이는 부분
