@@ -2,11 +2,11 @@
 
 namespace Heading
 {
-	class CChatSession : public CClientSession
+	class CBroadCastSession : public CClientSession
 	{
 	public:
-		CChatSession( SOCKET _sock );
-		virtual ~CChatSession();
+		CBroadCastSession( SOCKET _sock );
+		virtual ~CBroadCastSession();
 
 	private:
 

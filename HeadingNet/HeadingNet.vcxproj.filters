@@ -72,6 +72,15 @@
     <ClInclude Include="20230711_SeperateAccept\CChatSession.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="20230711_SeperateAccept\CBroadCaster.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="20230711_SeperateAccept\CSelecter.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="20230711_SeperateAccept\CBroadCastSession.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="HeadingNet.cpp">
@@ -120,6 +129,15 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="20230711_SeperateAccept\CChatSession.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="20230711_SeperateAccept\CBroadCaster.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="20230711_SeperateAccept\CSelecter.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="20230711_SeperateAccept\CBroadCastSession.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>

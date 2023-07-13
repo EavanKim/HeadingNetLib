@@ -2,25 +2,25 @@
 
 namespace Heading
 {
-	CChatter::CChatter( )
+	CBroadCaster::CBroadCaster( )
 	{
 
 	}
 
-	CChatter::~CChatter( )
+	CBroadCaster::~CBroadCaster( )
 	{
 
 	}
 
-	void CChatter::Set_NewSession( NewSocketList& _newSocket )
+	void CBroadCaster::Set_NewSession( NewSocketList& _newSocket )
 	{
 		for( CreatedSocketInfo& info : _newSocket )
 		{
 			switch( info.AcceptPort )
 			{
-			case 50000:
+			case 51000:
 				{
-					CClientSession* newSession = new CChatSession( info.Sock );
+					CClientSession* newSession = new CBroadCastSession( info.Sock );
 					newSession->CreateAndSetEvent( ( long ) ( FD_READ | FD_CLOSE ) );
 					m_events[ m_size ] = newSession->Get_Event( );
 					m_sessions.insert( std::make_pair( newSession->Get_Event( ), newSession ) );

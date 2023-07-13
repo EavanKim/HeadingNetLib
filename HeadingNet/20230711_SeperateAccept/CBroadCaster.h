@@ -2,11 +2,11 @@
 
 namespace Heading
 {
-	class CChatter : public CSelecter
+	class CBroadCaster : public CSelecter
 	{
 	public:
-		CChatter( );
-		virtual ~CChatter( );
+		CBroadCaster( );
+		virtual ~CBroadCaster( );
 
 		virtual void Set_NewSession( NewSocketList& _newSocket ) override;
 
