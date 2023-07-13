@@ -18,7 +18,7 @@ namespace Heading
 		memcpy_s( m_data, DEFAULT_SOCKET_BUFFER_LENGTH, _copy.m_data, DEFAULT_SOCKET_BUFFER_LENGTH );
 	}
 
-	Buffer::Buffer( Buffer&& _move )
+	Buffer::Buffer( Buffer&& _move ) noexcept
 	{
 		m_sessionKey = _move.m_sessionKey;
 		m_seek = _move.m_seek;
@@ -29,14 +29,14 @@ namespace Heading
 	{
 	}
 
-	void Buffer::commit( uint64_t _length )
+	void Buffer::commit( int _length )
 	{
-		printf( "commit length : %lld \n", _length );
+		printf( "commit length : %i \n", _length );
 		m_dataSize += _length;
 		m_seek = 0;
 	}
 
-	bool Buffer::get_buffer( char** _buffer, uint64_t* _length )
+	bool Buffer::get_buffer( char** _buffer, int* _length )
 	{
 		if( DEFAULT_SOCKET_BUFFER_LENGTH > m_dataSize )
 		{
@@ -48,7 +48,7 @@ namespace Heading
 
 			*_length = DEFAULT_SOCKET_BUFFER_LENGTH - m_dataSize;
 			*_buffer = m_data + m_dataSize;
-			printf( "return length : %lld / [%llX / %llX] \n", *_length, m_data, *_buffer );
+			printf( "return length : %i / [%llX / %llX] \n", *_length, (uint64_t)m_data, (uint64_t)*_buffer );
 			return true;
 		}
 

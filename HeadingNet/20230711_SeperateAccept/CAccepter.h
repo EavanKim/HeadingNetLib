@@ -18,7 +18,7 @@ namespace Heading
 		uint16_t	m_listenPort	= 0;
 	};
 
-	typedef std::unordered_map<SOCKET, CAccepter*> AcceptSessionMap;
-	typedef std::unordered_map<WSAEVENT, CAccepter*> AcceptSessionEventMap;
+	typedef std::unordered_map<SOCKET, CAccepter*>		AcceptSessionMap;
+	typedef std::unordered_map<WSAEVENT, CAccepter*>	AcceptSessionEventMap;
 }
 

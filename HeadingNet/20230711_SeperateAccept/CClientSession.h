@@ -5,7 +5,7 @@ namespace Heading
 	class CClientSession : public CEventBaseSession
 	{
 	public:
-		CClientSession();
+		CClientSession( SOCKET _sock );
 		virtual ~CClientSession();
 
 		virtual void Update() = 0;

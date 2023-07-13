@@ -75,7 +75,7 @@ namespace Heading
 
 	void CAccept_Mgr::Do_Select( )
 	{
-		DWORD ret = WSAWaitForMultipleEvents( m_accepts.size( ), m_events, FALSE, 0, TRUE );
+		DWORD ret = WSAWaitForMultipleEvents( (DWORD)m_accepts.size( ), m_events, FALSE, 0, TRUE );
 
 		switch( ret )
 		{
@@ -92,42 +92,20 @@ namespace Heading
 		// https://learn.microsoft.com/en-us/windows/win32/api/winsock2/nf-winsock2-wsawaitformultipleevents
 		// https://www.joinc.co.kr/w/man/4100/WASWaitForMultipleEvents 예제에 WaitForMultipleEvents의 리턴값이 에러가 아니라면 
 		// 해당 리턴값에서 WSA_WAIT_EVENT_0을 뺀 값이 대상 인덱스
-		for( INT seek = ret - WSA_WAIT_EVENT_0; m_size > seek; ++seek )
+		AcceptSessionEventMap::iterator iter = m_accepts.find( m_events[ ret - WSA_WAIT_EVENT_0 ] );
+		if( m_accepts.end( ) != iter )
 		{
-			// 대기하지 않고 이벤트 검사를 한 결과확인
-			// 0번인 처음 seek는 무조건 set 상태지만 일단 검사해버린다.
-			// https://learn.microsoft.com/en-us/windows/win32/api/synchapi/nf-synchapi-waitforsingleobject
-			DWORD EventResult = WaitForSingleObject( m_events[ seek ], 0 );
-			switch( EventResult )
+			sockaddr_in info = {}; // 얻어질까 과연
+			SOCKET newsock = iter->second->CreateConnect( info );
+			if( INVALID_SOCKET != newsock )
 			{
-			case WAIT_ABANDONED:
-			case WAIT_OBJECT_0:
-			case WAIT_TIMEOUT:
-			case WAIT_FAILED:
-				continue;
-			default:
-			{
-				AcceptSessionEventMap::iterator iter = m_accepts.find( m_events[ seek ] );
-				if( m_accepts.end( ) != iter )
-				{
-					sockaddr_in info = {}; // 얻어질까 과연
-					SOCKET newsock = iter->second->CreateConnect( info );
-					if( INVALID_SOCKET != newsock )
-					{
-						CreatedSocketInfo NewInfo;
-						NewInfo.AcceptPort = iter->second->Get_Port();
-						NewInfo.Sock = newsock;
-						m_newSockets.push_back( NewInfo );
-					}
-				}
+				CreatedSocketInfo NewInfo;
+				NewInfo.AcceptPort = iter->second->Get_Port();
+				NewInfo.Sock = newsock;
+				m_newSockets.push_back( NewInfo );
 			}
-			break;
-			}
-
-			// WaitForSingleObject 결과 처리 대상이었던 신호가 들어온 이벤트라면!
-			// 다 끝나면 이벤트 셋!
-			WSAResetEvent( m_events[ seek ] );
 		}
+		WSAResetEvent( m_events[ ret - WSA_WAIT_EVENT_0 ] );
 	}
 
 	bool CAccept_Mgr::Get_NewSocket( OUT NewSocketList& _newSocket )

@@ -177,7 +177,7 @@ namespace Heading
 
 		for( Header* packet : _connInfo.sendBuff )
 		{
-			::send( _connInfo.sock, ( char* ) packet, packet->length, 0 );
+			::send( _connInfo.sock, ( char* )packet, packet->length, 0 );
 			totalSend += packet->length;
 		}
 
@@ -187,7 +187,7 @@ namespace Heading
 	static int	recv( _Inout_ connectionInfo& _connInfo )
 	{
 		int			Receive = 0;
-		uint64_t	length = 0;
+		int			length = 0;
 		char* bufferStart = nullptr;
 
 		if( _connInfo.recvBuff.get_buffer( &bufferStart, &length ) )
@@ -258,7 +258,7 @@ namespace Heading
 					continue;
 				}
 				printf( "connect failed with error: %d\n", err );
-				return INVALID_SOCKET;
+				return false;
 			}
 		} while( S_OK != returnValue );
 
@@ -278,7 +278,7 @@ namespace Heading
 		tv.tv_sec = 0;
 		tv.tv_usec = 0;
 		_connInfo.readSet = _connInfo.selectSet;
-		return  select( _connInfo.sock + 1, &_connInfo.readSet, NULL, NULL, &tv );
+		return  select( (int)_connInfo.sock + 1, &_connInfo.readSet, NULL, NULL, &tv );
 	}
 
 	static int	aSelect_Write( _Inout_ bindingInfo& _connInfo )
@@ -287,7 +287,7 @@ namespace Heading
 		tv.tv_sec = 0;
 		tv.tv_usec = 0;
 		_connInfo.writeSet = _connInfo.selectSet;
-		return  select( _connInfo.sock + 1, NULL, &_connInfo.writeSet, NULL, &tv );
+		return  select( (int)_connInfo.sock + 1, NULL, &_connInfo.writeSet, NULL, &tv );
 	}
 
 	static int	aSelect_RW( _Inout_ bindingInfo& _connInfo )
@@ -297,7 +297,7 @@ namespace Heading
 		tv.tv_usec = 0;
 		_connInfo.readSet = _connInfo.selectSet;
 		_connInfo.writeSet = _connInfo.selectSet;
-		return  select( _connInfo.sock + 1, &_connInfo.readSet, &_connInfo.writeSet, NULL, &tv );
+		return  select( (int)_connInfo.sock + 1, &_connInfo.readSet, &_connInfo.writeSet, NULL, &tv );
 	}
 
 	static bool	release( _Inout_ bindingInfo& _connInfo )
@@ -358,7 +358,7 @@ namespace Heading
 						}
 
 						result += header->length;
-						printf( "send length : %lld  / data : %s", header->length, ( ( ChatBuffer* ) header )->buffer );
+						printf( "send length : %i  / data : %s", header->length, ( ( ChatBuffer* ) header )->buffer );
 
 						delete header;
 					}
@@ -399,7 +399,7 @@ namespace Heading
 					if( _connInfo.sessionMap.end( ) != session )
 					{
 						char* buffer = nullptr;
-						uint64_t length = 0;
+						int length = 0;
 						if( session->second.recvBuff.get_buffer( &buffer, &length ) )
 						{
 							int readCount = ::recv( currSock, buffer, length, 0 );

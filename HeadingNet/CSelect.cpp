@@ -62,7 +62,7 @@ namespace Heading
 					continue;
 				}
 				printf( "connect failed with error: %d\n", err );
-				return INVALID_SOCKET;
+				return false;
 			}
 		}
 		while( S_OK != returnValue );
@@ -91,7 +91,7 @@ namespace Heading
 		fd_set* readTarget = readSelect ? &m_readSet : nullptr;
 		fd_set* writeTarget = writeSelect ? &m_writeSet : nullptr;
 
-		int fdResult = select( m_sock + 1, readTarget, writeTarget, NULL, &tv );
+		int fdResult = select( (int)m_sock + 1, readTarget, writeTarget, NULL, &tv );
 
 		if( 0 != fdResult )
 		{
@@ -127,7 +127,7 @@ namespace Heading
 					if( m_sessionMap.end() != session )
 					{
 						char* buffer = nullptr;
-						uint64_t length = 0;
+						int length = 0;
 						if( session->second.recvBuff.get_buffer( &buffer, &length ) )
 						{
 							int readCount = ::recv( currSock, buffer, length, 0 );
@@ -185,7 +185,7 @@ namespace Heading
 							}
 
 							result += header->length;
-							printf( "send length : %lld  / data : %s", header->length, ( ( ChatBuffer* )header )->buffer );
+							printf( "send length : %i  / data : %s", header->length, ( ( ChatBuffer* )header )->buffer );
 
 							delete header;
 						}

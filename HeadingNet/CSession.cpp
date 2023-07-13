@@ -27,7 +27,7 @@ namespace Heading
 		int result = 0;
 
 		char* buffer = nullptr;
-		uint64_t length = 0;
+		int length = 0;
 		m_recvBuff.get_buffer( &buffer, &length );
 
 

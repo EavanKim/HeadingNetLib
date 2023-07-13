@@ -6,7 +6,9 @@ namespace Heading
 	class CEventBaseSession
 	{
 	public:
+		CEventBaseSession( SOCKET _sock );
 		virtual ~CEventBaseSession( );
+		void CreateAndSetEvent( long _eventFlag );
 
 		void Release( );
 

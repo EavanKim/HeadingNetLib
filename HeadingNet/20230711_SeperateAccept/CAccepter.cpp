@@ -3,7 +3,8 @@
 namespace Heading
 {
 	CAccepter::CAccepter( uint16_t _listenPort )
-		: m_listenPort( _listenPort )
+		: CEventBaseSession( INVALID_SOCKET )
+		, m_listenPort( _listenPort )
 	{
 		// The socket address to be passed to bind
 		m_info.sin_family = AF_INET;
@@ -49,8 +50,9 @@ namespace Heading
 			return false;
 		}
 
-		m_event = WSACreateEvent();
-		WSAEventSelect( m_sock, m_event, FD_ACCEPT | FD_CLOSE ); // 여기가 아마 Event와 묶이는 부분
+		//m_event = WSACreateEvent();
+		//WSAEventSelect( m_sock, m_event, FD_ACCEPT | FD_CLOSE ); // 여기가 아마 Event와 묶이는 부분
+		CreateAndSetEvent( FD_ACCEPT | FD_CLOSE );
 		if( SOCKET_ERROR == listen( m_sock, 5 ) )
 			return false;
 

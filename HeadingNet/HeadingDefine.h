@@ -1,6 +1,6 @@
 #pragma once
 
-#define DEFAULT_SOCKET_BUFFER_LENGTH 1 << 13
+#define DEFAULT_SOCKET_BUFFER_LENGTH (1 << 13)
 
 namespace Heading
 {
@@ -31,10 +31,12 @@ namespace Heading
 	{
 		uint64_t sessionKey = 0;
 		uint64_t type = 0;
-		uint64_t length = 0;
+		int length = 0;
 		time_t m_time = time( NULL );
 	};
 
+	// 패킷 바꾸기 전에는 잠시 Disable처리합니다.
+#pragma warning(disable : 4200)
 	template<uint64_t _type, uint64_t _buffersize>
 	struct SendStruct : public Header
 	{

@@ -2,7 +2,8 @@
 
 namespace Heading
 {
-	CClientSession::CClientSession( )
+	CClientSession::CClientSession( SOCKET _sock )
+		: CEventBaseSession( _sock )
 	{
 
 	}

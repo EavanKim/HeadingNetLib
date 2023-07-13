@@ -5,10 +5,12 @@ namespace Heading
 	class CChatter
 	{
 	public:
-		CChatter();
-		~CChatter();
+		CChatter( );
+		~CChatter( );
 
-		void Do_Update();
+		void Set_NewSession( NewSocketList& _newSocket );
+
+		void Do_Select( );
 
 	private:
 		ChatSessionEventMap m_clients = {};

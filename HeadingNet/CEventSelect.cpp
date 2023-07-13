@@ -77,7 +77,7 @@ namespace Heading
 
 	void CEventSelect::Do_Select()
 	{
-		DWORD index = WSAWaitForMultipleEvents(m_selectEvent.size(), m_selectEvent.data(), false, 0, false);
+		DWORD index = WSAWaitForMultipleEvents( (DWORD)m_selectEvent.size(), m_selectEvent.data(), false, 0, false);
 				
 		bool result = WSAResetEvent(m_selectEvent[index - WSA_WAIT_EVENT_0]);
 
