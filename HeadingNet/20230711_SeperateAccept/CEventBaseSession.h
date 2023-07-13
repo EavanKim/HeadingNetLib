@@ -16,9 +16,10 @@ namespace Heading
 		WSAEVENT	Get_Event();
 
 	protected:
-		SOCKADDR_IN	m_info	= {};
-		SOCKET		m_sock	= INVALID_SOCKET;
-		WSAEVENT	m_event = INVALID_HANDLE_VALUE;
+		Buffer		m_buffer	= {};
+		SOCKADDR_IN	m_info		= {};
+		SOCKET		m_sock		= INVALID_SOCKET;
+		WSAEVENT	m_event		= INVALID_HANDLE_VALUE;
 	};
 }
 
