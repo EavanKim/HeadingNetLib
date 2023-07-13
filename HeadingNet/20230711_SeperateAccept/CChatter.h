@@ -13,7 +13,10 @@ namespace Heading
 		void Do_Select( );
 
 	private:
-		ChatSessionEventMap m_clients = {};
+		int					m_size								= 0;
+		ChatSessionEventMap m_clients							= {};
+		ChatSessionEventMap m_broadCasts						= {};
+		WSAEVENT			m_events[WSA_MAXIMUM_WAIT_EVENTS]	= {};
 	};
 }
 
