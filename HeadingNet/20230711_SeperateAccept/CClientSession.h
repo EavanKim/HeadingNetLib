@@ -11,7 +11,6 @@ namespace Heading
 		virtual void Update() = 0;
 
 	private:
-
 	};
 
 	typedef std::unordered_map<SOCKET, CClientSession*> ChatSessionMap;

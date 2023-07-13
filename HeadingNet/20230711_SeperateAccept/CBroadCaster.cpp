@@ -21,7 +21,7 @@ namespace Heading
 			case 51000:
 				{
 					CClientSession* newSession = new CBroadCastSession( info.Sock );
-					newSession->CreateAndSetEvent( ( long ) ( FD_READ | FD_CLOSE ) );
+					newSession->CreateAndSetEvent( ( long ) ( FD_WRITE | FD_CLOSE ) );
 					m_events[ m_size ] = newSession->Get_Event( );
 					m_sessions.insert( std::make_pair( newSession->Get_Event( ), newSession ) );
 					++m_size;

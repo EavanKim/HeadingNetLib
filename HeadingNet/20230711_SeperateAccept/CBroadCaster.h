@@ -10,6 +10,7 @@ namespace Heading
 
 		virtual void Set_NewSession( NewSocketList& _newSocket ) override;
 
+		void SetSendData(  );
 	private:
 	};
 }
