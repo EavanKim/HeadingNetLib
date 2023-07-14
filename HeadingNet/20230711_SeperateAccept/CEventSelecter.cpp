@@ -24,8 +24,8 @@ namespace Heading
 
 	void CEventSelecter::Set_RemoveEvents( WSAEVENT _newEventHandle )
 	{
-		// ë°°ì—´ì„ ì„ í˜•ìœ¼ë¡œ ìœ ì§€í•˜ê¸° ìœ„í•´ FastPop ê°™ì€ ë°©ì‹ìœ¼ë¡œ ë§ˆì§€ë§‰ ê°’ì„ ì¨ì„œ ë®ì–´ë²„ë¦° ë’¤ ë§¥ìŠ¤ê°’ë§Œ ì¡°ì ˆí•©ë‹ˆë‹¤.
-		// ì–´ì°¨í”¼ EventëŠ” OS ê´€ë¦¬ ê°ì²´ì˜ ê´€ë¦¬ ë²ˆí˜¸ë§Œ ë°›ëŠ”ê²ƒì´ë¯€ë¡œ ê°’ë§Œ ìƒì§€ ì•Šìœ¼ë©´ ì–´ë– í•œ ë³µì‚¬ ë¦¬ìŠ¤í¬ë„ ì—†ìŠµë‹ˆë‹¤.
+		// ¹è¿­À» ¼±ÇüÀ¸·Î À¯ÁöÇÏ±â À§ÇØ FastPop °°Àº ¹æ½ÄÀ¸·Î ¸¶Áö¸· °ªÀ» ½á¼­ µ¤¾î¹ö¸° µÚ ¸Æ½º°ª¸¸ Á¶ÀıÇÕ´Ï´Ù.
+		// ¾îÂ÷ÇÇ Event´Â OS °ü¸® °´Ã¼ÀÇ °ü¸® ¹øÈ£¸¸ ¹Ş´Â°ÍÀÌ¹Ç·Î °ª¸¸ ÀÒÁö ¾ÊÀ¸¸é ¾î¶°ÇÑ º¹»ç ¸®½ºÅ©µµ ¾ø½À´Ï´Ù.
 		for( uint8_t seek = 0; WSA_MAXIMUM_WAIT_EVENTS > seek; ++seek )
 		{
 			if( m_events[ seek ] == _newEventHandle )
@@ -51,15 +51,15 @@ namespace Heading
 			break;
 		}
 
-		// ë¦¬í„´ëœ ê°’ì´ ê°€ì¥ ì‘ì€ ì¸ë±ìŠ¤ì„ì„ ë³´ì¥í•œë‹¤ê³  MSDNì— ì í˜€ìˆìœ¼ë¯€ë¡œ
-		// Wait ì²˜ë¦¬ë¡œ ì‹ í˜¸ë¥¼ êµ¬ë¶„í•©ë‹ˆë‹¤.
+		// ¸®ÅÏµÈ °ªÀÌ °¡Àå ÀÛÀº ÀÎµ¦½ºÀÓÀ» º¸ÀåÇÑ´Ù°í MSDN¿¡ ÀûÇôÀÖÀ¸¹Ç·Î
+		// Wait Ã³¸®·Î ½ÅÈ£¸¦ ±¸ºĞÇÕ´Ï´Ù.
 		// https://learn.microsoft.com/en-us/windows/win32/api/winsock2/nf-winsock2-wsawaitformultipleevents
-		// https://www.joinc.co.kr/w/man/4100/WASWaitForMultipleEvents ì˜ˆì œì— WaitForMultipleEventsì˜ ë¦¬í„´ê°’ì´ ì—ëŸ¬ê°€ ì•„ë‹ˆë¼ë©´ 
-		// í•´ë‹¹ ë¦¬í„´ê°’ì—ì„œ WSA_WAIT_EVENT_0ì„ ëº€ ê°’ì´ ëŒ€ìƒ ì¸ë±ìŠ¤
+		// https://www.joinc.co.kr/w/man/4100/WASWaitForMultipleEvents ¿¹Á¦¿¡ WaitForMultipleEventsÀÇ ¸®ÅÏ°ªÀÌ ¿¡·¯°¡ ¾Æ´Ï¶ó¸é 
+		// ÇØ´ç ¸®ÅÏ°ª¿¡¼­ WSA_WAIT_EVENT_0À» »« °ªÀÌ ´ë»ó ÀÎµ¦½º
 		for( INT seek = ret - WSA_WAIT_EVENT_0; WSA_MAXIMUM_WAIT_EVENTS > seek; ++seek )
 		{
-			// ëŒ€ê¸°í•˜ì§€ ì•Šê³  ì´ë²¤íŠ¸ ê²€ì‚¬ë¥¼ í•œ ê²°ê³¼í™•ì¸
-			// 0ë²ˆì¸ ì²˜ìŒ seekëŠ” ë¬´ì¡°ê±´ set ìƒíƒœì§€ë§Œ ì¼ë‹¨ ê²€ì‚¬í•´ë²„ë¦°ë‹¤.
+			// ´ë±âÇÏÁö ¾Ê°í ÀÌº¥Æ® °Ë»ç¸¦ ÇÑ °á°úÈ®ÀÎ
+			// 0¹øÀÎ Ã³À½ seek´Â ¹«Á¶°Ç set »óÅÂÁö¸¸ ÀÏ´Ü °Ë»çÇØ¹ö¸°´Ù.
 			// https://learn.microsoft.com/en-us/windows/win32/api/synchapi/nf-synchapi-waitforsingleobject
 			DWORD EventResult = WaitForSingleObject( m_events[ seek ], 0 );
 			switch( EventResult )
@@ -80,8 +80,8 @@ namespace Heading
 				break;
 			}
 
-			// WaitForSingleObject ê²°ê³¼ ì²˜ë¦¬ ëŒ€ìƒì´ì—ˆë˜ ì‹ í˜¸ê°€ ë“¤ì–´ì˜¨ ì´ë²¤íŠ¸ë¼ë©´!
-			// ë‹¤ ëë‚˜ë©´ ì´ë²¤íŠ¸ ì…‹!
+			// WaitForSingleObject °á°ú Ã³¸® ´ë»óÀÌ¾ú´ø ½ÅÈ£°¡ µé¾î¿Â ÀÌº¥Æ®¶ó¸é!
+			// ´Ù ³¡³ª¸é ÀÌº¥Æ® ¼Â!
 			WSAResetEvent( m_events[ seek ] );
 		}
 	}

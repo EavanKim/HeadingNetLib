@@ -8,7 +8,7 @@ namespace Heading
 		CEventSession( );
 		~CEventSession( );
 
-		// ì—¬ê¸°ì— ë„˜ê¸´ ì†Œì¼“ì€ ê·¸ ìˆœê°„ë¶€í„° Sessionì—ì„œ ê´€ë¦¬ê¶Œì„ ì·¨ë“ í•œ ê²ƒìœ¼ë¡œ í•©ë‹ˆë‹¤.
+		// ¿©±â¿¡ ³Ñ±ä ¼ÒÄÏÀº ±× ¼ø°£ºÎÅÍ Session¿¡¼­ °ü¸®±ÇÀ» Ãëµæ ÇÑ °ÍÀ¸·Î ÇÕ´Ï´Ù.
 		void			BindEvent			( SOCKET				_sock
 											, long					_NetworkEventType			);
 		void			ReleaseEvent		(													);
@@ -22,7 +22,7 @@ namespace Heading
 		void			RecvData			(													);
 		void			SendData			(													);
 
-		// ê¸°ë³¸ ê¸°ëŠ¥
+		// ±âº» ±â´É
 		volatile	LONG64				m_threadAlive		= 0;
 					long				m_sessionTypeFlag	= 0;
 					WSAEVENT			m_event				= INVALID_HANDLE_VALUE;
@@ -30,7 +30,7 @@ namespace Heading
 					WSANETWORKEVENTS	m_sessionEvents		= {};
 					SOCKADDR_IN			m_info				= {};
 
-					// ê¸°ì¡´ ë‚´ìš©
+					// ±âÁ¸ ³»¿ë
 					Buffer				m_socketBuffer		= {};
 					packetBuff			m_recvPackets		= {};
 					packetBuff			m_sendPackets		= {};

@@ -7,7 +7,7 @@ namespace Heading
 		CAccept_Mgr( );
 		~CAccept_Mgr( );
 
-		// WSA_MAXIMUM_WAIT_EVENTS ë¥¼ ë„˜ì–´ê°€ê±°ë‚˜ bind ì‹¤íŒ¨í•˜ë©´ false
+		// WSA_MAXIMUM_WAIT_EVENTS ¸¦ ³Ñ¾î°¡°Å³ª bind ½ÇÆĞÇÏ¸é false
 		bool Set_NewAcceptPort( uint16_t _port );
 		bool Set_CloseAcceptPort( uint16_t _port );
 
@@ -17,10 +17,10 @@ namespace Heading
 
 	private:
 		uint8_t					m_size								= 0;
-		// Accepterë¥¼ Select ìš©ìœ¼ë¡œë§Œ ì‚¬ìš©í•˜ê³  Events ë§µì€ ì „ì²´ì—ì„œ ì‚¬ìš©í•˜ëŠ”ê²Œ ë§ì„ì§€ ê³ ë¯¼...
-		// ì‚¬ì‹¤ ì–´ì°¨í”¼ Acceptë¥¼ MAXIMUMì´ ë„˜ë„ë¡ ì²˜ë¦¬í•˜ì§„ ì•Šì„í…Œë‹ˆ ì¼ë‹¨ ì—¬ê¸°ë‹¤ ì„ ì–¸í•©ë‹ˆë‹¤.
-		// Clientë§Œ MAXë„˜ì§€ ì•Šê²Œ ì²˜ë¦¬í•˜ë„ë¡ Chat ë§¤ë‹ˆì €ì—ì„œëŠ” ì™¸ë¶€ì˜ EventMapì„ ë°›ì•„ì„œ Select
-		// ì•ˆê·¸ëŸ¬ë©´ í´ë¼ 64ê°œ ë„˜ì–´ê°€ë©´ í„°ì§€ë‹ˆê¹Œ ë¬¸ì œ...
+		// Accepter¸¦ Select ¿ëÀ¸·Î¸¸ »ç¿ëÇÏ°í Events ¸ÊÀº ÀüÃ¼¿¡¼­ »ç¿ëÇÏ´Â°Ô ¸ÂÀ»Áö °í¹Î...
+		// »ç½Ç ¾îÂ÷ÇÇ Accept¸¦ MAXIMUMÀÌ ³Ñµµ·Ï Ã³¸®ÇÏÁø ¾ÊÀ»Å×´Ï ÀÏ´Ü ¿©±â´Ù ¼±¾ğÇÕ´Ï´Ù.
+		// Client¸¸ MAX³ÑÁö ¾Ê°Ô Ã³¸®ÇÏµµ·Ï Chat ¸Å´ÏÀú¿¡¼­´Â ¿ÜºÎÀÇ EventMapÀ» ¹Ş¾Æ¼­ Select
+		// ¾È±×·¯¸é Å¬¶ó 64°³ ³Ñ¾î°¡¸é ÅÍÁö´Ï±î ¹®Á¦...
 		AcceptSessionEventMap	m_accepts							= {};
 		NewSocketList			m_newSockets						= {};
 		WSAEVENT				m_events[WSA_MAXIMUM_WAIT_EVENTS]	= {};

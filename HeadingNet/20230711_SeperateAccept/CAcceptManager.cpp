@@ -15,16 +15,16 @@ namespace Heading
 
 	bool CAccept_Mgr::Set_NewAcceptPort( uint16_t _port )
 	{
-		// ë¦¬í„´ ì—ëŸ¬ì²˜ë¦¬ë¥¼ ìƒê°í•˜ë©´ ì´ Events ê°¯ìˆ˜ë¥¼ ë„˜ì–´ê°ˆ ìˆ˜ ì—†ìŒ.
+		// ¸®ÅÏ ¿¡·¯Ã³¸®¸¦ »ı°¢ÇÏ¸é ÀÌ Events °¹¼ö¸¦ ³Ñ¾î°¥ ¼ö ¾øÀ½.
 		if( WSA_MAXIMUM_WAIT_EVENTS <= m_accepts.size( ) )
 			return false;
 
 		if( 1024 >= _port )
 		{
-			// ì˜ˆì•½ëœ í¬íŠ¸ë¥¼ ì“°ë ¤í•˜ë©´ ë°´
+			// ¿¹¾àµÈ Æ÷Æ®¸¦ ¾²·ÁÇÏ¸é ¹ê
 			return false;
 		}
-		// ìµœëŒ€ê°’ì€ uint16_t í˜•ìœ¼ë¡œ ë°©ì–´í•˜ë¯€ë¡œ ì²´í¬ê°€ ì—†ìŠµë‹ˆë‹¤.
+		// ÃÖ´ë°ªÀº uint16_t ÇüÀ¸·Î ¹æ¾îÇÏ¹Ç·Î Ã¼Å©°¡ ¾ø½À´Ï´Ù.
 
 		CAccepter* session = new CAccepter( _port );
 		if( session->Bind( ) )
@@ -87,15 +87,15 @@ namespace Heading
 			break;
 		}
 
-		// ë¦¬í„´ëœ ê°’ì´ ê°€ì¥ ì‘ì€ ì¸ë±ìŠ¤ì„ì„ ë³´ì¥í•œë‹¤ê³  MSDNì— ì í˜€ìˆìœ¼ë¯€ë¡œ
-		// Wait ì²˜ë¦¬ë¡œ ì‹ í˜¸ë¥¼ êµ¬ë¶„í•©ë‹ˆë‹¤.
+		// ¸®ÅÏµÈ °ªÀÌ °¡Àå ÀÛÀº ÀÎµ¦½ºÀÓÀ» º¸ÀåÇÑ´Ù°í MSDN¿¡ ÀûÇôÀÖÀ¸¹Ç·Î
+		// Wait Ã³¸®·Î ½ÅÈ£¸¦ ±¸ºĞÇÕ´Ï´Ù.
 		// https://learn.microsoft.com/en-us/windows/win32/api/winsock2/nf-winsock2-wsawaitformultipleevents
-		// https://www.joinc.co.kr/w/man/4100/WASWaitForMultipleEvents ì˜ˆì œì— WaitForMultipleEventsì˜ ë¦¬í„´ê°’ì´ ì—ëŸ¬ê°€ ì•„ë‹ˆë¼ë©´ 
-		// í•´ë‹¹ ë¦¬í„´ê°’ì—ì„œ WSA_WAIT_EVENT_0ì„ ëº€ ê°’ì´ ëŒ€ìƒ ì¸ë±ìŠ¤
+		// https://www.joinc.co.kr/w/man/4100/WASWaitForMultipleEvents ¿¹Á¦¿¡ WaitForMultipleEventsÀÇ ¸®ÅÏ°ªÀÌ ¿¡·¯°¡ ¾Æ´Ï¶ó¸é 
+		// ÇØ´ç ¸®ÅÏ°ª¿¡¼­ WSA_WAIT_EVENT_0À» »« °ªÀÌ ´ë»ó ÀÎµ¦½º
 		AcceptSessionEventMap::iterator iter = m_accepts.find( m_events[ ret - WSA_WAIT_EVENT_0 ] );
 		if( m_accepts.end( ) != iter )
 		{
-			sockaddr_in info = {}; // ì–»ì–´ì§ˆê¹Œ ê³¼ì—°
+			sockaddr_in info = {}; // ¾ò¾îÁú±î °ú¿¬
 			SOCKET newsock = iter->second->CreateConnect( info );
 			if( INVALID_SOCKET != newsock )
 			{

@@ -12,8 +12,8 @@ namespace Heading
 		ENUM_SESSION_PRIORITY_MAX
 	};
 
-	//ì´ ê°ì²´ í•˜ë‚˜ë‹¹ 1session.
-	// ì‘ì—…ìê°€ ì•Œì•„ë³´ê¸° ì‰¬ìš´ ì´ë¦„ì…ë‹ˆë‹¤.
+	//ÀÌ °´Ã¼ ÇÏ³ª´ç 1session.
+	// ÀÛ¾÷ÀÚ°¡ ¾Ë¾Æº¸±â ½¬¿î ÀÌ¸§ÀÔ´Ï´Ù.
 	enum ENUM_SESSION_TYPE
 	{
 		ENUM_SESSION_SYNC,
@@ -35,7 +35,7 @@ namespace Heading
 		time_t m_time = time( NULL );
 	};
 
-	// íŒ¨í‚· ë°”ê¾¸ê¸° ì „ì—ëŠ” ì ì‹œ Disableì²˜ë¦¬í•©ë‹ˆë‹¤.
+	// ÆĞÅ¶ ¹Ù²Ù±â Àü¿¡´Â Àá½Ã DisableÃ³¸®ÇÕ´Ï´Ù.
 #pragma warning(disable : 4200)
 	template<uint64_t _type, uint64_t _buffersize>
 	struct SendStruct : public Header

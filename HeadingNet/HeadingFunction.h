@@ -224,7 +224,7 @@ namespace Heading
 		int returnValue = 0;
 		int loopCounter = 0;
 
-		// ìƒˆë¡œ ë°”ì¸ë”©í•˜ë©´ ì´ˆê¸°í™”í•´ë²„ë¦¬ê¸°
+		// »õ·Î ¹ÙÀÎµùÇÏ¸é ÃÊ±âÈ­ÇØ¹ö¸®±â
 		if( INVALID_SOCKET != _connInfo.sock )
 		{
 			closesocket( _connInfo.sock );
@@ -237,7 +237,7 @@ namespace Heading
 			if( 5 < loopCounter )
 			{
 				int winerror = GetLastError( );
-				// exception ê°ì²´ ìƒì„±ë˜ë©´ throwí•˜ë©´ì„œ ì—ëŸ¬ ì •ë³´ ì†¡ì‹ 
+				// exception °´Ã¼ »ı¼ºµÇ¸é throwÇÏ¸é¼­ ¿¡·¯ Á¤º¸ ¼Û½Å
 				return false;
 			}
 

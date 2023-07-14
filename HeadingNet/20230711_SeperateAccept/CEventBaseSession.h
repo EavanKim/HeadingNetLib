@@ -1,5 +1,5 @@
 #pragma once
-// ì¼ë‹¨ ìƒì„± ë³µì‚¬ëŠ” ê¸°ë³¸ ì„¸íŒ…ì„ ì‚¬ìš©í•©ë‹ˆë‹¤.
+// ÀÏ´Ü »ý¼º º¹»ç´Â ±âº» ¼¼ÆÃÀ» »ç¿ëÇÕ´Ï´Ù.
 
 namespace Heading
 {

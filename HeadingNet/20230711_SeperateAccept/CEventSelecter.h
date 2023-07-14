@@ -1,5 +1,5 @@
 #pragma once
-// Select ì²˜ë¦¬í•´ì£¼ëŠ” Component
+// Select Ã³¸®ÇØÁÖ´Â Component
 
 namespace Heading
 {

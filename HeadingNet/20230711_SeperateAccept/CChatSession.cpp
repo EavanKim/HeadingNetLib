@@ -19,7 +19,7 @@ namespace Heading
 
 		m_buffer.commit( ::recv( m_sock, buffer, length, 0 ) );
 
-		// í…ŒìŠ¤íŠ¸ìš©
+		// Å×½ºÆ®¿ë
 		packetBuff datas = {};
 		m_buffer.get_data( &datas );
 		for( Header* debugsession : datas )

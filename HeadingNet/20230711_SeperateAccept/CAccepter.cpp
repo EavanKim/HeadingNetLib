@@ -21,7 +21,7 @@ namespace Heading
 		int returnValue = 0;
 		int loopCounter = 0;
 
-		// ìƒˆë¡œ ë°”ì¸ë”©í•˜ë©´ ì´ˆê¸°í™”í•´ë²„ë¦¬ê¸°
+		// »õ·Î ¹ÙÀÎµùÇÏ¸é ÃÊ±âÈ­ÇØ¹ö¸®±â
 		if( INVALID_SOCKET != m_sock )
 		{
 			closesocket( m_sock );
@@ -51,7 +51,7 @@ namespace Heading
 		}
 
 		//m_event = WSACreateEvent();
-		//WSAEventSelect( m_sock, m_event, FD_ACCEPT | FD_CLOSE ); // ì—¬ê¸°ê°€ ì•„ë§ˆ Eventì™€ ë¬¶ì´ëŠ” ë¶€ë¶„
+		//WSAEventSelect( m_sock, m_event, FD_ACCEPT | FD_CLOSE ); // ¿©±â°¡ ¾Æ¸¶ Event¿Í ¹­ÀÌ´Â ºÎºĞ
 		CreateAndSetEvent( FD_ACCEPT | FD_CLOSE );
 		if( SOCKET_ERROR == listen( m_sock, 5 ) )
 			return false;

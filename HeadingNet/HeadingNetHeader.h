@@ -26,7 +26,7 @@
 #include "HeadingBuffer.h"
 #include "HeadingSession.h"
 
-// Classí™” ìž‘ì—… ë‚´ìš©ë“¤
+// ClassÈ­ ÀÛ¾÷ ³»¿ëµé
 #include "CSession.h"
 #include "CSelect.h"
 #include "CEventSession.h"
