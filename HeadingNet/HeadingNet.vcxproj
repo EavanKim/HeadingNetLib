@@ -154,8 +154,6 @@
     <ClInclude Include="20230711_SeperateAccept\CConnector.h" />
     <ClInclude Include="20230711_SeperateAccept\CEventBaseSession.h" />
     <ClInclude Include="20230711_SeperateAccept\CChatSession.h" />
-    <ClInclude Include="20230711_SeperateAccept\CBroadCaster.h" />
-    <ClInclude Include="20230711_SeperateAccept\CBroadCastSession.h" />
     <ClInclude Include="CEventSelect.h" />
     <ClInclude Include="20230711_SeperateAccept\CEventSelecter.h" />
     <ClInclude Include="CEventSession.h" />
@@ -178,8 +176,6 @@
     <ClCompile Include="20230711_SeperateAccept\CConnector.cpp" />
     <ClCompile Include="20230711_SeperateAccept\CEventBaseSession.cpp" />
     <ClCompile Include="20230711_SeperateAccept\CChatSession.cpp" />
-    <ClCompile Include="20230711_SeperateAccept\CBroadCaster.cpp" />
-    <ClCompile Include="20230711_SeperateAccept\CBroadCastSession.cpp" />
     <ClCompile Include="CEventSelect.cpp" />
     <ClCompile Include="20230711_SeperateAccept\CEventSelecter.cpp" />
     <ClCompile Include="CEventSession.cpp" />
