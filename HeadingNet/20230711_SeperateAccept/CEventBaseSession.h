@@ -1,5 +1,4 @@
 #pragma once
-// 일단 생성 복사는 기본 세팅을 사용합니다.
 
 namespace Heading
 {

@@ -26,7 +26,6 @@
 #include "HeadingBuffer.h"
 #include "HeadingSession.h"
 
-// Class화 작업 내용들
 #include "CSession.h"
 #include "CSelect.h"
 #include "CEventSession.h"
@@ -36,11 +35,9 @@
 #include "20230711_SeperateAccept/CAccepter.h"
 #include "20230711_SeperateAccept/CClientSession.h"
 #include "20230711_SeperateAccept/CChatSession.h"
-#include "20230711_SeperateAccept/CBroadCastSession.h"
 #include "20230711_SeperateAccept/CAcceptManager.h"
 #include "20230711_SeperateAccept/CEventSelecter.h"
 #include "20230711_SeperateAccept/CSelecter.h"
 #include "20230711_SeperateAccept/CChatter.h"
-#include "20230711_SeperateAccept/CBroadCaster.h"
 
 #include "HeadingFunction.h"

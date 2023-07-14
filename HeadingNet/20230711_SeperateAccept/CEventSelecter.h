@@ -1,5 +1,4 @@
 #pragma once
-// Select 처리해주는 Component
 
 namespace Heading
 {
