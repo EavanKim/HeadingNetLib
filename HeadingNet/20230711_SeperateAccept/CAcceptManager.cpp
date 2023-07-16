@@ -15,16 +15,13 @@ namespace Heading
 
 	bool CAccept_Mgr::Set_NewAcceptPort( uint16_t _port )
 	{
-		// 리턴 에러처리를 생각하면 이 Events 갯수를 넘어갈 수 없음.
 		if( WSA_MAXIMUM_WAIT_EVENTS <= m_accepts.size( ) )
 			return false;
 
 		if( 1024 >= _port )
 		{
-			// 예약된 포트를 쓰려하면 밴
 			return false;
 		}
-		// 최대값은 uint16_t 형으로 방어하므로 체크가 없습니다.
 
 		CAccepter* session = new CAccepter( _port );
 		if( session->Bind( ) )
@@ -87,15 +84,12 @@ namespace Heading
 			break;
 		}
 
-		// 리턴된 값이 가장 작은 인덱스임을 보장한다고 MSDN에 적혀있으므로
-		// Wait 처리로 신호를 구분합니다.
 		// https://learn.microsoft.com/en-us/windows/win32/api/winsock2/nf-winsock2-wsawaitformultipleevents
-		// https://www.joinc.co.kr/w/man/4100/WASWaitForMultipleEvents 예제에 WaitForMultipleEvents의 리턴값이 에러가 아니라면 
-		// 해당 리턴값에서 WSA_WAIT_EVENT_0을 뺀 값이 대상 인덱스
+		// https://www.joinc.co.kr/w/man/4100/WASWaitForMultipleEvents
 		AcceptSessionEventMap::iterator iter = m_accepts.find( m_events[ ret - WSA_WAIT_EVENT_0 ] );
 		if( m_accepts.end( ) != iter )
 		{
-			sockaddr_in info = {}; // 얻어질까 과연
+			sockaddr_in info = {};
 			SOCKET newsock = iter->second->CreateConnect( info );
 			if( INVALID_SOCKET != newsock )
 			{

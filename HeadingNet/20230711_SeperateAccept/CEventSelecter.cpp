@@ -24,8 +24,6 @@ namespace Heading
 
 	void CEventSelecter::Set_RemoveEvents( WSAEVENT _newEventHandle )
 	{
-		// ¹è¿­À» ¼±ÇüÀ¸·Î À¯ÁöÇÏ±â À§ÇØ FastPop °°Àº ¹æ½ÄÀ¸·Î ¸¶Áö¸· °ªÀ» ½á¼­ µ¤¾î¹ö¸° µÚ ¸Æ½º°ª¸¸ Á¶ÀýÇÕ´Ï´Ù.
-		// ¾îÂ÷ÇÇ Event´Â OS °ü¸® °´Ã¼ÀÇ °ü¸® ¹øÈ£¸¸ ¹Þ´Â°ÍÀÌ¹Ç·Î °ª¸¸ ÀÒÁö ¾ÊÀ¸¸é ¾î¶°ÇÑ º¹»ç ¸®½ºÅ©µµ ¾ø½À´Ï´Ù.
 		for( uint8_t seek = 0; WSA_MAXIMUM_WAIT_EVENTS > seek; ++seek )
 		{
 			if( m_events[ seek ] == _newEventHandle )
@@ -51,15 +49,10 @@ namespace Heading
 			break;
 		}
 
-		// ¸®ÅÏµÈ °ªÀÌ °¡Àå ÀÛÀº ÀÎµ¦½ºÀÓÀ» º¸ÀåÇÑ´Ù°í MSDN¿¡ ÀûÇôÀÖÀ¸¹Ç·Î
-		// Wait Ã³¸®·Î ½ÅÈ£¸¦ ±¸ºÐÇÕ´Ï´Ù.
 		// https://learn.microsoft.com/en-us/windows/win32/api/winsock2/nf-winsock2-wsawaitformultipleevents
-		// https://www.joinc.co.kr/w/man/4100/WASWaitForMultipleEvents ¿¹Á¦¿¡ WaitForMultipleEventsÀÇ ¸®ÅÏ°ªÀÌ ¿¡·¯°¡ ¾Æ´Ï¶ó¸é 
-		// ÇØ´ç ¸®ÅÏ°ª¿¡¼­ WSA_WAIT_EVENT_0À» »« °ªÀÌ ´ë»ó ÀÎµ¦½º
+		// https://www.joinc.co.kr/w/man/4100/WASWaitForMultipleEvents 
 		for( INT seek = ret - WSA_WAIT_EVENT_0; WSA_MAXIMUM_WAIT_EVENTS > seek; ++seek )
 		{
-			// ´ë±âÇÏÁö ¾Ê°í ÀÌº¥Æ® °Ë»ç¸¦ ÇÑ °á°úÈ®ÀÎ
-			// 0¹øÀÎ Ã³À½ seek´Â ¹«Á¶°Ç set »óÅÂÁö¸¸ ÀÏ´Ü °Ë»çÇØ¹ö¸°´Ù.
 			// https://learn.microsoft.com/en-us/windows/win32/api/synchapi/nf-synchapi-waitforsingleobject
 			DWORD EventResult = WaitForSingleObject( m_events[ seek ], 0 );
 			switch( EventResult )
@@ -80,8 +73,8 @@ namespace Heading
 				break;
 			}
 
-			// WaitForSingleObject °á°ú Ã³¸® ´ë»óÀÌ¾ú´ø ½ÅÈ£°¡ µé¾î¿Â ÀÌº¥Æ®¶ó¸é!
-			// ´Ù ³¡³ª¸é ÀÌº¥Æ® ¼Â!
+			// WaitForSingleObject ï¿½ï¿½ï¿½ Ã³ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ì¾ï¿½ï¿½ï¿½ ï¿½ï¿½È£ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ìºï¿½Æ®ï¿½ï¿½ï¿½!
+			// ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ìºï¿½Æ® ï¿½ï¿½!
 			WSAResetEvent( m_events[ seek ] );
 		}
 	}

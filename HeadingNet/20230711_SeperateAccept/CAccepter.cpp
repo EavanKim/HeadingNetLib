@@ -21,7 +21,6 @@ namespace Heading
 		int returnValue = 0;
 		int loopCounter = 0;
 
-		// 새로 바인딩하면 초기화해버리기
 		if( INVALID_SOCKET != m_sock )
 		{
 			closesocket( m_sock );
@@ -51,7 +50,7 @@ namespace Heading
 		}
 
 		//m_event = WSACreateEvent();
-		//WSAEventSelect( m_sock, m_event, FD_ACCEPT | FD_CLOSE ); // 여기가 아마 Event와 묶이는 부분
+		//WSAEventSelect( m_sock, m_event, FD_ACCEPT | FD_CLOSE );
 		CreateAndSetEvent( FD_ACCEPT | FD_CLOSE );
 		if( SOCKET_ERROR == listen( m_sock, 5 ) )
 			return false;

@@ -28,7 +28,6 @@ namespace Heading
 		int returnValue = 0;
 		int loopCounter = 0;
 
-		// 새로 바인딩하면 초기화해버리기
 		if( INVALID_SOCKET != m_sock )
 		{
 			closesocket( m_sock );
@@ -41,7 +40,6 @@ namespace Heading
 			if( 5 < loopCounter )
 			{
 				int winerror = GetLastError();
-				// exception 객체 생성되면 throw하면서 에러 정보 송신
 				return false;
 			}
 
@@ -68,7 +66,7 @@ namespace Heading
 		while( S_OK != returnValue );
 
 		m_connectEvent = WSACreateEvent();
-		WSAEventSelect( m_sock, m_connectEvent, FD_ACCEPT | FD_CLOSE ); // 여기가 아마 Event와 묶이는 부분
+		WSAEventSelect( m_sock, m_connectEvent, FD_ACCEPT | FD_CLOSE );
 		if( SOCKET_ERROR == listen( m_sock, 5 ) )
 			return false;
 

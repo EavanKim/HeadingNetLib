@@ -7,12 +7,10 @@ namespace Heading
 	public:
 		CChatSession( SOCKET _sock );
 		virtual ~CChatSession();
-
-	private:
-
-		// Inherited via CClientSession
+		
 		virtual void Update( ) override;
-
+		void GetChatData( packetBuff& _datas );
+		void SetChatData( CChatBuffer& _datas );
 	};
 }
 
