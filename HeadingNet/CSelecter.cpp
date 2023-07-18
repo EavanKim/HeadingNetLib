@@ -1,5 +1,4 @@
 #include "pch.h"
-#include "CSelecter.h"
 
 //=============================================================================================================================
 // 
@@ -29,9 +28,9 @@ namespace Heading
 
 		switch( ret )
 		{
+		case WSA_WAIT_FAILED:
 		case WSA_WAIT_IO_COMPLETION:
 		case WSA_WAIT_TIMEOUT:
-		case -1:
 		{
 			// would be need blocked but...we need process
 			// 읽고있는 송신측을 100% 신뢰하고 블럭을 비울것이기 때문에

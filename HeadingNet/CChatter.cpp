@@ -44,12 +44,15 @@ namespace Heading
 				m_chat.InsertDatas( (uint64_t)iter->first, head );
 		}
 
-
-		ChatSessionEventMap::iterator iter = m_sessions.begin( );
-		for( ; m_sessions.end( ) != iter; ++iter )
+		ChatSessionEventMap::iterator iter2 = m_sessions.begin( );
+		for( ; m_sessions.end( ) != iter2; ++iter2 )
 		{
-			CChatSession* session = (CChatSession*)iter->second;
-			m_chat.GetDatas();
+			packetBuff senddata = {};
+			CChatSession* session = (CChatSession*)iter2->second;
+			m_chat.GetDatas((uint64_t)iter2->first, senddata);
+
+			session->SetChatData(senddata);
+			session->SendData();
 		}
 	}
 }
