@@ -70,8 +70,9 @@ namespace Heading
 		return false;
 	}
 
-	void CAccept_Mgr::Do_Select( )
+	bool CAccept_Mgr::Do_Select( )
 	{
+		bool result = false;
 		DWORD ret = WSAWaitForMultipleEvents( (DWORD)m_accepts.size( ), m_events, FALSE, 0, TRUE );
 
 		switch( ret )
@@ -79,7 +80,10 @@ namespace Heading
 		case WSA_WAIT_IO_COMPLETION:
 		case WSA_WAIT_TIMEOUT:
 		case -1:
-			return;
+			if( WSAEWOULDBLOCK == ret )
+				result = true;
+
+			return result;
 		default:
 			break;
 		}
@@ -97,9 +101,12 @@ namespace Heading
 				NewInfo.AcceptPort = iter->second->Get_Port();
 				NewInfo.Sock = newsock;
 				m_newSockets.push_back( NewInfo );
+				result = true;
 			}
 		}
 		WSAResetEvent( m_events[ ret - WSA_WAIT_EVENT_0 ] );
+
+		return result;
 	}
 
 	bool CAccept_Mgr::Get_NewSocket( OUT NewSocketList& _newSocket )

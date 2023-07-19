@@ -33,6 +33,7 @@
 #include "CChatSession.h"
 #include "CAcceptManager.h"
 #include "CEventSelecter.h"
+#include "CBufferGroup.h"
 #include "CSelecter.h"
 #include "CChatter.h"
 

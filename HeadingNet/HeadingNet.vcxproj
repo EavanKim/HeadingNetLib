@@ -148,6 +148,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="CAcceptManager.h" />
+    <ClInclude Include="CBufferGroup.h" />
     <ClInclude Include="CChatter.h" />
     <ClInclude Include="CAccepter.h" />
     <ClInclude Include="CClientSession.h" />
@@ -168,6 +169,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CAcceptManager.cpp" />
+    <ClCompile Include="CBufferGroup.cpp" />
     <ClCompile Include="CChatter.cpp" />
     <ClCompile Include="CAccepter.cpp" />
     <ClCompile Include="CClientSession.cpp" />
@@ -187,6 +189,9 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="note.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

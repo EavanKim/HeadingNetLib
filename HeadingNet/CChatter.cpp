@@ -16,9 +16,11 @@ namespace Heading
 	{
 		for( CreatedSocketInfo& info : _newSocket )
 		{
-			switch( info.AcceptPort )
+			if( WSA_MAXIMUM_WAIT_EVENTS > m_size )
 			{
-			case 50000:
+				switch( info.AcceptPort )
+				{
+				case 50000:
 				{
 					CClientSession* newSession = new CChatSession( info.Sock );
 					newSession->CreateAndSetEvent( ( long ) ( FD_READ | FD_WRITE | FD_CLOSE ) );
@@ -27,7 +29,10 @@ namespace Heading
 					++m_size;
 				}
 				break;
+				}
 			}
+			else
+				return;
 		}
 	}
 

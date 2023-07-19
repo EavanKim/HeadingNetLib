@@ -10,7 +10,7 @@ namespace Heading
 		bool Set_NewAcceptPort( uint16_t _port );
 		bool Set_CloseAcceptPort( uint16_t _port );
 
-		void Do_Select( );
+		bool Do_Select( );
 
 		bool Get_NewSocket( OUT NewSocketList& _newSocket );
 
