@@ -120,4 +120,24 @@ namespace Heading
 		return false;
 	}
 
+	void CAccept_Mgr::Dispose( )
+	{
+		for( AcceptSessionEventMap::iterator iter = m_accepts.begin( ); m_accepts.end( ) != iter; ++iter )
+		{
+			iter->second->Release();
+		}
+
+		m_accepts.clear();
+
+		for( CreatedSocketInfo info : m_newSockets )
+		{
+			closesocket(info.Sock);
+		}
+
+		m_newSockets.clear();
+
+		// m_accepts에서 비워졌을걸로 기대합니다.
+		ZeroMemory(m_events, WSA_MAXIMUM_WAIT_EVENTS * sizeof(WSAEVENT));
+	}
+
 }

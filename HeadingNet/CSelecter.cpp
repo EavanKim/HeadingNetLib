@@ -16,43 +16,54 @@ namespace Heading
 {
 	CSelecter::CSelecter( )
 	{
+		InterlockedExchange64(&m_bSessionLive, 1);
 	}
 
 	CSelecter::~CSelecter( )
 	{
 	}
 
-	void CSelecter::Do_Select( )
+	int CSelecter::Do_Select( void* _ptr )
 	{
-		DWORD ret = WSAWaitForMultipleEvents( ( DWORD ) m_sessions.size( ), m_events, FALSE, 0, TRUE );
+		while( 1 == InterlockedCompareExchange64(&m_bSessionLive, 0, 0) )
+		{
+			DWORD ret = WSAWaitForMultipleEvents( ( DWORD ) m_sessions.size( ), m_events, FALSE, 0, TRUE );
 
-		switch( ret )
-		{
-		case WSA_WAIT_FAILED:
-		case WSA_WAIT_IO_COMPLETION:
-		case WSA_WAIT_TIMEOUT:
-		{
-			// would be need blocked but...we need process
-			// 읽고있는 송신측을 100% 신뢰하고 블럭을 비울것이기 때문에
-			// 내가 송신 시도 대기시키는 버퍼가 넘칠 수 있어도 지나가는 코드.
-			// 만약 송신 시도 대기가 가득차도록 동작을 안하면 연결 끊어버리기가 필요하지만...
-			// 지금은 그냥 넘기기만 합니다.
-			if(	WSAEWOULDBLOCK == WSAGetLastError() ) 
+			switch( ret )
+			{
+			case WSA_WAIT_FAILED:
+			case WSA_WAIT_IO_COMPLETION:
+			case WSA_WAIT_TIMEOUT:
+			{
+				// would be need blocked but...we need process
+				// 읽고있는 송신측을 100% 신뢰하고 블럭을 비울것이기 때문에
+				// 내가 송신 시도 대기시키는 버퍼가 넘칠 수 있어도 지나가는 코드.
+				// 만약 송신 시도 대기가 가득차도록 동작을 안하면 연결 끊어버리기가 필요하지만...
+				// 지금은 그냥 넘기기만 합니다.
+				if(	WSAEWOULDBLOCK == WSAGetLastError() ) 
+					continue;
+			}
+			continue;
+			default:
 				break;
-		}
-			return;
-		default:
-			break;
+			}
+
+			// https://learn.microsoft.com/en-us/windows/win32/api/winsock2/nf-winsock2-wsawaitformultipleevents
+			// https://www.joinc.co.kr/w/man/4100/WASWaitForMultipleEvents 
+			ChatSessionEventMap::iterator iter = m_sessions.find( m_events[ ret - WSA_WAIT_EVENT_0 ] );
+			if( m_sessions.end( ) != iter )
+			{
+				iter->second->Update( );
+				
+			}
+
+			WSAResetEvent( m_events[ ret - WSA_WAIT_EVENT_0 ] );
 		}
 
-		// https://learn.microsoft.com/en-us/windows/win32/api/winsock2/nf-winsock2-wsawaitformultipleevents
-		// https://www.joinc.co.kr/w/man/4100/WASWaitForMultipleEvents 
-		ChatSessionEventMap::iterator iter = m_sessions.find( m_events[ ret - WSA_WAIT_EVENT_0 ] );
-		if( m_sessions.end( ) != iter )
-		{
-			iter->second->Update( );
-		}
-
-		WSAResetEvent( m_events[ ret - WSA_WAIT_EVENT_0 ] );
+		return 0;
+	}
+	void CSelecter::Stop( )
+	{
+		InterlockedExchange64(&m_bSessionLive, 0);
 	}
 }

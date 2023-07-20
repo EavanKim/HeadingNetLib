@@ -9,7 +9,6 @@ namespace Heading
 		virtual ~CClientSession();
 
 		virtual void Update() = 0;
-
 	private:
 	};
 

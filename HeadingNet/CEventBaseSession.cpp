@@ -96,4 +96,19 @@ namespace Heading
 
 		return result;
 	}
+
+	void CEventBaseSession::GetChatData( packetBuff& _datas )
+	{
+		m_recvBuff.swap( _datas );
+	}
+
+	void CEventBaseSession::SetChatData( packetBuff& _datas )
+	{
+		m_sendBuff.swap( _datas );
+	}
+
+	void CEventBaseSession::enqueueSend( Header* _data )
+	{
+		m_sendBuff.push_back(_data);
+	}
 }

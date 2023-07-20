@@ -9,8 +9,6 @@ namespace Heading
 		virtual ~CChatSession();
 		
 		virtual void Update( ) override;
-		void GetChatData( packetBuff& _datas );
-		void SetChatData( packetBuff& _datas );
 	};
 }
 

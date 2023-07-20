@@ -51,11 +51,19 @@ namespace Heading
 	typedef SendStruct<2, 1> Shutdown;
 	typedef SendStruct<3, 1> Ping;
 	typedef SendStruct<100, 43> TestBuffer;
-	typedef SendStruct<1000, 1000> ChatBuffer;
+	typedef SendStruct<1000, 100> ChatBuffer;
+	typedef SendStruct<1001, 8> UpdateBuffer;
+	typedef SendStruct<1002, 1080> ChatLogBuffer;
 #pragma pack(pop)
 
 	typedef std::vector<Header*>			packetBuff;
 	typedef std::vector<SOCKET>				SocketList;
 	typedef std::vector<CreatedSocketInfo>	NewSocketList;
 	typedef std::vector<WSAEVENT>			EventList;
+
+	struct SessionData
+	{
+		WSAEVENT m_sessionKey = INVALID_HANDLE_VALUE;
+		Header* m_message = nullptr;;
+	};
 }

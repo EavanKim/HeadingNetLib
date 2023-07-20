@@ -17,6 +17,11 @@ namespace Heading
 		int RecvData();
 		int SendData();
 
+		void GetChatData( packetBuff& _datas );
+		void SetChatData( packetBuff& _datas );
+
+		void enqueueSend( Header* _data );
+
 	protected:
 		Buffer		m_buffer	= {};
 		SOCKADDR_IN	m_info		= {};

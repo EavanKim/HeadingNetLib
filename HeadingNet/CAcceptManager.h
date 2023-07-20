@@ -14,6 +14,8 @@ namespace Heading
 
 		bool Get_NewSocket( OUT NewSocketList& _newSocket );
 
+		void Dispose();
+
 	private:
 		uint8_t					m_size								= 0;
 		AcceptSessionEventMap	m_accepts							= {};

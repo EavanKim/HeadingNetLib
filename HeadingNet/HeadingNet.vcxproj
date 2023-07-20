@@ -149,6 +149,7 @@
   <ItemGroup>
     <ClInclude Include="CAcceptManager.h" />
     <ClInclude Include="CBufferGroup.h" />
+    <ClInclude Include="CChatProcess.h" />
     <ClInclude Include="CChatter.h" />
     <ClInclude Include="CAccepter.h" />
     <ClInclude Include="CClientSession.h" />
@@ -158,6 +159,7 @@
     <ClInclude Include="CChatBuffer.h" />
     <ClInclude Include="CEventSelecter.h" />
     <ClInclude Include="CSelecter.h" />
+    <ClInclude Include="CSubProcess.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="HeadingBuffer.h" />
     <ClInclude Include="HeadingDefine.h" />
@@ -170,6 +172,7 @@
   <ItemGroup>
     <ClCompile Include="CAcceptManager.cpp" />
     <ClCompile Include="CBufferGroup.cpp" />
+    <ClCompile Include="CChatProcess.cpp" />
     <ClCompile Include="CChatter.cpp" />
     <ClCompile Include="CAccepter.cpp" />
     <ClCompile Include="CClientSession.cpp" />
@@ -179,6 +182,7 @@
     <ClCompile Include="CChatBuffer.cpp" />
     <ClCompile Include="CEventSelecter.cpp" />
     <ClCompile Include="CSelecter.cpp" />
+    <ClCompile Include="CSubProcess.cpp" />
     <ClCompile Include="HeadingBuffer.cpp" />
     <ClCompile Include="HeadingFunction.cpp" />
     <ClCompile Include="HeadingNet.cpp" />
