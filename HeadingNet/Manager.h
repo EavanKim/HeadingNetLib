@@ -26,7 +26,7 @@ namespace Heading
 		class Manager
 		{
 		public:
-			static void Init(uint64_t _selectThreadCount);
+			static void Init(E_LOG_LEVEL _logLevel, uint64_t _selectThreadCount);
 			static Manager* Get();
 			void Dispose( );
 
@@ -44,7 +44,7 @@ namespace Heading
 			bool try_set_new_session(CreatedSocketInfo& _socket);
 
 		private:
-			Manager(uint64_t _selectThreadCount);
+			Manager(E_LOG_LEVEL _logLevel, uint64_t _selectThreadCount);
 			~Manager();
 
 			static Manager* m_instance;

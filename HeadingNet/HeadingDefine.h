@@ -1,7 +1,6 @@
 #pragma once
 
 #define DEFAULT_SOCKET_BUFFER_LENGTH (1 << 13)
-#define DEBUG_LEVEL 0
 
 namespace Heading
 {

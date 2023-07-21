@@ -6,10 +6,10 @@ namespace Heading
 	{
 		Manager* Manager::m_instance = nullptr;
 
-		void Manager::Init( uint64_t _selectThreadCount )
+		void Manager::Init( E_LOG_LEVEL _logLevel, uint64_t _selectThreadCount )
 		{
 			if( nullptr == m_instance )
-				m_instance = new Manager( _selectThreadCount );
+				m_instance = new Manager( _logLevel, _selectThreadCount );
 		}
 
 		Manager* Manager::Get( )
@@ -197,7 +197,8 @@ namespace Heading
 			}
 		}
 
-		Manager::Manager( uint64_t _selectThreadCount )
+		Manager::Manager( E_LOG_LEVEL _logLevel, uint64_t _selectThreadCount )
+			: m_logLevel( _logLevel )
 		{
 			std::string str;
 			WSAErrorString( WSAStartup( MAKEWORD( 2, 2 ), &m_data ), str );
