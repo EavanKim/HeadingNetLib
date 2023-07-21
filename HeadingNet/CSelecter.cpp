@@ -53,8 +53,7 @@ namespace Heading
 			ChatSessionEventMap::iterator iter = m_sessions.find( m_events[ ret - WSA_WAIT_EVENT_0 ] );
 			if( m_sessions.end( ) != iter )
 			{
-				iter->second->Update( );
-				
+				iter->second->Update( );				
 			}
 
 			WSAResetEvent( m_events[ ret - WSA_WAIT_EVENT_0 ] );

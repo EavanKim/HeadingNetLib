@@ -7,10 +7,26 @@ namespace Heading
 		typedef std::unordered_map<WSAEVENT, CEventBaseSession*> sessionMap;
 		typedef std::unordered_map<uint64_t, CSelecter*> selectMap;
 
+		enum E_LOG_LEVEL
+		{
+			E_LOG_LEVEL_NONE,
+			E_LOG_LEVEL_RELEASE,
+			E_LOG_LEVEL_DEBUG,
+			E_LOG_LEVEL_MAX
+		};
+
+		struct ManagerState_CountOf
+		{
+			uint64_t m_acceptThread = 0;
+			uint64_t m_selectThread = 0;
+			uint64_t m_maximumSession = 0;
+			uint64_t m_currentSession = 0;
+		};
+
 		class Manager
 		{
 		public:
-			static void Init();
+			static void Init(uint64_t _selectThreadCount);
 			static Manager* Get();
 			void Dispose( );
 
@@ -19,15 +35,16 @@ namespace Heading
 
 			void Update();
 
-			// Thread에서 Accept되면 Manager로 빼면서 SelectMap에 배치하기.
-			// SelectMap에 사이즈 관리 추가하고 연결이 끊기면 여분자리에 새 연결 받기
-			// 모자라면 새 Select 추가.
-			// Accept가 굳이 메니저에 있을 필요가 있을까...?
-			// 그냥 Accept를 로컬에 선언해서 써버릴까...
 			static int Accept( void* _ptr );
 
+			void server_log(E_LOG_LEVEL _level, std::string _log);
+			void server_log_flush();
+
+			// false 가 되면 들어온 모든 소켓에 closesocket 발생
+			bool try_set_new_session(CreatedSocketInfo& _socket);
+
 		private:
-			Manager();
+			Manager(uint64_t _selectThreadCount);
 			~Manager();
 
 			static Manager* m_instance;
@@ -37,8 +54,21 @@ namespace Heading
 			concurrency::concurrent_queue<SessionData*> m_recvQueue;
 			concurrency::concurrent_queue<SessionData*> m_sendQueue;
 
+			// 로그기능은 별도의 static으로 옮겨서
+			// 클라이언트에서도 동일하게 사용 가능하도록 하기.
+			concurrency::concurrent_queue<std::string> m_logQueue;
+
+			// 들어온 port 정보로 올바른 경로로 안내할 수 있는 준비
+			// 하나의 서버로 여러 서비스를 할 때 필요한 기능.
+			concurrency::concurrent_queue<CreatedSocketInfo> m_newSocketQueue;
+
 			std::vector<CSubProcess*> m_process = {};
 
+			// beginthread로 해볼까...
+			std::vector<std::thread*> m_threads;
+
+			E_LOG_LEVEL m_logLevel = E_LOG_LEVEL::E_LOG_LEVEL_NONE;
+			ManagerState_CountOf m_state_count = {};
 			WSADATA m_data = {};
 			sessionMap m_sessions = {};
 			CAccept_Mgr m_login = {};

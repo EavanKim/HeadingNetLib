@@ -1,6 +1,7 @@
 #pragma once
 
 #define DEFAULT_SOCKET_BUFFER_LENGTH (1 << 13)
+#define DEBUG_LEVEL 0
 
 namespace Heading
 {
@@ -64,6 +65,6 @@ namespace Heading
 	struct SessionData
 	{
 		WSAEVENT m_sessionKey = INVALID_HANDLE_VALUE;
-		Header* m_message = nullptr;;
+		Header* m_message = nullptr;
 	};
 }
