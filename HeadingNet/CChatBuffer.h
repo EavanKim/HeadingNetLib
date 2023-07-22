@@ -22,7 +22,6 @@ namespace Heading
 		void Clear( );
 
 	private:
-		// 필요하면 잠금 할 수 있도록 처리
 		std::vector<CChatData> m_data;
 	};
 }

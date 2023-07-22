@@ -40,7 +40,7 @@ namespace Heading
 			void server_log(E_LOG_LEVEL _level, std::string _log);
 			void server_log_flush();
 
-			// false 가 되면 들어온 모든 소켓에 closesocket 발생
+			// false �� �Ǹ� ���� ��� ���Ͽ� closesocket �߻�
 			bool try_set_new_session(CreatedSocketInfo& _socket);
 
 		private:
@@ -54,17 +54,17 @@ namespace Heading
 			concurrency::concurrent_queue<SessionData*> m_recvQueue;
 			concurrency::concurrent_queue<SessionData*> m_sendQueue;
 
-			// 로그기능은 별도의 static으로 옮겨서
-			// 클라이언트에서도 동일하게 사용 가능하도록 하기.
+			// �αױ���� ������ static���� �Űܼ�
+			// Ŭ���̾�Ʈ������ �����ϰ� ��� �����ϵ��� �ϱ�.
 			concurrency::concurrent_queue<std::string> m_logQueue;
 
-			// 들어온 port 정보로 올바른 경로로 안내할 수 있는 준비
-			// 하나의 서버로 여러 서비스를 할 때 필요한 기능.
+			// ���� port ������ �ùٸ� ��η� �ȳ��� �� �ִ� �غ�
+			// �ϳ��� ������ ���� ���񽺸� �� �� �ʿ��� ���.
 			concurrency::concurrent_queue<CreatedSocketInfo> m_newSocketQueue;
 
 			std::vector<CSubProcess*> m_process = {};
 
-			// beginthread로 해볼까...
+			// beginthread�� �غ���...
 			std::vector<std::thread*> m_threads;
 
 			E_LOG_LEVEL m_logLevel = E_LOG_LEVEL::E_LOG_LEVEL_NONE;

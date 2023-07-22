@@ -136,7 +136,7 @@ namespace Heading
 
 		m_newSockets.clear();
 
-		// m_acceptsì—ì„œ ë¹„ì›Œì¡Œì„ê±¸ë¡œ ê¸°ëŒ€í•©ë‹ˆë‹¤.
+		// m_accepts¿¡¼­ ºñ¿öÁ³À»°É·Î ±â´ëÇÕ´Ï´Ù.
 		ZeroMemory(m_events, WSA_MAXIMUM_WAIT_EVENTS * sizeof(WSAEVENT));
 	}
 

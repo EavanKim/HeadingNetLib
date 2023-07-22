@@ -5,6 +5,7 @@ namespace Heading
 	CEventBaseSession::CEventBaseSession( SOCKET _sock )
 		: m_sock ( _sock )
 	{
+
 	}
 
 	CEventBaseSession::~CEventBaseSession( )
@@ -59,10 +60,10 @@ namespace Heading
 			{
 
 				// would be need blocked but...we need process
-				// ì½ê³ ìžˆëŠ” ì†¡ì‹ ì¸¡ì„ 100% ì‹ ë¢°í•˜ê³  ë¸”ëŸ­ì„ ë¹„ìš¸ê²ƒì´ê¸° ë•Œë¬¸ì—
-				// ë‚´ê°€ ì†¡ì‹  ì‹œë„ ëŒ€ê¸°ì‹œí‚¤ëŠ” ë²„í¼ê°€ ë„˜ì¹  ìˆ˜ ìžˆì–´ë„ ì§€ë‚˜ê°€ëŠ” ì½”ë“œ.
-				// ë§Œì•½ ì†¡ì‹  ì‹œë„ ëŒ€ê¸°ê°€ ê°€ë“ì°¨ë„ë¡ ë™ìž‘ì„ ì•ˆí•˜ë©´ ì—°ê²° ëŠì–´ë²„ë¦¬ê¸°ê°€ í•„ìš”í•˜ì§€ë§Œ...
-				// ì§€ê¸ˆì€ ê·¸ëƒ¥ ë„˜ê¸°ê¸°ë§Œ í•©ë‹ˆë‹¤.
+				// ÀÐ°íÀÖ´Â ¼Û½ÅÃøÀ» 100% ½Å·ÚÇÏ°í ºí·°À» ºñ¿ï°ÍÀÌ±â ¶§¹®¿¡
+				// ³»°¡ ¼Û½Å ½Ãµµ ´ë±â½ÃÅ°´Â ¹öÆÛ°¡ ³ÑÄ¥ ¼ö ÀÖ¾îµµ Áö³ª°¡´Â ÄÚµå.
+				// ¸¸¾à ¼Û½Å ½Ãµµ ´ë±â°¡ °¡µæÂ÷µµ·Ï µ¿ÀÛÀ» ¾ÈÇÏ¸é ¿¬°á ²÷¾î¹ö¸®±â°¡ ÇÊ¿äÇÏÁö¸¸...
+				// Áö±ÝÀº ±×³É ³Ñ±â±â¸¸ ÇÕ´Ï´Ù.
 				if(	WSAEWOULDBLOCK == WSAGetLastError() ) 
 					return 0;
 
