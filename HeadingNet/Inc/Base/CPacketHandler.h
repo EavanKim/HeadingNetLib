@@ -1,7 +1,7 @@
 #pragma once
 namespace Heading
 {
-	class CSubProcess
+	class CPacketHandler
 	{
 	public:
 

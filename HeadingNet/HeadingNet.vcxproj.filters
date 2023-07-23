@@ -15,123 +15,90 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="framework.h">
+    <ClInclude Include="Inc\framework.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="pch.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="HeadingNetHeader.h">
+    <ClInclude Include="Inc\HeadingNetHeader.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="HeadingDefine.h">
+    <ClInclude Include="Inc\Util\HeadingDefine.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="HeadingBuffer.h">
+    <ClInclude Include="Inc\Base\HeadingBuffer.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="HeadingSession.h">
+    <ClInclude Include="Inc\HeadingSession.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="HeadingFunction.h">
+    <ClInclude Include="Inc\Util\HeadingFunction.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="CAcceptManager.h">
+    <ClInclude Include="Inc\CAcceptManager.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="CChatter.h">
+    <ClInclude Include="Inc\CAccepter.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="CAccepter.h">
+    <ClInclude Include="Inc\CClientSession.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="CClientSession.h">
+    <ClInclude Include="Inc\CConnector.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="CConnector.h">
+    <ClInclude Include="Inc\Base\CEventBaseSession.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="CEventBaseSession.h">
+    <ClInclude Include="Inc\Base\CEventSelecter.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="CEventSelecter.h">
+    <ClInclude Include="Inc\Base\CSelecter.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="CChatSession.h">
+    <ClInclude Include="Test\CBufferGroup.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="CSelecter.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="CChatBuffer.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="Manager.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="CBufferGroup.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="CSubProcess.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="CChatProcess.h">
+    <ClInclude Include="Inc\Base\CPacketHandler.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="HeadingNet.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="pch.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="HeadingBuffer.cpp">
+    <ClCompile Include="Src\HeadingBuffer.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="HeadingFunction.cpp">
+    <ClCompile Include="Src\HeadingFunction.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="CAcceptManager.cpp">
+    <ClCompile Include="Src\CAcceptManager.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="CChatter.cpp">
+    <ClCompile Include="Src\CAccepter.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="CAccepter.cpp">
+    <ClCompile Include="Src\CClientSession.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="CClientSession.cpp">
+    <ClCompile Include="Src\CConnector.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="CConnector.cpp">
+    <ClCompile Include="Src\CEventBaseSession.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="CEventBaseSession.cpp">
+    <ClCompile Include="Src\CEventSelecter.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="CEventSelecter.cpp">
+    <ClCompile Include="Src\CSelecter.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="CChatSession.cpp">
+    <ClCompile Include="Test\CBufferGroup.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="CSelecter.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="CChatBuffer.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="Manager.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="CBufferGroup.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="CSubProcess.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="CChatProcess.cpp">
+    <ClCompile Include="Src\CPacketHandler.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>

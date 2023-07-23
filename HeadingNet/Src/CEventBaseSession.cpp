@@ -58,12 +58,6 @@ namespace Heading
 			result = ::recv( m_sock, buffer, length, 0 );
 			if( -1 == result )
 			{
-
-				// would be need blocked but...we need process
-				// 읽고있는 송신측을 100% 신뢰하고 블럭을 비울것이기 때문에
-				// 내가 송신 시도 대기시키는 버퍼가 넘칠 수 있어도 지나가는 코드.
-				// 만약 송신 시도 대기가 가득차도록 동작을 안하면 연결 끊어버리기가 필요하지만...
-				// 지금은 그냥 넘기기만 합니다.
 				if(	WSAEWOULDBLOCK == WSAGetLastError() ) 
 					return 0;
 

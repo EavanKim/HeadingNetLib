@@ -26,24 +26,18 @@
 #include <concurrent_vector.h>
 #include <concurrent_priority_queue.h>
 
-#include "HeadingDefine.h"
-#include "HeadingBuffer.h"
+#include "Util/HeadingDefine.h"
+#include "Base/HeadingBuffer.h"
 #include "HeadingSession.h"
 
-#include "CChatBuffer.h"
-#include "CEventBaseSession.h"
+#include "Base/CEventBaseSession.h"
 #include "CAccepter.h"
 #include "CClientSession.h"
-#include "CChatSession.h"
 #include "CAcceptManager.h"
-#include "CEventSelecter.h"
-#include "CBufferGroup.h"
-#include "CSelecter.h"
-#include "CChatter.h"
+#include "Base/CEventSelecter.h"
+#include "../Test/CBufferGroup.h"
+#include "Base/CSelecter.h"
 
-#include "CSubProcess.h"
-#include "CChatProcess.h"
+#include "Base/CPacketHandler.h"
 
-#include "Manager.h"
-
-#include "HeadingFunction.h"
+#include "Util/HeadingFunction.h"

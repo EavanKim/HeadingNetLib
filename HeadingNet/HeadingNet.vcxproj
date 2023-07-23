@@ -72,6 +72,8 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <OutDir>$(ProjectDir)..\..\bin\$(Configuration)\</OutDir>
+    <IncludePath>$(ProjectDir)Inc;$(IncludePath)</IncludePath>
+    <SourcePath>$(ProjectDir)Src;$(SourcePath)</SourcePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>$(ProjectDir)..\..\bin\$(Configuration)\</OutDir>
@@ -147,46 +149,35 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="CAcceptManager.h" />
-    <ClInclude Include="CBufferGroup.h" />
-    <ClInclude Include="CChatProcess.h" />
-    <ClInclude Include="CChatter.h" />
-    <ClInclude Include="CAccepter.h" />
-    <ClInclude Include="CClientSession.h" />
-    <ClInclude Include="CConnector.h" />
-    <ClInclude Include="CEventBaseSession.h" />
-    <ClInclude Include="CChatSession.h" />
-    <ClInclude Include="CChatBuffer.h" />
-    <ClInclude Include="CEventSelecter.h" />
-    <ClInclude Include="CSelecter.h" />
-    <ClInclude Include="CSubProcess.h" />
-    <ClInclude Include="framework.h" />
-    <ClInclude Include="HeadingBuffer.h" />
-    <ClInclude Include="HeadingDefine.h" />
-    <ClInclude Include="HeadingFunction.h" />
-    <ClInclude Include="HeadingNetHeader.h" />
-    <ClInclude Include="HeadingSession.h" />
-    <ClInclude Include="Manager.h" />
+    <ClInclude Include="Inc\CAcceptManager.h" />
+    <ClInclude Include="Test\CBufferGroup.h" />
+    <ClInclude Include="Inc\CAccepter.h" />
+    <ClInclude Include="Inc\CClientSession.h" />
+    <ClInclude Include="Inc\CConnector.h" />
+    <ClInclude Include="Inc\Base\CEventBaseSession.h" />
+    <ClInclude Include="Inc\Base\CEventSelecter.h" />
+    <ClInclude Include="Inc\Base\CSelecter.h" />
+    <ClInclude Include="Inc\Base\CPacketHandler.h" />
+    <ClInclude Include="Inc\framework.h" />
+    <ClInclude Include="Inc\Base\HeadingBuffer.h" />
+    <ClInclude Include="Inc\Util\HeadingDefine.h" />
+    <ClInclude Include="Inc\Util\HeadingFunction.h" />
+    <ClInclude Include="Inc\HeadingNetHeader.h" />
+    <ClInclude Include="Inc\HeadingSession.h" />
     <ClInclude Include="pch.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="CAcceptManager.cpp" />
-    <ClCompile Include="CBufferGroup.cpp" />
-    <ClCompile Include="CChatProcess.cpp" />
-    <ClCompile Include="CChatter.cpp" />
-    <ClCompile Include="CAccepter.cpp" />
-    <ClCompile Include="CClientSession.cpp" />
-    <ClCompile Include="CConnector.cpp" />
-    <ClCompile Include="CEventBaseSession.cpp" />
-    <ClCompile Include="CChatSession.cpp" />
-    <ClCompile Include="CChatBuffer.cpp" />
-    <ClCompile Include="CEventSelecter.cpp" />
-    <ClCompile Include="CSelecter.cpp" />
-    <ClCompile Include="CSubProcess.cpp" />
-    <ClCompile Include="HeadingBuffer.cpp" />
-    <ClCompile Include="HeadingFunction.cpp" />
-    <ClCompile Include="HeadingNet.cpp" />
-    <ClCompile Include="Manager.cpp" />
+    <ClCompile Include="Src\CAcceptManager.cpp" />
+    <ClCompile Include="Test\CBufferGroup.cpp" />
+    <ClCompile Include="Src\CAccepter.cpp" />
+    <ClCompile Include="Src\CClientSession.cpp" />
+    <ClCompile Include="Src\CConnector.cpp" />
+    <ClCompile Include="Src\CEventBaseSession.cpp" />
+    <ClCompile Include="Src\CEventSelecter.cpp" />
+    <ClCompile Include="Src\CSelecter.cpp" />
+    <ClCompile Include="Src\CPacketHandler.cpp" />
+    <ClCompile Include="Src\HeadingBuffer.cpp" />
+    <ClCompile Include="Src\HeadingFunction.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
