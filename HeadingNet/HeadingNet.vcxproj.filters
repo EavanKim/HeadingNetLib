@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Inc\framework.h">
+    <ClInclude Include="framework.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="pch.h">
@@ -68,37 +68,37 @@
     <ClCompile Include="pch.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Src\HeadingBuffer.cpp">
+    <ClCompile Include="HeadingBuffer.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Src\HeadingFunction.cpp">
+    <ClCompile Include="HeadingFunction.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Src\CAcceptManager.cpp">
+    <ClCompile Include="CAcceptManager.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Src\CAccepter.cpp">
+    <ClCompile Include="CAccepter.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Src\CClientSession.cpp">
+    <ClCompile Include="CClientSession.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Src\CConnector.cpp">
+    <ClCompile Include="CConnector.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Src\CEventBaseSession.cpp">
+    <ClCompile Include="CEventBaseSession.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Src\CEventSelecter.cpp">
+    <ClCompile Include="CEventSelecter.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Src\CSelecter.cpp">
+    <ClCompile Include="CSelecter.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Test\CBufferGroup.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Src\CPacketHandler.cpp">
+    <ClCompile Include="CPacketHandler.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>

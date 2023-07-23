@@ -136,7 +136,6 @@ namespace Heading
 
 		m_newSockets.clear();
 
-		// m_accepts에서 비워졌을걸로 기대합니다.
 		ZeroMemory(m_events, WSA_MAXIMUM_WAIT_EVENTS * sizeof(WSAEVENT));
 	}
 

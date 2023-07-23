@@ -26,6 +26,8 @@
 #include <concurrent_vector.h>
 #include <concurrent_priority_queue.h>
 
+#include <condition_variable>
+
 #include "Util/HeadingDefine.h"
 #include "Base/HeadingBuffer.h"
 #include "HeadingSession.h"
