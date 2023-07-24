@@ -28,6 +28,8 @@
 
 #include <condition_variable>
 
+#include "Array_WSAEvent.h"
+
 #include "Util/HeadingDefine.h"
 #include "Base/HeadingBuffer.h"
 #include "HeadingSession.h"

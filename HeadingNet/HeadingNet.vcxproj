@@ -149,6 +149,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Inc\Array_WSAEvent.h" />
     <ClInclude Include="Inc\CAcceptManager.h" />
     <ClInclude Include="Test\CBufferGroup.h" />
     <ClInclude Include="Inc\CAccepter.h" />
@@ -167,6 +168,7 @@
     <ClInclude Include="pch.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Array_WSAEvent.cpp" />
     <ClCompile Include="CAcceptManager.cpp" />
     <ClCompile Include="Test\CBufferGroup.cpp" />
     <ClCompile Include="CAccepter.cpp" />

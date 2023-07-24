@@ -27,16 +27,15 @@ namespace Heading
 #pragma pack(push, 1)
 	struct Header
 	{
-		uint64_t sessionKey = 0;
 		uint64_t type = 0;
 		int length = 0;
-		time_t m_time = time( NULL );
 	};
 
-#pragma warning(disable : 4200)
 	template<uint64_t _type, uint64_t _buffersize>
 	struct SendStruct : public Header
 	{
+		static_assert(_buffersize < 1);
+
 		char buffer[ _buffersize ];
 
 		SendStruct()
