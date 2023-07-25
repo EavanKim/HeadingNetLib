@@ -149,6 +149,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="CAcceptThread.h" />
     <ClInclude Include="Inc\Array_WSAEvent.h" />
     <ClInclude Include="Inc\CAcceptManager.h" />
     <ClInclude Include="Test\CBufferGroup.h" />
@@ -170,6 +171,7 @@
   <ItemGroup>
     <ClCompile Include="Array_WSAEvent.cpp" />
     <ClCompile Include="CAcceptManager.cpp" />
+    <ClCompile Include="CAcceptThread.cpp" />
     <ClCompile Include="Test\CBufferGroup.cpp" />
     <ClCompile Include="CAccepter.cpp" />
     <ClCompile Include="CClientSession.cpp" />

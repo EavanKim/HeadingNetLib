@@ -101,7 +101,7 @@ namespace Heading
 		Header* parse = get_data();
 		while( nullptr != parse )
 		{
-			printf( "[seek : %lld][data] : %s \n", m_seek, ( ( SendStruct<0, 0>* )parse )->buffer );
+			printf( "[seek : %lld][data] : %s \n", m_seek, ( ( SendStruct<0, 1>* )parse )->buffer );
 			_datas->push_back( parse );
 			parse = get_data();
 		}

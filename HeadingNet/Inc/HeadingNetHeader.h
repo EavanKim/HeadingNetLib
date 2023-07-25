@@ -36,6 +36,7 @@
 
 #include "Base/CEventBaseSession.h"
 #include "CAccepter.h"
+#include "CAcceptThread.h"
 #include "CClientSession.h"
 #include "CAcceptManager.h"
 #include "Base/CEventSelecter.h"

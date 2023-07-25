@@ -34,7 +34,7 @@ namespace Heading
 	template<uint64_t _type, uint64_t _buffersize>
 	struct SendStruct : public Header
 	{
-		static_assert(_buffersize < 1);
+		static_assert(_buffersize > 0);
 
 		char buffer[ _buffersize ];
 

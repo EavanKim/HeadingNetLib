@@ -14,6 +14,7 @@ namespace Heading
 
 	CAccepter::~CAccepter( )
 	{
+		// 부모 클래스에서 소켓과 이벤트 삭제
 	}
 
 	bool CAccepter::Bind( )
