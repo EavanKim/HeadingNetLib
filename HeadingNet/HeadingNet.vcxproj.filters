@@ -36,9 +36,6 @@
     <ClInclude Include="Inc\Util\HeadingFunction.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Inc\CAcceptManager.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="Inc\CAccepter.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
@@ -52,12 +49,6 @@
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Inc\Base\CEventSelecter.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="Inc\Base\CSelecter.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="Test\CBufferGroup.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Inc\Base\CPacketHandler.h">
@@ -80,9 +71,6 @@
     <ClCompile Include="HeadingFunction.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="CAcceptManager.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="CAccepter.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
@@ -96,12 +84,6 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="CEventSelecter.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="CSelecter.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="Test\CBufferGroup.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="CPacketHandler.cpp">

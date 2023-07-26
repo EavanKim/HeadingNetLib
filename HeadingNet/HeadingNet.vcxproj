@@ -151,14 +151,11 @@
   <ItemGroup>
     <ClInclude Include="Inc\CAcceptThread.h" />
     <ClInclude Include="Inc\Array_WSAEvent.h" />
-    <ClInclude Include="Inc\CAcceptManager.h" />
-    <ClInclude Include="Test\CBufferGroup.h" />
     <ClInclude Include="Inc\CAccepter.h" />
     <ClInclude Include="Inc\CClientSession.h" />
     <ClInclude Include="Inc\CConnector.h" />
     <ClInclude Include="Inc\Base\CEventBaseSession.h" />
     <ClInclude Include="Inc\Base\CEventSelecter.h" />
-    <ClInclude Include="Inc\Base\CSelecter.h" />
     <ClInclude Include="Inc\Base\CPacketHandler.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="Inc\Base\HeadingBuffer.h" />
@@ -170,15 +167,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Array_WSAEvent.cpp" />
-    <ClCompile Include="CAcceptManager.cpp" />
     <ClCompile Include="CAcceptThread.cpp" />
-    <ClCompile Include="Test\CBufferGroup.cpp" />
     <ClCompile Include="CAccepter.cpp" />
     <ClCompile Include="CClientSession.cpp" />
     <ClCompile Include="CConnector.cpp" />
     <ClCompile Include="CEventBaseSession.cpp" />
     <ClCompile Include="CEventSelecter.cpp" />
-    <ClCompile Include="CSelecter.cpp" />
     <ClCompile Include="CPacketHandler.cpp" />
     <ClCompile Include="HeadingBuffer.cpp" />
     <ClCompile Include="HeadingFunction.cpp" />
