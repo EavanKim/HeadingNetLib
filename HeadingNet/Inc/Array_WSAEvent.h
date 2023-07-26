@@ -8,6 +8,9 @@ namespace Heading
 	public:
 		bool Add( WSAEVENT _newEvent );
 		void Remove( WSAEVENT _delete );
+		uint8_t size( );
+		WSAEVENT* operator*( );
+		WSAEVENT operator[]( DWORD _index );
 
 	private:
 		uint8_t m_size = 0;

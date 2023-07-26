@@ -39,4 +39,19 @@ namespace Heading
 			}
 		}
 	}
+
+	uint8_t Array_WSAEvent::size()
+	{
+		return m_size;
+	}
+
+	WSAEVENT* Array_WSAEvent::operator*( )
+	{
+		return m_events;
+	}
+
+	WSAEVENT Array_WSAEvent::operator[]( DWORD _index )
+	{
+		return m_events[_index];
+	}
 }

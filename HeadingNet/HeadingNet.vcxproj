@@ -149,7 +149,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="CAcceptThread.h" />
+    <ClInclude Include="Inc\CAcceptThread.h" />
     <ClInclude Include="Inc\Array_WSAEvent.h" />
     <ClInclude Include="Inc\CAcceptManager.h" />
     <ClInclude Include="Test\CBufferGroup.h" />

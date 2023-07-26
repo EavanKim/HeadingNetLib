@@ -79,11 +79,14 @@ namespace Heading
 		{
 		case WSA_WAIT_IO_COMPLETION:
 		case WSA_WAIT_TIMEOUT:
-		case -1:
-			if( WSAEWOULDBLOCK == ret )
-				result = true;
-
-			return result;
+			return false; // 여기까진 대기할 때 발생할 수 있는 정상상태
+		case WSANOTINITIALISED: // WSAStartup이 실패한 것이므로 여기까지 들어온 것 자체가 망한 상황.
+		case WSAENETDOWN: // network subsystem이 실패. 다시 처음부터 연결 해 보자
+		case WSAEINPROGRESS: // blocking Windows sockets 1.1 call is in progress, 콜백 함수안에 갇힌 상황
+		case WSA_NOT_ENOUGH_MEMORY: // 메모리 부족. FULL Memory 로그만 남기고 크래시하자
+		case WSA_INVALID_HANDLE: // event 배열에 한 개 이상의 이벤트가 정상이 아님.
+		case WSA_INVALID_PARAMETER: // event 갯수를 잘못 넣은 것 같다 다시 확인하자.
+			return false; // 여기까진 WSAWaitForMultipleEvents 중에 일어날 수 있는 에러
 		default:
 			break;
 		}
