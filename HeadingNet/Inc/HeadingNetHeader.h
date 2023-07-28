@@ -38,10 +38,7 @@
 #include "CAccepter.h"
 #include "CAcceptThread.h"
 #include "CClientSession.h"
-#include "CAcceptManager.h"
 #include "Base/CEventSelecter.h"
-#include "../Test/CBufferGroup.h"
-#include "Base/CSelecter.h"
 
 #include "Base/CPacketHandler.h"
 
