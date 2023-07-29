@@ -47,7 +47,7 @@ namespace Heading
 		return m_event;
 	}
 
-	int CEventBaseSession::RecvData( )
+	int CEventBaseSession::RecvData( packetBuff& _datas )
 	{
 		int result = 0;
 
@@ -70,7 +70,7 @@ namespace Heading
 			}
 
 			m_buffer.commit( result );
-			m_buffer.get_data( &m_recvBuff );
+			m_buffer.get_data( &_datas );
 		}
 
 		return result;
@@ -90,16 +90,6 @@ namespace Heading
 		m_sendBuff.clear();
 
 		return result;
-	}
-
-	void CEventBaseSession::GetChatData( packetBuff& _datas )
-	{
-		m_recvBuff.swap( _datas );
-	}
-
-	void CEventBaseSession::SetChatData( packetBuff& _datas )
-	{
-		m_sendBuff.swap( _datas );
 	}
 
 	void CEventBaseSession::enqueueSend( Header* _data )

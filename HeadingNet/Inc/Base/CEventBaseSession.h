@@ -14,11 +14,8 @@ namespace Heading
 		SOCKET		Get_Sock();
 		WSAEVENT	Get_Event();
 
-		int RecvData();
-		int SendData();
-
-		void GetChatData( packetBuff& _datas );
-		void SetChatData( packetBuff& _datas );
+		int RecvData( packetBuff& _datas );
+		int SendData( );
 
 		void enqueueSend( Header* _data );
 
@@ -28,7 +25,6 @@ namespace Heading
 		SOCKET		m_sock		= INVALID_SOCKET;
 		WSAEVENT	m_event		= INVALID_HANDLE_VALUE;
 
-		packetBuff	m_recvBuff	= {};
 		packetBuff	m_sendBuff	= {};
 	};
 }
