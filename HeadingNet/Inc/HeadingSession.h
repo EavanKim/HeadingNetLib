@@ -36,14 +36,11 @@ namespace Heading
 
 	struct connectionInfo
 	{
-
 		uint64_t		Key			= 0;
 		std::string		ip			= "";
 		std::string		port		= "";
 		addrinfo*		info		= nullptr;
 		SOCKET			sock		= INVALID_SOCKET;
-		Buffer			recvBuff	= {};
-		packetBuff		sendBuff	= {};
 		errorInfo		err			= {};
 	};
 
