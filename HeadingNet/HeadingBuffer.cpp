@@ -67,13 +67,16 @@ namespace Heading
 				switch( getHeader->type )
 				{
 					case 1:
-						result = new SessionKey();
+						result = new PCK_SessionKey();
 						break;
 					case 2:
-						result = new Shutdown();
+						result = new PCK_Shutdown();
 						break;
 					case 3:
-						result = new Ping();
+						result = new PCK_Ping();
+						break;
+					case 4:
+						result = new PCK_Pong();
 						break;
 					case 100:
 						result = new TestBuffer();
