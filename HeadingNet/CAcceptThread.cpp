@@ -24,7 +24,7 @@ namespace Heading
 
 		while( info->liveChecker() )
 		{
-			DWORD result = WSAWaitForMultipleEvents(1, events, FALSE, 0, FALSE);
+			DWORD result = WSAWaitForMultipleEvents(1, events, FALSE, INFINITE, FALSE);
 			switch( WaitObjectCheck( result ) )
 			{
 			case E_Wait_Delayed:
@@ -35,15 +35,25 @@ namespace Heading
 				return -1;
 			case E_Wait_Reset_SOCK: // 단 하나뿐인 accepter socket이 맛이 간 것 같으니 삭제 후 재할당 진행
 			case E_Wait_Reset_EVENTS_ARRAY: // 단 하나뿐인 Event가 고장났으니 accepter 수리 필요. // 삭제 후 재할당 진행
+			{
 				delete accepter;
 				accepter = new CAccepter( info->port );
 				events[ 0 ] = { accepter->Get_Event() };
+			}
 				break;
 			case E_Wait_OK: // 여기서 Accept 처리
+			{
 				sockaddr_in sockinfo = {};
-				info->onAccept( accepter->CreateConnect( sockinfo ) );
+				SOCKET newSock = accepter->CreateConnect( sockinfo );
+				if( INVALID_SOCKET != newSock )
+					info->onAccept( newSock );
+			}
+				break;
+			default:
 				break;
 			}
+
+			WSAResetEvent(events[result] );
 		}
 
 		return 0;
