@@ -17,7 +17,7 @@ namespace Heading
 		
 		addrinfo info = {};
 		ZeroMemory( &info, sizeof( addrinfo ) );
-		info.ai_family = AF_UNSPEC;
+		info.ai_family = AF_INET;
 		info.ai_socktype = SOCK_STREAM;
 		info.ai_protocol = IPPROTO_TCP;
 
@@ -32,8 +32,9 @@ namespace Heading
 		_info.sock = socket( _info.info->ai_family, _info.info->ai_socktype, _info.info->ai_protocol );
 	}
 
-	void CConnector::onPing( Header* _pong )
+	void CConnector::onPing( )
 	{
+
 	}
 
 }
