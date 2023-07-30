@@ -84,6 +84,29 @@ namespace Heading
 					case 1000:
 						result = new ChatBuffer();
 						break;
+					case 10000:
+						result = new PCK_CS_Enter();
+						break;
+					case 10001:
+						result = new PCK_CS_Exit();
+						break;
+					case 10002:
+						result = new PCK_CS_Chatting();
+						break;
+					case 10003:
+						result = new PCK_CS_Wispering();
+						break;
+					case 10004:
+						result = new PCK_CS_RequestPrevious();
+						break;
+					case 10005:
+						result = new PCK_SC_ReturnEnter();
+						break;
+					case 10006:
+						result = new PCK_SC_OthersChatting();
+						break;
+					default:
+						break;
 				}
 			}
 		}
