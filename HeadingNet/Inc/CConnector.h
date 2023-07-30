@@ -12,8 +12,8 @@ namespace Heading
 
 
 
-		// Pong Event 하면서 Socket 검사.
-		void onPing( Header* _pong );
+		// Ping에 대해 Pong Event 하면서 Socket 검사.
+		void onPing( );
 
 	private:
 
