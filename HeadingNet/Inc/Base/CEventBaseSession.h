@@ -20,12 +20,13 @@ namespace Heading
 		void enqueueSend( Header* _data );
 
 	protected:
-		Buffer		m_buffer	= {};
-		SOCKADDR_IN	m_info		= {};
-		SOCKET		m_sock		= INVALID_SOCKET;
-		WSAEVENT	m_event		= INVALID_HANDLE_VALUE;
+		uint64_t	m_sendBufferSize	= 0;
+		Buffer		m_buffer			= {};
+		SOCKADDR_IN	m_info				= {};
+		SOCKET		m_sock				= INVALID_SOCKET;
+		WSAEVENT	m_event				= INVALID_HANDLE_VALUE;
 
-		packetBuff	m_sendBuff	= {};
+		packetBuff	m_sendBuff			= {};
 	};
 }
 

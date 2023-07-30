@@ -128,8 +128,41 @@ namespace Heading
 		while( nullptr != parse )
 		{
 			printf( "[seek : %lld][data] : %s \n", m_seek, ( ( SendStruct<0, 1>* )parse )->buffer );
-			_datas->push_back( parse );
+			_datas->push( parse );
 			parse = get_data();
 		}
+	}
+
+	void Buffer::get_send_data( char** _buffer, int* _length )
+	{
+		*_buffer = new char[m_dataSize];
+		memcpy_s(*_buffer, m_dataSize, m_data, m_dataSize);
+		*_length = m_dataSize;
+
+		// 다 꺼냈으니 비워줍니다.
+		m_seek = 0;
+		m_dataSize = 0;
+	}
+
+	bool Buffer::set_data( char* _data, uint64_t _length )
+	{
+		if( m_seek != (DEFAULT_SOCKET_BUFFER_LENGTH / 2) )
+		{
+			uint64_t emptySize = (DEFAULT_SOCKET_BUFFER_LENGTH/2) - m_seek;
+			if( emptySize > _length )
+			{
+				memcpy_s(&m_data[m_seek], emptySize, _data, _length);
+				m_seek += _length;
+				m_dataSize += _length;
+
+				return true;
+			}
+		}
+
+		return false;
+	}
+	bool Buffer::isEmpty( )
+	{
+		return 0 == m_dataSize;
 	}
 }

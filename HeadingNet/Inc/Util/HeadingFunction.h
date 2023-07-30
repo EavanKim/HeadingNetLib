@@ -23,7 +23,7 @@ namespace Heading
 	}
 
 	static void	PrintMem( _In_	char* _ptr
-								, _In_	uint64_t _length )
+						, _In_	uint64_t _length )
 	{
 		for (uint64_t seek = 0; _length > seek; ++seek)
 			printf("%02x ", _ptr[seek]);

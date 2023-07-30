@@ -4,8 +4,26 @@ namespace Heading
 {
 	CEventBaseSession::CEventBaseSession( SOCKET _sock )
 		: m_sock ( _sock )
-	{
+	{ 
 
+		const int on = 1;
+		setsockopt( m_sock, IPPROTO_TCP, TCP_NODELAY, (char*) & on, sizeof( on ) );
+		
+		uint64_t optVal;
+		int optLen = sizeof(int);
+
+		if (getsockopt(m_sock, 
+						SOL_SOCKET, 
+						SO_SNDBUF, 
+						(char*)&optVal, 
+						&optLen) != SOCKET_ERROR)
+			printf("SockOpt Value: %lld\n", optVal);
+		if (getsockopt(m_sock, 
+						SOL_SOCKET, 
+						SO_RCVBUF, 
+						(char*)&optVal, 
+						&optLen) != SOCKET_ERROR)
+			printf("SockOpt Value: %lld\n", optVal);
 	}
 
 	CEventBaseSession::~CEventBaseSession( )
@@ -76,24 +94,68 @@ namespace Heading
 		return result;
 	}
 
+	//https://gpgstudy.com/forum/viewtopic.php?t=24552
 	int CEventBaseSession::SendData( )
 	{
+		Buffer buff = {};
+		int Count = 0;
 		int result = 0;
 
-		for( Header* packet : m_sendBuff )
+		while( !m_sendBuff.empty( ) )
 		{
-			::send( m_sock, ( char* )packet, packet->length, 0 );
-			result += packet->length;
-			delete packet;
+			Header* packet = m_sendBuff.front();
+			if( nullptr != packet )
+			{
+				if( !buff.set_data( ( char* ) packet, packet->length ) )
+				{
+					char* sendrawdata;
+					int sendlength;
+					buff.get_send_data(&sendrawdata, &sendlength);
+					int sendresult = ::send( m_sock, ( char* )sendrawdata, sendlength, 0 );
+					if( SOCKET_ERROR == sendresult )
+					{
+						return result;
+					}
+					else if( 0 == sendresult )
+					{
+						return result;
+					}
+					continue;
+				}
+				else
+				{
+					result += packet->length;
+					delete packet;
+					++Count;
+					printf( "[%i] sendCount \n", Count );
+				}
+			}
+
+			// NULL 이 들어있더라도 front에 잘못된 값이 저장된 것이니 비웁니다.
+			m_sendBuff.pop();
 		}
 
-		m_sendBuff.clear();
+		if( !buff.isEmpty( ) )
+		{
+			char* sendrawdata;
+			int sendlength;
+			buff.get_send_data(&sendrawdata, &sendlength);
+			int sendresult = ::send( m_sock, ( char* )sendrawdata, sendlength, 0 );
+			if( SOCKET_ERROR == sendresult )
+			{
+				return result;
+			}
+			else if( 0 == sendresult )
+			{
+				return result;
+			}
+		}
 
 		return result;
 	}
 
 	void CEventBaseSession::enqueueSend( Header* _data )
 	{
-		m_sendBuff.push_back(_data);
+		m_sendBuff.push(_data);
 	}
 }

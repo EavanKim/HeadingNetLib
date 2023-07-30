@@ -63,7 +63,7 @@ namespace Heading
 	typedef SendStruct<10006, 120> PCK_SC_OthersChatting;
 #pragma pack(pop)
 
-	typedef std::vector<Header*>			packetBuff;
+	typedef std::queue<Header*>			packetBuff;
 	typedef std::vector<SOCKET>				SocketList;
 	typedef std::vector<CreatedSocketInfo>	NewSocketList;
 	typedef std::vector<WSAEVENT>			EventList;
