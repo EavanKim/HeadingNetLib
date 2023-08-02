@@ -24,6 +24,8 @@ namespace Heading
 						(char*)&optVal, 
 						&optLen) != SOCKET_ERROR)
 			printf("SockOpt Value: %lld\n", optVal);
+
+		ioctlsocket(m_sock, FIONBIO, 0);
 	}
 
 	CEventBaseSession::~CEventBaseSession( )
