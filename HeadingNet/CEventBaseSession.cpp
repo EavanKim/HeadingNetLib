@@ -94,60 +94,58 @@ namespace Heading
 		return result;
 	}
 
+	void CEventBaseSession::onEventSend( )
+	{
+		m_isCanSend = true;
+	}
+
 	//https://gpgstudy.com/forum/viewtopic.php?t=24552
 	int CEventBaseSession::SendData( )
 	{
-		Buffer buff = {};
-		int Count = 0;
+		int count = 0;
 		int result = 0;
 
-		while( !m_sendBuff.empty( ) )
+		// Event 유효기간 - Accept -> WouldBlock
+		if( m_isCanSend && !m_sendBuff.empty( ) )
 		{
-			Header* packet = m_sendBuff.front();
+			Header* packet = m_sendBuff.front( );
 			if( nullptr != packet )
 			{
-				if( !buff.set_data( ( char* ) packet, packet->length ) )
+				int sendresult = ::send( m_sock, ( char* ) packet, packet->length, 0 );
+				if( SOCKET_ERROR == sendresult )
 				{
-					char* sendrawdata;
-					int sendlength;
-					buff.get_send_data(&sendrawdata, &sendlength);
-					int sendresult = ::send( m_sock, ( char* )sendrawdata, sendlength, 0 );
-					if( SOCKET_ERROR == sendresult )
-					{
-						return result;
-					}
-					else if( 0 == sendresult )
-					{
-						return result;
-					}
-					continue;
+					if( WSAEWOULDBLOCK == WSAGetLastError( ) )
+						m_isCanSend = false;
+
+					return result;
 				}
-				else
+				else if( 0 == sendresult )
+				{
+					// Close 상태
+					m_isCanSend = false;
+					return result;
+				}
+				else if( packet->length > sendresult )
+				{
+					return result;
+				}
+				else if( packet->length < sendresult )
+				{
+					return result;
+				}
+				else// if( packet->length == sendresult )
 				{
 					result += packet->length;
 					delete packet;
-					++Count;
-					printf( "[%i] sendCount \n", Count );
+					++count;
+					printf( "[%i] sendCount \n", count );
+
+					m_sendBuff.pop( );
 				}
 			}
-
-			// NULL 이 들어있더라도 front에 잘못된 값이 저장된 것이니 비웁니다.
-			m_sendBuff.pop();
-		}
-
-		if( !buff.isEmpty( ) )
-		{
-			char* sendrawdata;
-			int sendlength;
-			buff.get_send_data(&sendrawdata, &sendlength);
-			int sendresult = ::send( m_sock, ( char* )sendrawdata, sendlength, 0 );
-			if( SOCKET_ERROR == sendresult )
+			else
 			{
-				return result;
-			}
-			else if( 0 == sendresult )
-			{
-				return result;
+				throw "Null Buffer Crash";
 			}
 		}
 

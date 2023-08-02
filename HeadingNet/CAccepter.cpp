@@ -52,7 +52,7 @@ namespace Heading
 
 		//m_event = WSACreateEvent();
 		//WSAEventSelect( m_sock, m_event, FD_ACCEPT | FD_CLOSE );
-		CreateAndSetEvent( FD_ACCEPT | FD_CLOSE );
+		CreateAndSetEvent( FD_ACCEPT | FD_CLOSE | FD_CONNECT );
 		if( SOCKET_ERROR == listen( m_sock, 5 ) )
 			return false;
 
