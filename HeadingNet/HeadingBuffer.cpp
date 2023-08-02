@@ -42,12 +42,12 @@ namespace Heading
 		{
 			if( 0 != m_dataSize )
 			{
-				memcpy_s( m_data, m_dataSize, m_data + m_seek, m_dataSize );
+				memcpy_s( m_data, m_dataSize, ((char*)m_data) + m_seek, m_dataSize );
 				m_seek = 0;
 			}
 
 			*_length = DEFAULT_SOCKET_BUFFER_LENGTH - m_dataSize;
-			*_buffer = m_data + m_dataSize;
+			*_buffer = ((char*)m_data) + m_dataSize;
 			printf( "return length : %i / [%llX / %llX] \n", *_length, (uint64_t)m_data, (uint64_t)*_buffer );
 			return true;
 		}
@@ -60,7 +60,7 @@ namespace Heading
 		Header* result = nullptr;
 		if( m_dataSize >= sizeof( Header ) )
 		{
-			Header* getHeader = ( Header* )m_data + m_seek;
+			Header* getHeader = ( Header* )((char*)m_data + m_seek);
 
 			if( m_dataSize >= getHeader->length )
 			{
