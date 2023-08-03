@@ -50,10 +50,6 @@ namespace Heading
 	typedef SendStruct<2, 1> PCK_Shutdown;
 	typedef SendStruct<3, 1> PCK_Ping;
 	typedef SendStruct<4, 1> PCK_Pong;
-	typedef SendStruct<100, 43> TestBuffer;
-	typedef SendStruct<1000, 100> ChatBuffer;
-	typedef SendStruct<1001, 8> UpdateBuffer;
-	typedef SendStruct<1002, 1080> ChatLogBuffer;
 	typedef SendStruct<10000, 12> PCK_CS_Enter;
 	typedef SendStruct<10001, 2> PCK_CS_Exit;
 	typedef SendStruct<10002, 102> PCK_CS_Chatting;

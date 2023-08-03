@@ -78,12 +78,6 @@ namespace Heading
 					case 4:
 						result = new PCK_Pong();
 						break;
-					case 100:
-						result = new TestBuffer();
-						break;
-					case 1000:
-						result = new ChatBuffer();
-						break;
 					case 10000:
 						result = new PCK_CS_Enter();
 						break;
