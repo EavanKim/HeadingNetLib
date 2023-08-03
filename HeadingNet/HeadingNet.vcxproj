@@ -150,6 +150,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="CSimpleWorker.h" />
     <ClInclude Include="Inc\CAcceptThread.h" />
     <ClInclude Include="Inc\Array_WSAEvent.h" />
     <ClInclude Include="Inc\CAccepter.h" />
@@ -175,6 +176,7 @@
     <ClCompile Include="CEventBaseSession.cpp" />
     <ClCompile Include="CEventSelecter.cpp" />
     <ClCompile Include="CPacketHandler.cpp" />
+    <ClCompile Include="CSimpleWorker.cpp" />
     <ClCompile Include="HeadingBuffer.cpp" />
     <ClCompile Include="HeadingFunction.cpp" />
     <ClCompile Include="pch.cpp">

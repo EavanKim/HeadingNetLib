@@ -80,9 +80,10 @@ namespace Heading
 			{
 				if(	WSAEWOULDBLOCK == WSAGetLastError() ) 
 					return 0;
-
-				if( INVALID_SOCKET != m_sock )
-					closesocket( m_sock );
+				
+				// 이미 소켓에 에러가 난 상태에선 추가조작 금지라는 조언에 따라 주석됩니다.
+				//if( INVALID_SOCKET != m_sock )
+				//	closesocket( m_sock );
 
 				m_sock = INVALID_SOCKET;
 
