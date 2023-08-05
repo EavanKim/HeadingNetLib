@@ -133,16 +133,4 @@ namespace Heading
 			return E_Wait_OK;
 		}
 	}
-
-	static void start( _In_	WSAData& _data )
-	{
-		std::string str;
-		WSAErrorString( WSAStartup( MAKEWORD( 2, 2 ), &_data ), str );
-		printf( "Heading::string Error %s \n", str.c_str( ) );
-	}
-
-	static void end( )
-	{
-		WSACleanup( );
-	}
 }

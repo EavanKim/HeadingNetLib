@@ -18,6 +18,8 @@ namespace Heading
 		void onEventSend();
 		int SendData( );
 
+		bool CheckLive();
+
 		void enqueueSend( Header* _data );
 
 	protected:
@@ -27,6 +29,8 @@ namespace Heading
 		SOCKADDR_IN	m_info				= {};
 		SOCKET		m_sock				= INVALID_SOCKET;
 		WSAEVENT	m_event				= INVALID_HANDLE_VALUE;
+
+		bool		m_isLive			= true;
 
 		packetBuff	m_sendBuff			= {};
 	};

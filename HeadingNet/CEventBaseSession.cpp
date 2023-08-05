@@ -8,24 +8,13 @@ namespace Heading
 
 		const int on = 1;
 		setsockopt( m_sock, IPPROTO_TCP, TCP_NODELAY, (char*) & on, sizeof( on ) );
-		
-		uint64_t optVal;
-		int optLen = sizeof(int);
 
-		if (getsockopt(m_sock, 
-						SOL_SOCKET, 
-						SO_SNDBUF, 
-						(char*)&optVal, 
-						&optLen) != SOCKET_ERROR)
-			printf("SockOpt Value: %lld\n", optVal);
-		if (getsockopt(m_sock, 
-						SOL_SOCKET, 
-						SO_RCVBUF, 
-						(char*)&optVal, 
-						&optLen) != SOCKET_ERROR)
-			printf("SockOpt Value: %lld\n", optVal);
+		LINGER  ling = {0,};  
+		ling.l_onoff = 1;   // LINGER 옵션 사용 여부  
+		ling.l_linger = 0;  // LINGER Timeout 설정  
 
-		ioctlsocket(m_sock, FIONBIO, 0);
+		// LINGER 옵션을 Socket에 적용  
+		setsockopt(m_sock, SOL_SOCKET, SO_LINGER, (CHAR*)&ling, sizeof(ling));
 	}
 
 	CEventBaseSession::~CEventBaseSession( )
@@ -80,10 +69,6 @@ namespace Heading
 			{
 				if(	WSAEWOULDBLOCK == WSAGetLastError() ) 
 					return 0;
-				
-				// 이미 소켓에 에러가 난 상태에선 추가조작 금지라는 조언에 따라 주석됩니다.
-				//if( INVALID_SOCKET != m_sock )
-				//	closesocket( m_sock );
 
 				m_sock = INVALID_SOCKET;
 
@@ -126,6 +111,7 @@ namespace Heading
 				{
 					// Close 상태
 					m_isCanSend = false;
+					m_isLive = false;
 					return result;
 				}
 				else if( packet->length > sendresult )
@@ -153,6 +139,11 @@ namespace Heading
 		}
 
 		return result;
+	}
+
+	bool CEventBaseSession::CheckLive( )
+	{
+		return m_isLive;
 	}
 
 	void CEventBaseSession::enqueueSend( Header* _data )

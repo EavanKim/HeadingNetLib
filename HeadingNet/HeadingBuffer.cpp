@@ -155,6 +155,7 @@ namespace Heading
 
 		return false;
 	}
+
 	bool Buffer::isEmpty( )
 	{
 		return 0 == m_dataSize;
