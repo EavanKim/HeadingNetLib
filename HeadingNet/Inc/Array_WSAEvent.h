@@ -6,8 +6,9 @@ namespace Heading
 	class Array_WSAEvent
 	{
 	public:
-		bool Add( WSAEVENT _newEvent );
-		void Remove( WSAEVENT _delete );
+		bool add( WSAEVENT _newEvent );
+		void remove( WSAEVENT _delete );
+		void clear();
 		uint8_t size( );
 		WSAEVENT* operator*( );
 		WSAEVENT operator[]( DWORD _index );

@@ -2,7 +2,7 @@
 
 namespace Heading
 {
-	bool Array_WSAEvent::Add( WSAEVENT _newEvent )
+	bool Array_WSAEvent::add( WSAEVENT _newEvent )
 	{
 		if( WSA_MAXIMUM_WAIT_EVENTS > m_size )
 		{
@@ -14,7 +14,7 @@ namespace Heading
 		return false;
 	}
 
-	void Array_WSAEvent::Remove( WSAEVENT _delete )
+	void Array_WSAEvent::remove( WSAEVENT _delete )
 	{
 		// 단순하고 무식하게 써리 원
 		// Event를 키로 하여 검색해서 꺼내쓰기 때문에 순서가 관계 없어서 가능한 단순처리
@@ -38,6 +38,12 @@ namespace Heading
 				return;
 			}
 		}
+	}
+
+	void Array_WSAEvent::clear( )
+	{
+		// Event 자체의 생명주기는 m_sessions의 session이 관리하므로 핸들에 대한 어떠한 추가연산도 없습니다.
+		ZeroMemory(m_events, (sizeof(WSAEVENT) * WSA_MAXIMUM_WAIT_EVENTS));
 	}
 
 	uint8_t Array_WSAEvent::size()
