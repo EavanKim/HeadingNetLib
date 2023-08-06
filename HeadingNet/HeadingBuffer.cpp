@@ -91,13 +91,19 @@ namespace Heading
 						result = new PCK_CS_Wispering();
 						break;
 					case 10004:
-						result = new PCK_CS_RequestPrevious();
+						result = new PCK_SC_Wispering();
 						break;
 					case 10005:
-						result = new PCK_SC_ReturnEnter();
+						result = new PCK_CS_RequestPrevious();
 						break;
 					case 10006:
+						result = new PCK_SC_ReturnEnter();
+						break;
+					case 10007:
 						result = new PCK_SC_OthersChatting();
+						break;
+					case 10008:
+						result = new PCK_SC_RequestReset();
 						break;
 					default:
 						break;
