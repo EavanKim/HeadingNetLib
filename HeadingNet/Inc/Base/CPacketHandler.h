@@ -20,7 +20,7 @@ namespace Heading
 		const uint64_t type = 0;
 		const int size = 0;
 		
-		bool (*callback)(CClientSession* _session, Header* _packet) = nullptr;
+		void (*callback)(CClientSession* _session, Header* _packet) = nullptr;
 	};
 
 	// 핸들러 별로 타입이 변경되므로
@@ -30,10 +30,10 @@ namespace Heading
 	public:
 		// 여기서 널이 들어오면 콜백이 설정되지 않은 대상에서 크래시가 나고
 		// 널 콜백을 만들어두면 빈 응답이 들어왔을 때 로그를 남기거나 할 수 있습니다.
-		CPacketHandler(bool (*_nullCallback)(CClientSession* _session, Header* _packet));
+		CPacketHandler(void (*_nullCallback)(IN Heading::CClientSession* _session, IN Heading::Header* _packet));
 
 		template<class T>
-		void AddPacketType(bool (*_callback)(CClientSession* _session, Header* _packet) = nullptr )
+		void AddPacketType(void (*_callback)(CClientSession* _session, Header* _packet) = nullptr )
 		{
 			static_assert(std::is_base_of<T, Header>::value);
 
@@ -52,32 +52,13 @@ namespace Heading
 
 		void Do_Process(CClientSession* _session, Header* _packet);
 
-		template<class T>
-		Header* Create_Header( )
-		{
-			static_assert( std::is_base_of<T, Header>::value );
-
-			Header* result = nullptr;
-
-			size_t hash = typeid( T ).hash_code( );
-			for( int seek = 0; PACKET_HANDLER_SIZE > seek; ++seek )
-			{
-				if( m_callbackArray[ seek ].classhash == hash )
-				{
-					PacketCallback& callback = m_callbackArray[ seek ];
-					result = ( T* ) malloc( callback );
-					memcpy_s( result, sizeof( T ), m_callbackArray[ seek ].prototype, sizeof( T ) );
-					break;
-				}
-			}
-
-			return result;
-		}
+		// 여기 들어오면 나머지 조건은 무시하고 일단 밀어넣습니다.
+		bool Create_Header(int _ePacketType , char* _ptr, char* _data, int _size );
 
 	private:
-		bool (*m_nullCallback)(CClientSession* _session, Header* _packet) = nullptr;
+		void (*m_nullCallback)(CClientSession* _session, Header* _packet) = nullptr;
 		uint8_t m_size = 0;
-		PacketCallback m_callbackArray[ PACKET_HANDLER_SIZE ] = {};
+		PacketCallback m_callbackArray[ PACKET_HANDLER_SIZE ];
 	};
 }
 
