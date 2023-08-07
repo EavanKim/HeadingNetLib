@@ -29,19 +29,19 @@ namespace Heading
 			{
 			case E_Wait_Delayed:
 				break;
-			case E_Wait_MEM_FULL: // í¬ëž˜ì‹œ ì–´ë–»ê²Œ ë‚¼ê¹Œ ê³ ë¯¼í•´ë³´ê¸°
-				throw "Memory FULL !!!"; // ì´ê±° ëœ¨ë©´ ë§‰ìž¥ì´ë‹ˆ Throw ì‹œì¼œë²„ë¦¬ê¸°
-			case E_Wait_Reset_WSA: // ì´ê±° ëœ¨ë©´ ë‹µì´ ì—†ë‹¤...
+			case E_Wait_MEM_FULL: // Å©·¡½Ã ¾î¶»°Ô ³¾±î °í¹ÎÇØº¸±â
+				throw "Memory FULL !!!"; // ÀÌ°Å ¶ß¸é ¸·ÀåÀÌ´Ï Throw ½ÃÄÑ¹ö¸®±â
+			case E_Wait_Reset_WSA: // ÀÌ°Å ¶ß¸é ´äÀÌ ¾ø´Ù...
 				return -1;
-			case E_Wait_Reset_SOCK: // ë‹¨ í•˜ë‚˜ë¿ì¸ accepter socketì´ ë§›ì´ ê°„ ê²ƒ ê°™ìœ¼ë‹ˆ ì‚­ì œ í›„ ìž¬í• ë‹¹ ì§„í–‰
-			case E_Wait_Reset_EVENTS_ARRAY: // ë‹¨ í•˜ë‚˜ë¿ì¸ Eventê°€ ê³ ìž¥ë‚¬ìœ¼ë‹ˆ accepter ìˆ˜ë¦¬ í•„ìš”. // ì‚­ì œ í›„ ìž¬í• ë‹¹ ì§„í–‰
+			case E_Wait_Reset_SOCK: // ´Ü ÇÏ³ª»ÓÀÎ accepter socketÀÌ ¸ÀÀÌ °£ °Í °°À¸´Ï »èÁ¦ ÈÄ ÀçÇÒ´ç ÁøÇà
+			case E_Wait_Reset_EVENTS_ARRAY: // ´Ü ÇÏ³ª»ÓÀÎ Event°¡ °íÀå³µÀ¸´Ï accepter ¼ö¸® ÇÊ¿ä. // »èÁ¦ ÈÄ ÀçÇÒ´ç ÁøÇà
 			{
 				delete accepter;
 				accepter = new CAccepter( info->port );
 				events[ 0 ] = { accepter->Get_Event() };
 			}
 				break;
-			case E_Wait_OK: // ì—¬ê¸°ì„œ Accept ì²˜ë¦¬
+			case E_Wait_OK: // ¿©±â¼­ Accept Ã³¸®
 			{
 				sockaddr_in sockinfo = {};
 				SOCKET newSock = accepter->CreateConnect( sockinfo );

@@ -23,13 +23,13 @@ namespace Heading
 		void (*callback)(CClientSession* _session, Header* _packet) = nullptr;
 	};
 
-	// í•¸ë“¤ëŸ¬ ë³„ë¡œ íƒ€ì…ì´ ë³€ê²½ë˜ë¯€ë¡œ
-	// ë°˜ë“œì‹œ ì„œë²„ - í´ë¼ê°€ ë™ì¼í•œ í•¸ë“¤ëŸ¬ ì´ˆê¸°í™”ë¥¼ ì¨ì•¼í•©ë‹ˆë‹¤.
+	// ÇÚµé·¯ º°·Î Å¸ÀÔÀÌ º¯°æµÇ¹Ç·Î
+	// ¹İµå½Ã ¼­¹ö - Å¬¶ó°¡ µ¿ÀÏÇÑ ÇÚµé·¯ ÃÊ±âÈ­¸¦ ½á¾ßÇÕ´Ï´Ù.
 	class CPacketHandler
 	{
 	public:
-		// ì—¬ê¸°ì„œ ë„ì´ ë“¤ì–´ì˜¤ë©´ ì½œë°±ì´ ì„¤ì •ë˜ì§€ ì•Šì€ ëŒ€ìƒì—ì„œ í¬ë˜ì‹œê°€ ë‚˜ê³ 
-		// ë„ ì½œë°±ì„ ë§Œë“¤ì–´ë‘ë©´ ë¹ˆ ì‘ë‹µì´ ë“¤ì–´ì™”ì„ ë•Œ ë¡œê·¸ë¥¼ ë‚¨ê¸°ê±°ë‚˜ í•  ìˆ˜ ìˆìŠµë‹ˆë‹¤.
+		// ¿©±â¼­ ³ÎÀÌ µé¾î¿À¸é Äİ¹éÀÌ ¼³Á¤µÇÁö ¾ÊÀº ´ë»ó¿¡¼­ Å©·¡½Ã°¡ ³ª°í
+		// ³Î Äİ¹éÀ» ¸¸µé¾îµÎ¸é ºó ÀÀ´äÀÌ µé¾î¿ÔÀ» ¶§ ·Î±×¸¦ ³²±â°Å³ª ÇÒ ¼ö ÀÖ½À´Ï´Ù.
 		CPacketHandler(void (*_nullCallback)(IN Heading::CClientSession* _session, IN Heading::Header* _packet));
 
 		template<class T>
@@ -37,8 +37,8 @@ namespace Heading
 		{
 			static_assert(std::is_base_of<T, Header>::value);
 
-			// type ì •ë³´ê°€ ìƒˆë¡œ ìƒì„±ë˜ëŠ” ë¶€ë¶„ì„ ì œì™¸í•˜ë©´ sizeëŠ” ì–»ì„ ìˆ˜ ìˆìœ¼ë¯€ë¡œ
-			// ë¡œì»¬ ë³€ìˆ˜ í•˜ë‚˜ë¡œ ì–»ì„ ìˆ˜ ìˆëŠ” ë°ì´í„°ëŠ” ë‹¤ íšë“ì‹œë„í•©ë‹ˆë‹¤.
+			// type Á¤º¸°¡ »õ·Î »ı¼ºµÇ´Â ºÎºĞÀ» Á¦¿ÜÇÏ¸é size´Â ¾òÀ» ¼ö ÀÖÀ¸¹Ç·Î
+			// ·ÎÄÃ º¯¼ö ÇÏ³ª·Î ¾òÀ» ¼ö ÀÖ´Â µ¥ÀÌÅÍ´Â ´Ù È¹µæ½ÃµµÇÕ´Ï´Ù.
 			T strLocalInfo;
 
 			new ( m_callbackArray[ m_size ] ) PacketCallback( typeid( T ).name( )
@@ -52,7 +52,7 @@ namespace Heading
 
 		void Do_Process(CClientSession* _session, Header* _packet);
 
-		// ì—¬ê¸° ë“¤ì–´ì˜¤ë©´ ë‚˜ë¨¸ì§€ ì¡°ê±´ì€ ë¬´ì‹œí•˜ê³  ì¼ë‹¨ ë°€ì–´ë„£ìŠµë‹ˆë‹¤.
+		// ¿©±â µé¾î¿À¸é ³ª¸ÓÁö Á¶°ÇÀº ¹«½ÃÇÏ°í ÀÏ´Ü ¹Ğ¾î³Ö½À´Ï´Ù.
 		bool Create_Header(int _ePacketType , char* _ptr, char* _data, int _size );
 
 	private:

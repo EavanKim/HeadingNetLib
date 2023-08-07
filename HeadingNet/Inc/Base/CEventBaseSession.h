@@ -23,7 +23,7 @@ namespace Heading
 		void enqueueSend( Header* _data );
 
 	protected:
-		std::atomic<bool> m_isCanSend = true; // ì²˜ìŒì—” ì¼ë‹¨ ë³´ë‚¼ ìˆ˜ ìˆê³  ë°œì†¡ í›„ì—ëŠ” ì™„ë£Œ ì´ë²¤íŠ¸ë¥¼ ë°›ì•„ì•¼ ì´ˆê¸°í™”
+		std::atomic<bool> m_isCanSend = true; // Ã³À½¿£ ÀÏ´Ü º¸³¾ ¼ö ÀÖ°í ¹ß¼Û ÈÄ¿¡´Â ¿Ï·á ÀÌº¥Æ®¸¦ ¹Ş¾Æ¾ß ÃÊ±âÈ­
 		uint64_t	m_sendBufferSize	= 0;
 		Buffer		m_buffer			= {};
 		SOCKADDR_IN	m_info				= {};

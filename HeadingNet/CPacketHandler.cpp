@@ -14,7 +14,7 @@ namespace Heading
 			m_callbackArray[ _packet->type ].callback( _session, _packet );
 		else
 		{
-			// 혹시 의도하지 않은 null 동작 관련 처리동작을 하고 있다면 아래 함수 포인터로 처리합니다.
+			// Ȥ�� �ǵ����� ���� null ���� ���� ó�������� �ϰ� �ִٸ� �Ʒ� �Լ� �����ͷ� ó���մϴ�.
 			if( nullptr != m_nullCallback )
 				m_nullCallback( _session, _packet );
 		}

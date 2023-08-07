@@ -24,7 +24,7 @@ namespace Heading
 		int fnResult = getaddrinfo( _info.ip.c_str( ), _info.port.c_str( ), &info, &_info.info );
 		if( S_OK != fnResult )
 		{
-			// ë¡œê·¸ ë‚¨ê²¨ë³¼ ìœ„ì¹˜...? í˜¹ì€ ì´ë²¤íŠ¸ ì²˜ë¦¬ ìœ„ì¹˜.
+			// ·Î±× ³²°Üº¼ À§Ä¡...? È¤Àº ÀÌº¥Æ® Ã³¸® À§Ä¡.
 			_info.sock = INVALID_SOCKET;
 			return;
 		}

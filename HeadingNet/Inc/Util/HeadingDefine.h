@@ -36,9 +36,9 @@ namespace Heading
 
 		}
 
-		// type는 type 배열에 들어간 Index로 처리합니다.
-		// 디버깅 정보는 typeid의 name로 처리합니다.
-		// 해당 정보는 데이터를 다루는 패킷 핸들러에 저장됩니다.
+		// type�� type �迭�� �� Index�� ó���մϴ�.
+		// ����� ������ typeid�� name�� ó���մϴ�.
+		// �ش� ������ �����͸� �ٷ�� ��Ŷ �ڵ鷯�� ����˴ϴ�.
 		const uint64_t type = 0;
 		const int length = 0;
 	};

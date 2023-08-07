@@ -110,25 +110,25 @@ namespace Heading
 		{
 			switch( WSAGetLastError( ) )
 			{
-			case WSANOTINITIALISED: // WSAStartupì´ ì‹¤íŒ¨í•œ ê²ƒì´ë¯€ë¡œ ì—¬ê¸°ê¹Œì§€ ë“¤ì–´ì˜¨ ê²ƒ ìì²´ê°€ ë§í•œ ìƒí™©.
+			case WSANOTINITIALISED: // WSAStartupÀÌ ½ÇÆĞÇÑ °ÍÀÌ¹Ç·Î ¿©±â±îÁö µé¾î¿Â °Í ÀÚÃ¼°¡ ¸ÁÇÑ »óÈ².
 				return E_Wait_Reset_WSA;
-			case WSAENETDOWN: // network subsystemì´ ì‹¤íŒ¨. ë‹¤ì‹œ ì²˜ìŒë¶€í„° ì—°ê²° í•´ ë³´ì
+			case WSAENETDOWN: // network subsystemÀÌ ½ÇÆĞ. ´Ù½Ã Ã³À½ºÎÅÍ ¿¬°á ÇØ º¸ÀÚ
 				return E_Wait_Reset_SOCK;
-			case WSAEINPROGRESS: // blocking Windows sockets 1.1 call is in progress, ì½œë°± í•¨ìˆ˜ì•ˆì— ê°‡íŒ ìƒí™©
-				return E_Wait_Max; // ì´ê±´ ì¢€ ë” ê³µë¶€í•´ë³´ê¸°
-			case WSA_NOT_ENOUGH_MEMORY: // ë©”ëª¨ë¦¬ ë¶€ì¡±. FULL Memory ë¡œê·¸ë§Œ ë‚¨ê¸°ê³  í¬ë˜ì‹œí•˜ì
+			case WSAEINPROGRESS: // blocking Windows sockets 1.1 call is in progress, Äİ¹é ÇÔ¼ö¾È¿¡ °¤Èù »óÈ²
+				return E_Wait_Max; // ÀÌ°Ç Á» ´õ °øºÎÇØº¸±â
+			case WSA_NOT_ENOUGH_MEMORY: // ¸Ş¸ğ¸® ºÎÁ·. FULL Memory ·Î±×¸¸ ³²±â°í Å©·¡½ÃÇÏÀÚ
 				return E_Wait_MEM_FULL; 
-			case WSA_INVALID_HANDLE: // event ë°°ì—´ì— í•œ ê°œ ì´ìƒì˜ ì´ë²¤íŠ¸ê°€ ì •ìƒì´ ì•„ë‹˜.
-				return E_Wait_Reset_EVENTS_ARRAY; // WSAEVENT ë“¤ì€ ë°°ì—´ ì •ë³´ ë‹¤ì‹œ ì •ë¦¬í•˜ê¸°
-			case WSA_INVALID_PARAMETER: // event ê°¯ìˆ˜ë¥¼ ì˜ëª» ë„£ì€ ê²ƒ ê°™ë‹¤ ë‹¤ì‹œ í™•ì¸í•˜ì.
-				return E_Wait_Reset_EVENTS_ARRAY; // WSAEVENT ë“¤ì€ ë°°ì—´ ì •ë³´ ë‹¤ì‹œ ì •ë¦¬í•˜ê¸°
+			case WSA_INVALID_HANDLE: // event ¹è¿­¿¡ ÇÑ °³ ÀÌ»óÀÇ ÀÌº¥Æ®°¡ Á¤»óÀÌ ¾Æ´Ô.
+				return E_Wait_Reset_EVENTS_ARRAY; // WSAEVENT µéÀº ¹è¿­ Á¤º¸ ´Ù½Ã Á¤¸®ÇÏ±â
+			case WSA_INVALID_PARAMETER: // event °¹¼ö¸¦ Àß¸ø ³ÖÀº °Í °°´Ù ´Ù½Ã È®ÀÎÇÏÀÚ.
+				return E_Wait_Reset_EVENTS_ARRAY; // WSAEVENT µéÀº ¹è¿­ Á¤º¸ ´Ù½Ã Á¤¸®ÇÏ±â
 			default:
 				return E_Wait_Max;
 			}
 		}
 		case WSA_WAIT_IO_COMPLETION:
 		case WSA_WAIT_TIMEOUT:
-			return E_Wait_Delayed; // ì—¬ê¸°ê¹Œì§„ ëŒ€ê¸°í•  ë•Œ ë°œìƒí•  ìˆ˜ ìˆëŠ” ì •ìƒìƒíƒœ
+			return E_Wait_Delayed; // ¿©±â±îÁø ´ë±âÇÒ ¶§ ¹ß»ıÇÒ ¼ö ÀÖ´Â Á¤»ó»óÅÂ
 		default:
 			return E_Wait_OK;
 		}

@@ -139,7 +139,7 @@ namespace Heading
 		memcpy_s(*_buffer, m_dataSize, m_data, m_dataSize);
 		*_length = m_dataSize;
 
-		// ë‹¤ êº¼ëƒˆìœ¼ë‹ˆ ë¹„ì›Œì¤ë‹ˆë‹¤.
+		// ´Ù ²¨³ÂÀ¸´Ï ºñ¿öÁİ´Ï´Ù.
 		m_seek = 0;
 		m_dataSize = 0;
 	}

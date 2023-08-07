@@ -12,7 +12,7 @@ namespace Heading
 
 
 
-		// Pingì— ëŒ€í•´ Pong Event í•˜ë©´ì„œ Socket ê²€ì‚¬.
+		// Ping¿¡ ´ëÇØ Pong Event ÇÏ¸é¼­ Socket °Ë»ç.
 		void onPing( );
 
 	private:

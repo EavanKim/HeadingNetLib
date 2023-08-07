@@ -14,7 +14,7 @@ namespace Heading
 
 	CAccepter::~CAccepter( )
 	{
-		// К╤─К╙╗ М│╢К·≤Л┼╓Л≈░Л└° Л├▄Л╪⌠ЙЁ╪ Л²╢К╡╓М┼╦ Л┌╜Л═°
+		// ╨н╦П е╛╥║╫╨©║╪╜ ╪рдо╟З юл╨╔ф╝ ╩Ха╕
 	}
 
 	bool CAccepter::Bind( )

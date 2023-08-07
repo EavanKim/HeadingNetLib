@@ -2,7 +2,7 @@
 
 namespace Heading
 {
-	// Event ì œê±° í•  ë•Œ fast í˜•ì‹ ì²˜ë¦¬ë¥¼ ìœ„í•œ ë°°ì—´ í´ë˜ìŠ¤
+	// Event Á¦°Å ÇÒ ¶§ fast Çü½Ä Ã³¸®¸¦ À§ÇÑ ¹è¿­ Å¬·¡½º
 	class Array_WSAEvent
 	{
 	public:
@@ -15,7 +15,7 @@ namespace Heading
 
 	private:
 		uint8_t m_size = 0;
-		WSAEVENT m_events[ WSA_MAXIMUM_WAIT_EVENTS ] = {}; // ì¼ë‹¨ ê¸°ë³¸ ì˜µì…˜ì¸ ìƒíƒœì—ì„  ë¬´ì¡°ê±´ 64ê°œ
+		WSAEVENT m_events[ WSA_MAXIMUM_WAIT_EVENTS ] = {}; // ÀÏ´Ü ±âº» ¿É¼ÇÀÎ »óÅÂ¿¡¼± ¹«Á¶°Ç 64°³
 	};
 }
 

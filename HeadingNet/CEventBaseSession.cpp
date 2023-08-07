@@ -10,10 +10,10 @@ namespace Heading
 		setsockopt( m_sock, IPPROTO_TCP, TCP_NODELAY, (char*) & on, sizeof( on ) );
 
 		LINGER  ling = {0,};  
-		ling.l_onoff = 1;   // LINGER ì˜µì…˜ ì‚¬ìš© ì—¬ë¶€  
-		ling.l_linger = 0;  // LINGER Timeout ì„¤ì •  
+		ling.l_onoff = 1;   // LINGER ¿É¼Ç »ç¿ë ¿©ºÎ  
+		ling.l_linger = 0;  // LINGER Timeout ¼³Á¤  
 
-		// LINGER ì˜µì…˜ì„ Socketì— ì ìš©  
+		// LINGER ¿É¼ÇÀ» Socket¿¡ Àû¿ë  
 		setsockopt(m_sock, SOL_SOCKET, SO_LINGER, (CHAR*)&ling, sizeof(ling));
 	}
 
@@ -93,7 +93,7 @@ namespace Heading
 		int count = 0;
 		int result = 0;
 
-		// Event ìœ íš¨ê¸°ê°„ - Accept -> WouldBlock
+		// Event À¯È¿±â°£ - Accept -> WouldBlock
 		if( m_isCanSend && !m_sendBuff.empty( ) )
 		{
 			Header* packet = m_sendBuff.front( );
@@ -109,7 +109,7 @@ namespace Heading
 				}
 				else if( 0 == sendresult )
 				{
-					// Close ìƒíƒœ
+					// Close »óÅÂ
 					m_isCanSend = false;
 					m_isLive = false;
 					return result;
