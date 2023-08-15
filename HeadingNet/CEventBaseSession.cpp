@@ -10,10 +10,10 @@ namespace Heading
 		setsockopt( m_sock, IPPROTO_TCP, TCP_NODELAY, (char*) & on, sizeof( on ) );
 
 		LINGER  ling = {0,};  
-		ling.l_onoff = 1;   // LINGER ¿É¼Ç »ç¿ë ¿©ºÎ  
-		ling.l_linger = 0;  // LINGER Timeout ¼³Á¤  
+		ling.l_onoff = 1;   // LINGER ï¿½É¼ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½  
+		ling.l_linger = 0;  // LINGER Timeout ï¿½ï¿½ï¿½ï¿½  
 
-		// LINGER ¿É¼ÇÀ» Socket¿¡ Àû¿ë  
+		// LINGER ï¿½É¼ï¿½ï¿½ï¿½ Socketï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½  
 		setsockopt(m_sock, SOL_SOCKET, SO_LINGER, (CHAR*)&ling, sizeof(ling));
 	}
 
@@ -93,7 +93,6 @@ namespace Heading
 		int count = 0;
 		int result = 0;
 
-		// Event À¯È¿±â°£ - Accept -> WouldBlock
 		if( m_isCanSend && !m_sendBuff.empty( ) )
 		{
 			Header* packet = m_sendBuff.front( );
@@ -109,9 +108,9 @@ namespace Heading
 				}
 				else if( 0 == sendresult )
 				{
-					// Close »óÅÂ
+					// Close ï¿½ï¿½ï¿½ï¿½
 					m_isCanSend = false;
-					m_isLive = false;
+					m_isConnected = false;
 					return result;
 				}
 				else if( packet->length > sendresult )
@@ -143,7 +142,7 @@ namespace Heading
 
 	bool CEventBaseSession::CheckLive( )
 	{
-		return m_isLive;
+		return m_isConnected;
 	}
 
 	void CEventBaseSession::enqueueSend( Header* _data )

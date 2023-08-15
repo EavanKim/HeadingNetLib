@@ -63,6 +63,18 @@
     <ClInclude Include="CSimpleWorker.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="Inc\Base\CEventBaseSession_v2.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\Base\CSimpleSocket.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\Base\CSimpleState.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\Base\CSimpleCallback.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -99,6 +111,18 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="CSimpleWorker.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="CEventBaseSession_v2.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="CSimpleSocket.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="CSimpleState.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="CSimpleCallback.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>

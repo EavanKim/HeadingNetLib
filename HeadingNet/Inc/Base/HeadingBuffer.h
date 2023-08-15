@@ -22,7 +22,7 @@ namespace Heading
 		void	get_send_data	( char**		_buffer
 								, int*			_length		);
 		bool	set_data		( char* _data
-								, uint64_t _length );
+								, int _length				);
 
 		bool	isEmpty			();
 

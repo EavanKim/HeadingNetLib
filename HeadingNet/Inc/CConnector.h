@@ -10,9 +10,6 @@ namespace Heading
 
 		void newConnect( connectionInfo& _info );
 
-
-
-		// Ping에 대해 Pong Event 하면서 Socket 검사.
 		void onPing( );
 
 	private:

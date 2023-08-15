@@ -150,6 +150,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Inc\Base\CSimpleCallback.h" />
+    <ClInclude Include="Inc\Base\CSimpleState.h" />
+    <ClInclude Include="Inc\Base\CSimpleSocket.h" />
+    <ClInclude Include="Inc\Base\CEventBaseSession_v2.h" />
     <ClInclude Include="CSimpleWorker.h" />
     <ClInclude Include="Inc\CAcceptThread.h" />
     <ClInclude Include="Inc\Array_WSAEvent.h" />
@@ -174,8 +178,12 @@
     <ClCompile Include="CClientSession.cpp" />
     <ClCompile Include="CConnector.cpp" />
     <ClCompile Include="CEventBaseSession.cpp" />
+    <ClCompile Include="CEventBaseSession_v2.cpp" />
     <ClCompile Include="CEventSelecter.cpp" />
     <ClCompile Include="CPacketHandler.cpp" />
+    <ClCompile Include="CSimpleCallback.cpp" />
+    <ClCompile Include="CSimpleState.cpp" />
+    <ClCompile Include="CSimpleSocket.cpp" />
     <ClCompile Include="CSimpleWorker.cpp" />
     <ClCompile Include="HeadingBuffer.cpp" />
     <ClCompile Include="HeadingFunction.cpp" />
