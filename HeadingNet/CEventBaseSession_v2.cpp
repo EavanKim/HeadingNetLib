@@ -15,4 +15,9 @@ namespace Heading
 	{
 		m_sock = _sock;
 	}
+
+	void CEventBaseSession_v2::StateCheck( )
+	{
+
+	}
 }

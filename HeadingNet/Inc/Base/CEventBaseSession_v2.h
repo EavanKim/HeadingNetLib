@@ -20,12 +20,18 @@ namespace Heading
 	class CEventBaseSession_v2
 	{
 	public:
-		CEventBaseSession_v2	( CSimpleSocket* _sock ); // Accept 된 대상으로 Session을 만드니까 socket 을 받아서 생성합니다.
-		~CEventBaseSession_v2	( );
+					CEventBaseSession_v2	( CSimpleSocket* _sock ); // Accept 된 대상으로 Session을 만드니까 socket 을 받아서 생성합니다.
+					~CEventBaseSession_v2	( );
 
-		void operator()( CSimpleSocket* _sock );
+		// Socket 에 문제가 있어서 날아간 경우 나중에 소켓을 새로 받기위한 함수
+		void		operator()				( CSimpleSocket* _sock );
 
-	private:
+		// 갱신되는 상태값들을 종합해서 자신의 상태를 결정하거나
+		// 소켓이 죽은 경우 날려버리는 타이밍입니다.
+		void		StateCheck				( );
+
+	protected:
+		__time64_t		m_lastWorkTime	= time(NULL);
 		CSimpleState	m_state			= {};
 		WSAEVENT		m_event			= INVALID_HANDLE_VALUE;
 
@@ -34,9 +40,14 @@ namespace Heading
 		// 혹시 Timeout 되면 Session도 날려버립니다.
 		CSimpleSocket*	m_sock			= nullptr;
 
+		// 외부에서 세션을 찾는 키
 		uint64_t		m_sessionKey	= 0;
-		uint64_t		m_userKey		= 0;
+
+		// 소켓 탐색 키
 		uint64_t		m_connectKey	= 0;
+
+		// DB 조회 기준 키
+		uint64_t		m_userKey		= 0;
 	};
 }
 

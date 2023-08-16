@@ -19,13 +19,33 @@ namespace Heading
 		}
 	}
 
-	void CSimpleSocket::setLINGLE( bool _state )
+	void CSimpleSocket::setNoDelay( bool _onoff )
 	{
-		// 종료 관련 버퍼 처리 - LINGLE
-		_Unreferenced_parameter_( _state );
+		int on = 0;
+
+		if( _onoff )
+		{
+			on = 1;
+		}
+
+		setsockopt( m_sock, IPPROTO_TCP, TCP_NODELAY, (char*)&on, sizeof( on ) );
 	}
 
-	void CSimpleSocket::setCallback( E_SOCKET_CALLBACK_TYPE _type, fnCallback _fn, void* _reserveParam = nullptr )
+	void CSimpleSocket::setLINGLE( bool _state, u_short _timeout )
+	{
+		// 종료 관련 버퍼 처리 - LINGLE
+		LINGER  ling = {0,};
+		if( _state )
+			ling.l_onoff = 1;
+		else
+			ling.l_onoff = 0;
+
+		ling.l_linger = _timeout;
+
+		setsockopt(m_sock, SOL_SOCKET, SO_LINGER, (CHAR*)&ling, sizeof(ling));
+	}
+
+	void CSimpleSocket::setCallback( E_SOCKET_CALLBACK_TYPE _type, fnCallback _fn, void* _reserveParam /*= nullptr*/ )
 	{
 		switch( _type )
 		{
@@ -90,7 +110,6 @@ namespace Heading
 			if( 0 == recvResult )
 			{
 				// Error Flag 설정하기
-				// 이건 어떻게 처리해야하나...
 				// size 0을 연결 확인으로 사용하는 경우도 있다고 하시니 넘겨봅니다.
 				return;
 			}

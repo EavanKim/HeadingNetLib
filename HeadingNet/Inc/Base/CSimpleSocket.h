@@ -28,7 +28,9 @@ namespace Heading
 		CSimpleSocket		( SOCKET _sock );
 		~CSimpleSocket		( );
 
-		void setLINGLE		( bool _state = false );
+		void setNoDelay		( bool _onoff = false );
+		void setLINGLE		( bool _state = false
+							, u_short _timeout = 0 );
 
 		// 콜백을 지울 땐 타입만 넣으면 됩니다,
 		void setCallback	( E_SOCKET_CALLBACK_TYPE _type

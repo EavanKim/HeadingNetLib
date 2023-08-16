@@ -9,11 +9,10 @@ namespace Heading
 		const int on = 1;
 		setsockopt( m_sock, IPPROTO_TCP, TCP_NODELAY, (char*) & on, sizeof( on ) );
 
-		LINGER  ling = {0,};  
-		ling.l_onoff = 1;   // LINGER �ɼ� ��� ����  
-		ling.l_linger = 0;  // LINGER Timeout ����  
+		LINGER  ling = {0,};
+		ling.l_onoff = 1;
+		ling.l_linger = 0;
 
-		// LINGER �ɼ��� Socket�� ����  
 		setsockopt(m_sock, SOL_SOCKET, SO_LINGER, (CHAR*)&ling, sizeof(ling));
 	}
 
