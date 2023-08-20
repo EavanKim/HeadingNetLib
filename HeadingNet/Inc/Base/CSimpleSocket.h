@@ -50,6 +50,8 @@ namespace Heading
 		CSimpleCallback	onReceive;
 		CSimpleCallback	onSend;
 
+		Buffer			m_recvBuffer;
+
 		SOCKET			m_sock		= INVALID_SOCKET;
 	};
 }

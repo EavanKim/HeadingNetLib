@@ -20,15 +20,20 @@ namespace Heading
 	class CEventBaseSession_v2
 	{
 	public:
-					CEventBaseSession_v2	( CSimpleSocket* _sock ); // Accept 된 대상으로 Session을 만드니까 socket 을 받아서 생성합니다.
-					~CEventBaseSession_v2	( );
+						CEventBaseSession_v2	( CSimpleSocket* _sock ); // Accept 된 대상으로 Session을 만드니까 socket 을 받아서 생성합니다.
+						~CEventBaseSession_v2	( );
 
 		// Socket 에 문제가 있어서 날아간 경우 나중에 소켓을 새로 받기위한 함수
-		void		operator()				( CSimpleSocket* _sock );
+		void			operator()				( CSimpleSocket* _sock );
 
 		// 갱신되는 상태값들을 종합해서 자신의 상태를 결정하거나
 		// 소켓이 죽은 경우 날려버리는 타이밍입니다.
-		void		StateCheck				( );
+		void			StateCheck				( );
+
+		WSAEVENT		getEvent				( );
+		CSimpleSocket*	getSocket				( );
+
+		void			clear					( );
 
 	protected:
 		__time64_t		m_lastWorkTime	= time(NULL);
