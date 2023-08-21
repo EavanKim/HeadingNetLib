@@ -27,6 +27,11 @@ namespace Heading
 		return _flag == ( m_state & _flag );
 	}
 
+	bool CSimpleState::haveState(int _flag)
+	{
+		return 0 != ( m_state & _flag );
+	}
+
 	void CSimpleState::initialize( int _flag )
 	{
 		m_state = _flag;

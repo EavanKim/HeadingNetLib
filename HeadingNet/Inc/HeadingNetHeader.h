@@ -39,10 +39,13 @@
 #include "Base/CSimpleState.h"
 #include "Base/CEventBaseSession.h"
 #include "Base/CSimpleSocket.h"
+#include "CLoginSocket.h"
 #include "Base/CEventBaseSession_v2.h"
 #include "CAccepter.h"
 #include "CConnector.h"
+#include "CLoginWaiter.h"
 #include "CAcceptThread.h"
+#include "CAcceptThread_v2.h"
 #include "CClientSession.h"
 #include "Base/CEventSelecter.h"
 

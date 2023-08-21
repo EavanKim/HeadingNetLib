@@ -10,6 +10,7 @@ namespace Heading
 #define HS_ERROR		0x00000001 // 에러상황
 #define HS_SOCKETDOWN	0x00008000 // 소켓이 죽어서 새로 할당이 필요한 상황
 #define HS_WOULDBLOCK	0x00010000 // 욷으블럭
+#define HS_CLOSETROUGH	0x00100000 // 일부러 소켓을 닫지 않음
 #define HS_CONNECT		0x08000000 // 가끔 최상단 비트는, 특히 마지막 2개 비트는 signed 유무로 고장날 때가 있어서 무시합니다.
 
 	class CSimpleSocket;
@@ -44,7 +45,10 @@ namespace Heading
 
 	public:
 		CSimpleState	m_state		= {};
-	private:
+
+		// 소켓을 꺼낼 필요가 생겼는데 소캣 래퍼에서 소켓을 꺼낼 거면
+		// 어차피 private는 의미 없는 것 같아서 protected화
+	protected:
 		CSimpleCallback	onError;
 		// 비동기 위치에서 리시브 하게 되면 데이터가 완성 된 순간의 콜백을 받도록 합니다.
 		CSimpleCallback	onReceive;

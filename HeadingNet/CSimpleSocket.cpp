@@ -13,7 +13,8 @@ namespace Heading
 		if( INVALID_SOCKET != m_sock )
 		{
 			// 에러 상태면 socket 삭제 패스
-			if( !m_state.checkState( HS_ERROR ) )
+			// 혹은 일부러 삭제를 피하겠다고 하면 패스
+			if( !m_state.haveState( HS_ERROR | HS_CLOSETROUGH ) )
 				closesocket( m_sock );
 			m_sock = INVALID_SOCKET;
 		}
