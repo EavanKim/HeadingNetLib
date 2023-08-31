@@ -40,6 +40,20 @@ namespace Heading
 		m_sockMap.insert( std::make_pair( sock->getEvent(), sock ) );
 	}
 
+	void CLoginWaiter::getLoginData(int _index, void*& _data)
+	{
+		WSAEVENT targetEvt = m_array[ _index ];
+		auto target = m_sockMap.find( targetEvt );
+		if ( m_sockMap.end() != target )
+		{
+			CLoginSocket* sock = target->second;
+			Buffer buf;
+			sock->recv(buf);
+
+			std::string string = ( ( SendStruct<0, 1>* )buf.get_data() )->buffer;
+		}
+	}
+
 	SOCKET CLoginWaiter::removeSocket(int _index)
 	{
 		WSAEVENT targetEvt = m_array[ _index ];

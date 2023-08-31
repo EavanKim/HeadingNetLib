@@ -15,6 +15,7 @@ namespace Heading
 		void updateAccepter( CAccepter* _accepter );
 
 		void addNewSocket( SOCKET _new );
+		void getLoginData( int _index, void*& _data );
 		SOCKET removeSocket( int _index );
 
 	private:

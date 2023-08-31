@@ -32,7 +32,7 @@ namespace Heading
 
 	void Buffer::commit( int _length )
 	{
-		printf( "commit length : %i \n", _length );
+		//printf( "commit length : %i \n", _length );
 		m_dataSize += _length;
 		m_seek = 0;
 	}
@@ -49,7 +49,7 @@ namespace Heading
 
 			*_length = DEFAULT_SOCKET_BUFFER_LENGTH - m_dataSize;
 			*_buffer = ((char*)m_data) + m_dataSize;
-			printf( "return length : %i / [%llX / %llX] \n", *_length, (uint64_t)m_data, (uint64_t)*_buffer );
+			//printf( "return length : %i / [%llX / %llX] \n", *_length, (uint64_t)m_data, (uint64_t)*_buffer );
 			return true;
 		}
 
@@ -122,7 +122,7 @@ namespace Heading
 		Header* parse = get_data();
 		while( nullptr != parse )
 		{
-			printf( "[seek : %lld][data] : %s \n", m_seek, ( ( SendStruct<0, 1>* )parse )->buffer );
+			//printf( "[seek : %lld][data] : %s \n", m_seek, ( ( SendStruct<0, 1>* )parse )->buffer );
 			_datas->push( parse );
 			parse = get_data();
 		}
