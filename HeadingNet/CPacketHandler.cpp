@@ -32,7 +32,7 @@ namespace Heading
 				char* dataPtr = _ptr + sizeof(Header);
 
 				*(const_cast<uint64_t*>(&headPtr->type)) = _ePacketType;
-				*(const_cast<int*>(&headPtr->length)) = m_callbackArray[ _ePacketType ].size;
+				*(const_cast<packetSize_t*>(&headPtr->length)) = m_callbackArray[ _ePacketType ].size;
 
 				memcpy_s(dataPtr, dataLength, _data, _size);
 			}

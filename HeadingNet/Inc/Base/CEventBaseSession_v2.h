@@ -33,12 +33,18 @@ namespace Heading
 		WSAEVENT		getEvent				( );
 		CSimpleSocket*	getSocket				( );
 
+		void			trySend					( Header* _send = NULL );
+
 		void			clear					( );
 
 	protected:
 		__time64_t		m_lastWorkTime	= time(NULL);
 		CSimpleState	m_state			= {};
 		WSAEVENT		m_event			= INVALID_HANDLE_VALUE;
+
+		// 저장하려던 데이터는 소켓 전송이 맞는지 염두에 두었으나,
+		// 재연결이 발생했을 때는 소켓을 지우고 다시 전송하므로 복사가 없도록 세션 귀속으로 처리합니다.
+		std::queue<Header*> m_sendQueue;
 
 		// 연결에 문제가 생기면 접속정보를 사용해서 다시 Accept 되길 기다리고
 		// 다시 Accept되면 연속해서 살려줍니다

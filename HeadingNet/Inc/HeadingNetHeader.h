@@ -49,6 +49,9 @@
 #include "CClientSession.h"
 #include "Base/CEventSelecter.h"
 
+#include "Base/CPacketEncoder.h"
+#include "Base/CPacketDecoder.h"
 #include "Base/CPacketHandler.h"
+#include "CSessionMgr.h"
 
 #include "Util/HeadingFunction.h"

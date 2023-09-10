@@ -47,6 +47,34 @@ namespace Heading
 		return m_sock;
 	}
 
+	void CEventBaseSession_v2::trySend(Header* _send)
+	{
+		// 어느것이 전송의 끝일까...?
+		if ( NULL != _send )
+		{
+			// 쓰기 상태가 아니라면
+			if ( !m_state.checkState( HEBS_WRITE ) )
+			{
+				m_sock->send(( char* ) _send, _send->length);
+				return;
+			}
+			else
+			{
+				m_sendQueue.push(_send);
+			}
+		}
+		else
+		{
+			if ( !m_sendQueue.empty() )
+			{
+				Header* sending = m_sendQueue.front();
+				// 필요하면 실패한 경우 pop 제외 로직 추가
+				m_sock->send(( char* ) sending, sending->length);
+				m_sendQueue.pop();
+			}
+		}
+	}
+
 	void CEventBaseSession_v2::clear( )
 	{
 		// Event 자체는 소켓 상태와 무관하게 삭제 가능한 것으로 판정합니다.

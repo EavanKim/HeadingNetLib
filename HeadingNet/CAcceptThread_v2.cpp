@@ -62,8 +62,6 @@ namespace Heading
 						}
 						else
 						{
-
-
 							SOCKET sock = Waiter.removeSocket(result);
 							info->onAccept(sock);
 						}

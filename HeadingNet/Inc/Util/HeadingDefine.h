@@ -1,6 +1,12 @@
 #pragma once
 
+#ifndef DEFAULT_SOCKET_BUFFER_LENGTH
 #define DEFAULT_SOCKET_BUFFER_LENGTH (1 << 13)
+#endif
+
+#ifndef MAXIMUM_PACKET_DATA_LENGTH
+#define MAXIMUM_PACKET_DATA_LENGTH (1 << 12)
+#endif
 
 namespace Heading
 {
@@ -24,21 +30,24 @@ namespace Heading
 		SOCKET Sock;
 	};
 
+	typedef uint64_t packetType_t;
+	typedef uint32_t packetSize_t;
+
 #pragma pack(push, 1)
 	struct Header
 	{
-		Header( uint64_t _type, int _length )
+		Header( packetType_t _type, packetSize_t _length )
 			: type( _type )
 			, length( _length )
 		{
 
 		}
 
-		const uint64_t type;
-		const int length;
+		const packetType_t type;
+		const packetSize_t length;
 	};
 
-	template<uint64_t _type, uint64_t _buffersize>
+	template<packetType_t _type, packetSize_t _buffersize>
 	struct SendStruct : public Header
 	{
 		static_assert(_buffersize > 0);

@@ -51,6 +51,7 @@ namespace Heading
 			sock->recv(buf);
 
 			std::string string = ( ( SendStruct<0, 1>* )buf.get_data() )->buffer;
+
 		}
 	}
 
