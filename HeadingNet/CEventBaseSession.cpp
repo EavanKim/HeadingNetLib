@@ -96,7 +96,7 @@ namespace Heading
 			Header* packet = m_sendBuff.front( );
 			if( nullptr != packet )
 			{
-				InternalSendData(packet);
+				result = InternalSendData(packet);
 			}
 			else
 			{
@@ -151,6 +151,7 @@ namespace Heading
 		}
 
 		m_sending.store(false);
+		return result;
 	}
 
 	bool CEventBaseSession::CheckLive( )
