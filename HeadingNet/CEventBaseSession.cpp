@@ -83,7 +83,7 @@ namespace Heading
 
 	void CEventBaseSession::onEventSend( )
 	{
-		m_isCanSend = true;
+
 	}
 
 	//https://gpgstudy.com/forum/viewtopic.php?t=24552
@@ -92,7 +92,7 @@ namespace Heading
 		int count = 0;
 		int result = 0;
 		
-		if( m_isCanSend && !m_sendBuff.empty( ) )
+		if( !m_sendBuff.empty( ) )
 		{
 			Header* packet = m_sendBuff.front( );
 			if( nullptr != packet )
@@ -124,7 +124,7 @@ namespace Heading
 		if( SOCKET_ERROR == sendresult )
 		{
 			if( WSAEWOULDBLOCK == WSAGetLastError( ) )
-				m_isCanSend = false;
+				return 0;
 
 			m_sending.store(false);
 			return result;
@@ -132,7 +132,6 @@ namespace Heading
 		else if( 0 == sendresult )
 		{
 			// Close ����
-			m_isCanSend = false;
 			m_isConnected = false;
 			m_sending.store(false);
 			return result;

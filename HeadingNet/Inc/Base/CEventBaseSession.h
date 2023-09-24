@@ -27,7 +27,6 @@ namespace Heading
 
 	protected:
 		std::atomic<bool> m_sending		= false;
-		std::atomic<bool> m_isCanSend	= true;
 		uint64_t	m_sendBufferSize	= 0;
 		Buffer		m_buffer			= {};
 		SOCKADDR_IN	m_info				= {};
