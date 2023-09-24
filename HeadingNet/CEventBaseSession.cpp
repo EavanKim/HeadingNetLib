@@ -89,46 +89,14 @@ namespace Heading
 	//https://gpgstudy.com/forum/viewtopic.php?t=24552
 	int CEventBaseSession::SendData( )
 	{
-		int count = 0;
 		int result = 0;
-
+		
 		if( m_isCanSend && !m_sendBuff.empty( ) )
 		{
 			Header* packet = m_sendBuff.front( );
 			if( nullptr != packet )
 			{
-				int sendresult = ::send( m_sock, ( char* ) packet, packet->length, 0 );
-				if( SOCKET_ERROR == sendresult )
-				{
-					if( WSAEWOULDBLOCK == WSAGetLastError( ) )
-						m_isCanSend = false;
-
-					return result;
-				}
-				else if( 0 == sendresult )
-				{
-					// Close ����
-					m_isCanSend = false;
-					m_isConnected = false;
-					return result;
-				}
-				else if( packet->length > sendresult )
-				{
-					return result;
-				}
-				else if( packet->length < sendresult )
-				{
-					return result;
-				}
-				else// if( packet->length == sendresult )
-				{
-					result += packet->length;
-					delete packet;
-					++count;
-					printf( "[%i] sendCount \n", count );
-
-					m_sendBuff.pop( );
-				}
+				InternalSendData(packet);
 			}
 			else
 			{
@@ -139,6 +107,52 @@ namespace Heading
 		return result;
 	}
 
+	int CEventBaseSession::InternalSendData( Header* _data )
+	{
+		m_sending.store(true);
+		int count = 0;
+		int result = 0;
+
+		int sendresult = ::send( m_sock, ( char* ) _data, _data->length, 0 );
+		if( SOCKET_ERROR == sendresult )
+		{
+			if( WSAEWOULDBLOCK == WSAGetLastError( ) )
+				m_isCanSend = false;
+
+			m_sending.store(false);
+			return result;
+		}
+		else if( 0 == sendresult )
+		{
+			// Close ����
+			m_isCanSend = false;
+			m_isConnected = false;
+			m_sending.store(false);
+			return result;
+		}
+		else if( _data->length > sendresult )
+		{
+			m_sending.store(false);
+			return result;
+		}
+		else if( _data->length < sendresult )
+		{
+			m_sending.store(false);
+			return result;
+		}
+		else// if( packet->length == sendresult )
+		{
+			result += _data->length;
+			delete _data;
+			++count;
+			printf( "[%i] sendCount \n", count );
+
+			m_sendBuff.pop( );
+		}
+
+		m_sending.store(false);
+	}
+
 	bool CEventBaseSession::CheckLive( )
 	{
 		return m_isConnected;
@@ -147,5 +161,26 @@ namespace Heading
 	void CEventBaseSession::enqueueSend( Header* _data )
 	{
 		m_sendBuff.push(_data);
+	}
+
+	void CEventBaseSession::trySend(Header* _data)
+	{
+		if ( m_sending.load() )
+		{
+			enqueueSend(_data);
+		}
+		else
+		{
+			if ( !m_sendBuff.empty() )
+			{
+				// 앞에 저장된 데이터가 있다면 전송 순서 지키기
+				enqueueSend(_data);
+				SendData();
+			}
+			else
+			{
+				InternalSendData(_data);
+			}
+		}
 	}
 }

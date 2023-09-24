@@ -52,6 +52,7 @@
 #include "Base/CPacketEncoder.h"
 #include "Base/CPacketDecoder.h"
 #include "Base/CPacketHandler.h"
+#include "CSessionRouter.h"
 #include "CSessionMgr.h"
 
 #include "Util/HeadingFunction.h"

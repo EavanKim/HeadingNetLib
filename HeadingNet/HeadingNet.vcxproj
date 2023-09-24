@@ -150,6 +150,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Inc\CSessionRouter.h" />
     <ClInclude Include="EventManager_v2.h" />
     <ClInclude Include="Inc\Base\CPacketEncoder.h" />
     <ClInclude Include="Inc\Base\CPacketDecoder.h" />
@@ -191,6 +192,7 @@
     <ClCompile Include="CPacketDecoder.cpp" />
     <ClCompile Include="CPacketEncoder.cpp" />
     <ClCompile Include="CPacketHandler.cpp" />
+    <ClCompile Include="CSessionRouter.cpp" />
     <ClCompile Include="CSimpleCallback.cpp" />
     <ClCompile Include="CSimpleState.cpp" />
     <ClCompile Include="CSimpleSocket.cpp" />
