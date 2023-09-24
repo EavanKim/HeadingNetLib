@@ -55,7 +55,9 @@ namespace Heading
 			// 쓰기 상태가 아니라면
 			if ( !m_state.checkState( HEBS_WRITE ) )
 			{
+				m_state.setState(true, HEBS_WRITE);
 				m_sock->send(( char* ) _send, _send->length);
+				m_state.setState(false, HEBS_WRITE);
 				return;
 			}
 			else
@@ -68,8 +70,10 @@ namespace Heading
 			if ( !m_sendQueue.empty() )
 			{
 				Header* sending = m_sendQueue.front();
+				m_state.setState(true, HEBS_WRITE);
 				// 필요하면 실패한 경우 pop 제외 로직 추가
 				m_sock->send(( char* ) sending, sending->length);
+				m_state.setState(false, HEBS_WRITE);
 				m_sendQueue.pop();
 			}
 		}
