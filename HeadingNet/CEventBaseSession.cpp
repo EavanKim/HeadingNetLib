@@ -89,6 +89,7 @@ namespace Heading
 	//https://gpgstudy.com/forum/viewtopic.php?t=24552
 	int CEventBaseSession::SendData( )
 	{
+		int count = 0;
 		int result = 0;
 		
 		if( m_isCanSend && !m_sendBuff.empty( ) )
@@ -97,11 +98,15 @@ namespace Heading
 			if( nullptr != packet )
 			{
 				result = InternalSendData(packet);
+				delete packet;
+				++count;
+				printf( "[%i] sendCount \n", count );
 			}
 			else
 			{
 				throw "Null Buffer Crash";
 			}
+			m_sendBuff.pop( );
 		}
 
 		return result;
@@ -110,7 +115,6 @@ namespace Heading
 	int CEventBaseSession::InternalSendData( Header* _data )
 	{
 		m_sending.store(true);
-		int count = 0;
 		int result = 0;
 
 		int sendresult = ::send( m_sock, ( char* ) _data, _data->length, 0 );
@@ -143,11 +147,6 @@ namespace Heading
 		else// if( packet->length == sendresult )
 		{
 			result += _data->length;
-			delete _data;
-			++count;
-			printf( "[%i] sendCount \n", count );
-
-			m_sendBuff.pop( );
 		}
 
 		m_sending.store(false);
