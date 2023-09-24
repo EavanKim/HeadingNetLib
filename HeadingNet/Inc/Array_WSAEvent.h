@@ -2,12 +2,13 @@
 
 namespace Heading
 {
-	// Event 제거 할 때 fast 형식 처리를 위한 배열 클래스
 	class Array_WSAEvent
 	{
 	public:
 		bool add( WSAEVENT _newEvent );
 		void remove( WSAEVENT _delete );
+		// Accepter 동작으로 0번을 고정 Accept 번호로 쓰기위한 추가함수.
+		WSAEVENT swap( int _index, WSAEVENT _newTarget );
 		void clear();
 		uint8_t size( );
 		WSAEVENT* operator*( );
@@ -15,7 +16,7 @@ namespace Heading
 
 	private:
 		uint8_t m_size = 0;
-		WSAEVENT m_events[ WSA_MAXIMUM_WAIT_EVENTS ] = {}; // 일단 기본 옵션인 상태에선 무조건 64개
+		WSAEVENT m_events[ WSA_MAXIMUM_WAIT_EVENTS ] = {};
 	};
 }
 

@@ -29,19 +29,19 @@ namespace Heading
 			{
 			case E_Wait_Delayed:
 				break;
-			case E_Wait_MEM_FULL: // 크래시 어떻게 낼까 고민해보기
-				throw "Memory FULL !!!"; // 이거 뜨면 막장이니 Throw 시켜버리기
-			case E_Wait_Reset_WSA: // 이거 뜨면 답이 없다...
+			case E_Wait_MEM_FULL:
+				throw "Memory FULL !!!";
+			case E_Wait_Reset_WSA:
 				return -1;
-			case E_Wait_Reset_SOCK: // 단 하나뿐인 accepter socket이 맛이 간 것 같으니 삭제 후 재할당 진행
-			case E_Wait_Reset_EVENTS_ARRAY: // 단 하나뿐인 Event가 고장났으니 accepter 수리 필요. // 삭제 후 재할당 진행
+			case E_Wait_Reset_SOCK:
+			case E_Wait_Reset_EVENTS_ARRAY:
 			{
 				delete accepter;
 				accepter = new CAccepter( info->port );
 				events[ 0 ] = { accepter->Get_Event() };
 			}
 				break;
-			case E_Wait_OK: // 여기서 Accept 처리
+			case E_Wait_OK:
 			{
 				sockaddr_in sockinfo = {};
 				SOCKET newSock = accepter->CreateConnect( sockinfo );

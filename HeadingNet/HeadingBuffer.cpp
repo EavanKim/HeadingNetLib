@@ -8,6 +8,7 @@ namespace Heading
 
 	Buffer::Buffer( uint64_t _sessionKey )
 	{
+		_Unreferenced_parameter_(_sessionKey);
 		memset( m_data, 0, DEFAULT_SOCKET_BUFFER_LENGTH );
 	}
 
@@ -31,7 +32,7 @@ namespace Heading
 
 	void Buffer::commit( int _length )
 	{
-		printf( "commit length : %i \n", _length );
+		//printf( "commit length : %i \n", _length );
 		m_dataSize += _length;
 		m_seek = 0;
 	}
@@ -48,7 +49,7 @@ namespace Heading
 
 			*_length = DEFAULT_SOCKET_BUFFER_LENGTH - m_dataSize;
 			*_buffer = ((char*)m_data) + m_dataSize;
-			printf( "return length : %i / [%llX / %llX] \n", *_length, (uint64_t)m_data, (uint64_t)*_buffer );
+			//printf( "return length : %i / [%llX / %llX] \n", *_length, (uint64_t)m_data, (uint64_t)*_buffer );
 			return true;
 		}
 
@@ -121,7 +122,7 @@ namespace Heading
 		Header* parse = get_data();
 		while( nullptr != parse )
 		{
-			printf( "[seek : %lld][data] : %s \n", m_seek, ( ( SendStruct<0, 1>* )parse )->buffer );
+			//printf( "[seek : %lld][data] : %s \n", m_seek, ( ( SendStruct<0, 1>* )parse )->buffer );
 			_datas->push( parse );
 			parse = get_data();
 		}
@@ -133,12 +134,11 @@ namespace Heading
 		memcpy_s(*_buffer, m_dataSize, m_data, m_dataSize);
 		*_length = m_dataSize;
 
-		// 다 꺼냈으니 비워줍니다.
 		m_seek = 0;
 		m_dataSize = 0;
 	}
 
-	bool Buffer::set_data( char* _data, uint64_t _length )
+	bool Buffer::set_data( char* _data, int _length )
 	{
 		if( m_seek != (DEFAULT_SOCKET_BUFFER_LENGTH / 2) )
 		{

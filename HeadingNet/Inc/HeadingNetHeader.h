@@ -28,19 +28,31 @@
 
 #include <condition_variable>
 
+#include "Base/CSimpleCallback.h"
+
 #include "Array_WSAEvent.h"
 
 #include "Util/HeadingDefine.h"
 #include "Base/HeadingBuffer.h"
 #include "HeadingSession.h"
 
+#include "Base/CSimpleState.h"
 #include "Base/CEventBaseSession.h"
+#include "Base/CSimpleSocket.h"
+#include "CLoginSocket.h"
+#include "Base/CEventBaseSession_v2.h"
 #include "CAccepter.h"
 #include "CConnector.h"
+#include "CLoginWaiter.h"
 #include "CAcceptThread.h"
+#include "CAcceptThread_v2.h"
 #include "CClientSession.h"
 #include "Base/CEventSelecter.h"
 
+#include "Base/CPacketEncoder.h"
+#include "Base/CPacketDecoder.h"
 #include "Base/CPacketHandler.h"
+#include "CSessionRouter.h"
+#include "CSessionMgr.h"
 
 #include "Util/HeadingFunction.h"

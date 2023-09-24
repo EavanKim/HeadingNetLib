@@ -16,33 +16,33 @@ namespace Heading
 
 	void Array_WSAEvent::remove( WSAEVENT _delete )
 	{
-		// 단순하고 무식하게 써리 원
-		// Event를 키로 하여 검색해서 꺼내쓰기 때문에 순서가 관계 없어서 가능한 단순처리
 		for( uint8_t seek = 0; m_size > seek; ++seek )
 		{
 			WSAEVENT CurrentEvent = m_events[ seek ];
-			// 일치하면 지우고 끝장을 본 뒤 탈출
 			if( CurrentEvent == _delete )
 			{
-				// 기본적으로 seek가 마지막이 아니라면
 				if( seek != ( m_size - 1 ) )
 				{
-					// 마지막 값을 위치를 옮겨 덮어버립니다.
 					m_events[ seek ] = m_events[ m_size - 1 ];
 				}
-				// seek가 마지막 인덱스인 size - 1이라면, 사이즈를 감소시켜서 다시 못 쓰게 만들고 덮어쓰기를 안합니다.
 
 				WSACloseEvent( CurrentEvent );
-				// 지우면 사이즈가 하나 감소
 				--m_size;
 				return;
 			}
 		}
 	}
 
+	WSAEVENT Array_WSAEvent::swap(int _index, WSAEVENT _newTarget)
+	{
+		WSAEVENT result = m_events[_index];
+		m_events[_index] = _newTarget;
+
+		return result;
+	}
+
 	void Array_WSAEvent::clear( )
 	{
-		// Event 자체의 생명주기는 m_sessions의 session이 관리하므로 핸들에 대한 어떠한 추가연산도 없습니다.
 		ZeroMemory(m_events, (sizeof(WSAEVENT) * WSA_MAXIMUM_WAIT_EVENTS));
 	}
 
