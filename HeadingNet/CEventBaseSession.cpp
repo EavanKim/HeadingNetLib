@@ -98,15 +98,18 @@ namespace Heading
 			if( nullptr != packet )
 			{
 				result = InternalSendData(packet);
-				delete packet;
-				++count;
-				printf( "[%i] sendCount \n", count );
+				if ( 0 != result )
+				{
+					delete packet;
+					++count;
+					printf( "[%i] sendCount \n", count );
+					m_sendBuff.pop( );
+				}
 			}
 			else
 			{
 				throw "Null Buffer Crash";
 			}
-			m_sendBuff.pop( );
 		}
 
 		return result;
