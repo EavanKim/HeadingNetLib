@@ -98,12 +98,21 @@ namespace Heading
 			if( nullptr != packet )
 			{
 				result = InternalSendData(packet);
-				if ( 0 != result )
+				if ( 0 < result )
 				{
-					delete packet;
-					++count;
-					printf( "[%i] sendCount \n", count );
-					m_sendBuff.pop( );
+					m_sendBufferSize += result;
+
+					if ( m_sendBufferSize >= packet->length )
+					{
+						delete packet;
+						++count;
+						printf( "[%i] sendCount \n", count );
+						m_sendBuff.pop( );
+					}
+				}
+				else
+				{
+					
 				}
 			}
 			else
@@ -120,18 +129,12 @@ namespace Heading
 	// https://github.com/torvalds/linux/blob/3aba70aed91f2b283f7952be152ad76ec5c34975/net/ipv4/tcp.c
 	// __inet_stream_connect
 	// https://android.googlesource.com/kernel/msm/+/android-msm-bullhead-3.10-n-preview-5/net/ipv4/af_inet.c
+	// 
+	// https://cr.yp.to/docs/connect.html
 	int CEventBaseSession::InternalSendData( Header* _data )
 	{
 		m_sending.store(true);
 		int result = 0;
-
-		SOCKADDR_IN addr;
-		int size = sizeof(SOCKADDR_IN);
-		ZeroMemory(&addr, size);
-		if ( 0 == ::getpeername(m_sock, ( SOCKADDR* ) &addr, &size) )
-		{
-
-		}
 
 		int sendresult = ::send( m_sock, ( char* ) _data, _data->length, 0 );
 		if( SOCKET_ERROR == sendresult )
