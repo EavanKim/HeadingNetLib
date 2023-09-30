@@ -112,7 +112,7 @@ namespace Heading
 				}
 				else
 				{
-					
+					throw "Error Occurred Crash";
 				}
 			}
 			else
@@ -147,7 +147,6 @@ namespace Heading
 		}
 		else if( 0 == sendresult )
 		{
-			// Close ����
 			m_isConnected = false;
 			m_sending.store(false);
 			return result;
@@ -183,22 +182,9 @@ namespace Heading
 
 	void CEventBaseSession::trySend(Header* _data)
 	{
-		if ( m_sending.load() )
-		{
-			enqueueSend(_data);
-		}
-		else
-		{
-			if ( !m_sendBuff.empty() )
-			{
-				// 앞에 저장된 데이터가 있다면 전송 순서 지키기
-				enqueueSend(_data);
-				SendData();
-			}
-			else
-			{
-				InternalSendData(_data);
-			}
-		}
+		// 부분 전송에 대비하여 Queue에 일단 집어넣어버리고
+		// 1회 발송시도 하는 것으로 처리 단순화
+		enqueueSend(_data);
+		SendData();
 	}
 }

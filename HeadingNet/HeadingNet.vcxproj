@@ -150,6 +150,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="CCommandKernal.h" />
     <ClInclude Include="Inc\CSessionRouter.h" />
     <ClInclude Include="EventManager_v2.h" />
     <ClInclude Include="Inc\Base\CPacketEncoder.h" />
@@ -184,6 +185,7 @@
     <ClCompile Include="CAcceptThread.cpp" />
     <ClCompile Include="CAccepter.cpp" />
     <ClCompile Include="CClientSession.cpp" />
+    <ClCompile Include="CCommandKernal.cpp" />
     <ClCompile Include="CConnector.cpp" />
     <ClCompile Include="CEventBaseSession.cpp" />
     <ClCompile Include="CEventBaseSession_v2.cpp" />
