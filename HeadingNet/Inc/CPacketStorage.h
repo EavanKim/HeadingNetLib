@@ -23,12 +23,6 @@
 // 
 //===============================================================================
 
-#ifdef _WIN64
-typedef uint64_t intPtr;
-#elif _WIN32
-typedef uint32_t intPtr;
-#endif
-
 typedef uint32_t index_t;
 typedef uint32_t storageSize_t;
 
