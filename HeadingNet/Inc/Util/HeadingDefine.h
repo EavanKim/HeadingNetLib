@@ -30,7 +30,7 @@ namespace Heading
 		SOCKET Sock;
 	};
 
-	typedef uint64_t session_t;
+	typedef uint16_t session_t;
 	typedef uint64_t packetType_t;
 	typedef uint32_t packetSize_t;
 
@@ -75,6 +75,31 @@ namespace Heading
 	typedef SendStruct<10006, 8> PCK_SC_ReturnEnter;
 	typedef SendStruct<10007, 120> PCK_SC_OthersChatting;
 	typedef SendStruct<10008, 8> PCK_SC_RequestReset;
+
+	struct connInfo_t
+	{
+		uint32_t	ip;
+		uint16_t	port;
+		session_t	session;
+	};
+
+	// Data Header로서 바이트 데이터 전체를 할당하고 앞쪽을 이 정보로 덮어쓰는 용도
+	// 다이나믹한 데이터 처리에 편리
+	// 외부에서 전체 배열 사이즈를 넣어주는게 훨씬 편할테니 내부에서 사이즈 보정을 하지 않습니다.
+	struct HeadingProtocol_t
+	{
+		HeadingProtocol_t( session_t _session, packetType_t _type, packetSize_t _size )
+			: type( _type )
+			, length( _size )
+			, session(_session)
+		{
+
+		}
+
+		const session_t		session;
+		const packetType_t	type;
+		const packetSize_t	length;
+	};
 #pragma pack(pop)
 
 	typedef std::queue<Header*>				packetBuff;

@@ -28,6 +28,11 @@
 
 #include <condition_variable>
 
+#include "CSimpleLock_Win.h"
+#include "CSimpleThreadLock.h"
+
+#include "CPacketStorage.h"
+
 #include "Base/CSimpleCallback.h"
 
 #include "Array_WSAEvent.h"
@@ -52,6 +57,11 @@
 #include "Base/CPacketEncoder.h"
 #include "Base/CPacketDecoder.h"
 #include "Base/CPacketHandler.h"
+
+#include "CWorkerBase.h"
+#include "CPacketSendWorker.h"
+#include "CPacketRecvWorker.h"
+
 #include "CSessionRouter.h"
 #include "CSessionMgr.h"
 

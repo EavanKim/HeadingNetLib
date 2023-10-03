@@ -150,7 +150,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="CCommandKernal.h" />
+    <ClInclude Include="Inc\CPacketRecvWorker.h" />
+    <ClInclude Include="Inc\CPacketStorage.h" />
+    <ClInclude Include="Inc\CSimpleThreadLock.h" />
+    <ClInclude Include="Inc\CSimpleLock_Win.h" />
+    <ClInclude Include="Inc\CPacketSendWorker.h" />
     <ClInclude Include="Inc\CSessionRouter.h" />
     <ClInclude Include="EventManager_v2.h" />
     <ClInclude Include="Inc\Base\CPacketEncoder.h" />
@@ -159,7 +163,7 @@
     <ClInclude Include="Inc\Base\CSimpleState.h" />
     <ClInclude Include="Inc\Base\CSimpleSocket.h" />
     <ClInclude Include="Inc\Base\CEventBaseSession_v2.h" />
-    <ClInclude Include="CSimpleWorker.h" />
+    <ClInclude Include="Inc\CWorkerBase.h" />
     <ClInclude Include="Inc\CAcceptThread.h" />
     <ClInclude Include="Inc\Array_WSAEvent.h" />
     <ClInclude Include="Inc\CAccepter.h" />
@@ -185,7 +189,6 @@
     <ClCompile Include="CAcceptThread.cpp" />
     <ClCompile Include="CAccepter.cpp" />
     <ClCompile Include="CClientSession.cpp" />
-    <ClCompile Include="CCommandKernal.cpp" />
     <ClCompile Include="CConnector.cpp" />
     <ClCompile Include="CEventBaseSession.cpp" />
     <ClCompile Include="CEventBaseSession_v2.cpp" />
@@ -194,11 +197,15 @@
     <ClCompile Include="CPacketDecoder.cpp" />
     <ClCompile Include="CPacketEncoder.cpp" />
     <ClCompile Include="CPacketHandler.cpp" />
+    <ClCompile Include="CPacketRecvWorker.cpp" />
+    <ClCompile Include="CPacketStorage.cpp" />
+    <ClCompile Include="CPacketSendWorker.cpp" />
     <ClCompile Include="CSessionRouter.cpp" />
     <ClCompile Include="CSimpleCallback.cpp" />
+    <ClCompile Include="CSimpleLock_Win.cpp" />
     <ClCompile Include="CSimpleState.cpp" />
     <ClCompile Include="CSimpleSocket.cpp" />
-    <ClCompile Include="CSimpleWorker.cpp" />
+    <ClCompile Include="CSimpleThreadLock.cpp" />
     <ClCompile Include="EventManager_v2.cpp" />
     <ClCompile Include="HeadingBuffer.cpp" />
     <ClCompile Include="HeadingFunction.cpp" />

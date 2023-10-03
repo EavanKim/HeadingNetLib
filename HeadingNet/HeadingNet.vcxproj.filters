@@ -60,7 +60,7 @@
     <ClInclude Include="Inc\CAcceptThread.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="CSimpleWorker.h">
+    <ClInclude Include="Inc\CWorkerBase.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Inc\Base\CEventBaseSession_v2.h">
@@ -99,7 +99,19 @@
     <ClInclude Include="Inc\CSessionRouter.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="CCommandKernal.h">
+    <ClInclude Include="Inc\CPacketSendWorker.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\CSimpleLock_Win.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\CSimpleThreadLock.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\CPacketStorage.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\CPacketRecvWorker.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
@@ -135,9 +147,6 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="CAcceptThread.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="CSimpleWorker.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="CEventBaseSession_v2.cpp">
@@ -176,7 +185,19 @@
     <ClCompile Include="CSessionRouter.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="CCommandKernal.cpp">
+    <ClCompile Include="CPacketSendWorker.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="CSimpleLock_Win.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="CSimpleThreadLock.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="CPacketStorage.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="CPacketRecvWorker.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
