@@ -2,7 +2,7 @@
 
 namespace Heading
 {
-	CPacketEncoder::CPacketEncoder(CPacketStorage* _storage)
+	CPacketEncoder::CPacketEncoder(CSessionStorage* _storage)
 		: m_storage(_storage)
 	{
 

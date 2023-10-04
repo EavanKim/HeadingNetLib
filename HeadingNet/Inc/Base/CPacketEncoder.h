@@ -5,13 +5,13 @@ namespace Heading
 	class CPacketEncoder
 	{
 	public:
-		CPacketEncoder(CPacketStorage* _storage);
+		CPacketEncoder(CSessionStorage* _storage);
 		~CPacketEncoder();
 
 
 
 	private:
-		CPacketStorage* m_storage = nullptr;
+		CSessionStorage* m_storage = nullptr;
 	};
 }
 

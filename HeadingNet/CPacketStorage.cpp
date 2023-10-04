@@ -2,13 +2,18 @@
 
 namespace Heading
 {
-	CPacketStorage::CPacketStorage()
+	CSessionStorage::CSessionStorage()
 	{
-		m_dataStorage = ( char* ) malloc(MAXIMUM_PACKET_STORAGE_SIZE);
-		memset(m_dataStorage, 0x00, MAXIMUM_PACKET_STORAGE_SIZE);
+		m_dataStorage = ( char* ) malloc(MAXIMUM_CUSTOM_STORAGE_SIZE);
+		memset(m_dataStorage, 0x00, MAXIMUM_CUSTOM_STORAGE_SIZE);
+
+		PrevIndex(MemStart) = NULL;
+		NextIndex(MemStart) = NULL;
+		MemState(MemStart) = true;
+		MemSize(MemStart) = MAXIMUM_CUSTOM_STORAGE_SIZE;
 	}
 
-	CPacketStorage::~CPacketStorage()
+	CSessionStorage::~CSessionStorage()
 	{
 		if ( nullptr != m_dataStorage )
 		{
@@ -17,7 +22,7 @@ namespace Heading
 		}
 	}
 
-	void CPacketStorage::split(index_t _addr, storageSize_t _size)
+	void CSessionStorage::split(index_t _addr, storageSize_t _size)
 	{
 		// 원하는 양 보다 크면 찢고
 		if ( MemSize(_addr) >= (_size + SZ_MEMHEADER + SZ_MEMHEADER + 1) ) // 헤더 사이즈에 딱 맞으면 사이즈 0짜리니까 1을 더 크게 확인
@@ -43,7 +48,7 @@ namespace Heading
 		}
 	}
 
-	void CPacketStorage::merge(index_t _prev, index_t _current, index_t _next)
+	void CSessionStorage::merge(index_t _prev, index_t _current, index_t _next)
 	{
 		if ( NULL == _prev )
 		{

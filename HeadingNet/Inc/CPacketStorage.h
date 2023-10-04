@@ -32,11 +32,11 @@ typedef uint32_t storageSize_t;
 
 #define PACKET_BLOCK_SIZE 16
 // MAXIMUM_PACKET_DATA_LENGTH << 1
-#define MAXIMUM_PACKET_STORAGE_SIZE 1 << 13
+#define MAXIMUM_CUSTOM_STORAGE_SIZE 1 << 13
 
 namespace Heading
 {
-	class CPacketStorage
+	class CSessionStorage
 	{
 #define PrevIndex(seek)	( * ( index_t*			)	( &m_dataStorage[	seek - 21	]	) ) // 8byte
 #define NextIndex(seek)	( * ( index_t*			)	( &m_dataStorage[	seek - 13	]	) ) // 8byte
@@ -48,8 +48,8 @@ namespace Heading
 #define SZ_MEMHEADER 21
 
 	public:
-		CPacketStorage();
-		~CPacketStorage();
+		CSessionStorage();
+		~CSessionStorage();
 
 		template<typename T>
 		T* allocate(storageSize_t _size)
@@ -78,24 +78,20 @@ namespace Heading
 		void free(T* _release)
 		{
 			if ( nullptr = _release )
-			{
 				return;
-			}
 
 			// 일단 메모리 주소 검사로 변환 후 이상값 방지
-			if ( ( &m_dataStorage[MAXIMUM_PACKET_STORAGE_SIZE] <= _release ) || ( &m_dataStorage[MemStart] > _release ) )
+			if ( ( &m_dataStorage[MAXIMUM_CUSTOM_STORAGE_SIZE] <= _release ) || ( &m_dataStorage[MemStart] > _release ) )
 				return;
 
 			index_t releaseIndex = GetIndex(_release);
 
 			if ( ( false != MemState(releaseIndex) ) // Double Free
 				|| releaseIndex <= PrevIndex(releaseIndex)
-				|| MAXIMUM_PACKET_STORAGE_SIZE <= NextIndex(releaseIndex)
-				|| MAXIMUM_PACKET_STORAGE_SIZE <= MemSize(releaseIndex)
+				|| MAXIMUM_CUSTOM_STORAGE_SIZE <= NextIndex(releaseIndex)
+				|| MAXIMUM_CUSTOM_STORAGE_SIZE <= MemSize(releaseIndex)
 				|| 0 != MemSize(releaseIndex) )
-			{
 				return;
-			}
 
 			merge(PrevIndex(_release), _release, NextIndex(_release));
 		}
