@@ -32,7 +32,7 @@ namespace Heading
 
 	typedef uint16_t session_t;
 	typedef uint64_t packetType_t;
-	typedef uint32_t packetSize_t;
+	typedef uint16_t packetSize_t;
 	typedef uint64_t INTPTR;
 
 	template <typename T>
