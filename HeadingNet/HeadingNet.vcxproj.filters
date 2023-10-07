@@ -108,10 +108,13 @@
     <ClInclude Include="Inc\CSimpleThreadLock.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Inc\CPacketStorage.h">
+    <ClInclude Include="Inc\CSessionStorage.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Inc\CPacketRecvWorker.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\CSessionStorage_v2.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
@@ -194,10 +197,13 @@
     <ClCompile Include="CSimpleThreadLock.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="CPacketStorage.cpp">
+    <ClCompile Include="CSessionStorage.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="CPacketRecvWorker.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="CSessionStorage_v2.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>

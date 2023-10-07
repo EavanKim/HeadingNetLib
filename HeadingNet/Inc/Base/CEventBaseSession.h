@@ -17,13 +17,13 @@ namespace Heading
 		int RecvData( packetBuff& _datas );
 		void onEventSend();
 		int SendData( );
-		int InternalSendData( Header* _data );
+		int InternalSendData( packetHeader_t* _data );
 
 		bool CheckLive();
 
-		void enqueueSend( Header* _data );
+		void enqueueSend( packetHeader_t* _data );
 
-		void trySend( Header* _data );
+		void trySend( packetHeader_t* _data );
 
 	protected:
 		std::atomic<bool> m_sending		= false;

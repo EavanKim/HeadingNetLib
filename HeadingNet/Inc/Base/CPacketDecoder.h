@@ -10,7 +10,7 @@ namespace Heading
 		~CPacketDecoder();
 
 		bool checkValidation();
-		bool getData(Header*& _get);
+		bool getData(packetHeader_t*& _get);
 
 	private:
 		packetSize_t m_seek = 0;

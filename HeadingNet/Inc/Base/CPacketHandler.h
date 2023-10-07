@@ -4,7 +4,7 @@
 
 namespace Heading
 {
-	typedef void (*packet_Callback)(CClientSession*, Header*);
+	typedef void (*packet_Callback)(CClientSession*, packetHeader_t*);
 
 	struct PacketCallback
 	{
@@ -33,9 +33,9 @@ namespace Heading
 		CPacketHandler(packet_Callback _nullCallback);
 
 		template<class T>
-		void AddPacketType(void (*_callback)(CClientSession*, Header*) = nullptr )
+		void AddPacketType(void (*_callback)(CClientSession*, packetHeader_t*) = nullptr )
 		{
-			static_assert(std::is_base_of<T, Header>::value);
+			static_assert(std::is_base_of<T, packetHeader_t>::value);
 
 			T strLocalInfo;
 
@@ -48,7 +48,7 @@ namespace Heading
 			++m_size;
 		}
 
-		void Do_Process(CClientSession* _session, Header* _packet);
+		void Do_Process(CClientSession* _session, packetHeader_t* _packet);
 
 		bool Create_Header(int _ePacketType , char* _ptr, char* _data, int _size );
 

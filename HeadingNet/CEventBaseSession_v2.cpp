@@ -47,7 +47,7 @@ namespace Heading
 		return m_sock;
 	}
 
-	void CEventBaseSession_v2::trySend(Header* _send)
+	void CEventBaseSession_v2::trySend(packetHeader_t* _send)
 	{
 		// 어느것이 전송의 끝일까...?
 		if ( NULL != _send )
@@ -69,7 +69,7 @@ namespace Heading
 		{
 			if ( !m_sendQueue.empty() )
 			{
-				Header* sending = m_sendQueue.front();
+				packetHeader_t* sending = m_sendQueue.front();
 				m_state.setState(true, HEBS_WRITE);
 				// 필요하면 실패한 경우 pop 제외 로직 추가
 				m_sock->send(( char* ) sending, sending->length);

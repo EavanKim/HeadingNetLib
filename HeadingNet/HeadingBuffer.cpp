@@ -56,12 +56,12 @@ namespace Heading
 		return false;
 	}
 
-	Header* Buffer::get_data()
+	packetHeader_t* Buffer::get_data()
 	{
-		Header* result = nullptr;
-		if( m_dataSize >= sizeof( Header ) )
+		packetHeader_t* result = nullptr;
+		if( m_dataSize >= sizeof( packetHeader_t ) )
 		{
-			Header* getHeader = ( Header* )((char*)m_data + m_seek);
+			packetHeader_t* getHeader = ( packetHeader_t* )((char*)m_data + m_seek);
 
 			if( m_dataSize >= getHeader->length )
 			{
@@ -119,7 +119,7 @@ namespace Heading
 	void Buffer::get_data( packetBuff* _datas )
 	{
 		m_seek = 0;
-		Header* parse = get_data();
+		packetHeader_t* parse = get_data();
 		while( nullptr != parse )
 		{
 			//printf( "[seek : %lld][data] : %s \n", m_seek, ( ( SendStruct<0, 1>* )parse )->buffer );

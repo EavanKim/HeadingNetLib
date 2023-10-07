@@ -8,7 +8,7 @@ namespace Heading
 		ZeroMemory(m_callbackArray, sizeof(PacketCallback) * PACKET_HANDLER_SIZE);
 	}
 
-	void CPacketHandler::Do_Process( CClientSession* _session, Header* _packet )
+	void CPacketHandler::Do_Process( CClientSession* _session, packetHeader_t* _packet )
 	{
 		if( nullptr != m_callbackArray[ _packet->type ].callback )
 			m_callbackArray[ _packet->type ].callback( _session, _packet );
@@ -25,11 +25,11 @@ namespace Heading
 
 		if( m_size > _ePacketType )
 		{
-			int dataLength = m_callbackArray[ _ePacketType ].size - sizeof(Header);
+			int dataLength = m_callbackArray[ _ePacketType ].size - sizeof(packetHeader_t);
 			if( dataLength > _size )
 			{
-				Header* headPtr = reinterpret_cast<Header*>(_ptr);
-				char* dataPtr = _ptr + sizeof(Header);
+				packetHeader_t* headPtr = reinterpret_cast<packetHeader_t*>(_ptr);
+				char* dataPtr = _ptr + sizeof(packetHeader_t);
 
 				*(const_cast<uint64_t*>(&headPtr->type)) = _ePacketType;
 				*(const_cast<packetSize_t*>(&headPtr->length)) = m_callbackArray[ _ePacketType ].size;

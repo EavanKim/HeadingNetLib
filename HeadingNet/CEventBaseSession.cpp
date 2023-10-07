@@ -94,7 +94,7 @@ namespace Heading
 		
 		if( !m_sendBuff.empty( ) )
 		{
-			Header* packet = m_sendBuff.front( );
+			packetHeader_t* packet = m_sendBuff.front( );
 			if( nullptr != packet )
 			{
 				result = InternalSendData(packet);
@@ -131,7 +131,7 @@ namespace Heading
 	// https://android.googlesource.com/kernel/msm/+/android-msm-bullhead-3.10-n-preview-5/net/ipv4/af_inet.c
 	// 
 	// https://cr.yp.to/docs/connect.html
-	int CEventBaseSession::InternalSendData( Header* _data )
+	int CEventBaseSession::InternalSendData( packetHeader_t* _data )
 	{
 		m_sending.store(true);
 		int result = 0;
@@ -175,12 +175,12 @@ namespace Heading
 		return m_isConnected;
 	}
 
-	void CEventBaseSession::enqueueSend( Header* _data )
+	void CEventBaseSession::enqueueSend( packetHeader_t* _data )
 	{
 		m_sendBuff.push(_data);
 	}
 
-	void CEventBaseSession::trySend(Header* _data)
+	void CEventBaseSession::trySend(packetHeader_t* _data)
 	{
 		// 부분 전송에 대비하여 Queue에 일단 집어넣어버리고
 		// 1회 발송시도 하는 것으로 처리 단순화

@@ -16,7 +16,7 @@ namespace Heading
 
 		bool	get_buffer		( char**		_buffer
 								, int*			_length		);
-		Header* get_data		(							);
+		packetHeader_t* get_data		(							);
 		void	get_data		( packetBuff*	_datas		);
 
 		void	get_send_data	( char**		_buffer

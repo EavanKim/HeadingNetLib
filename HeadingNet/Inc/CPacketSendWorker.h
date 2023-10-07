@@ -2,17 +2,17 @@
 
 namespace Heading
 {
-	typedef int( *fnPacket_t )( CPacketEncoder*&, Header* );
+	typedef int( *fnPacket_t )( CPacketEncoder*&, packetHeader_t* );
 
-	class CPacketSendWorker : CWorkerBase<fnPacket_t, CPacketEncoder*&, Header*>
+	class CPacketSendWorker : CWorkerBase<fnPacket_t, CPacketEncoder*&, packetHeader_t*>
 	{
 	public:
 		CPacketSendWorker(CPacketEncoder* _encoder);
-		int run(Header* _param = nullptr);
+		int run(packetHeader_t* _param = nullptr);
 
 	private:
 		CPacketEncoder* m_encoder = nullptr;
-		Header* m_packet = nullptr;
+		packetHeader_t* m_packet = nullptr;
 	};
 }
 

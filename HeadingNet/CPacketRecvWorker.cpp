@@ -7,7 +7,7 @@ namespace Heading
 	{
 	}
 
-	int CPacketRecvWorker::run(Header* _param)
+	int CPacketRecvWorker::run(packetHeader_t* _param)
 	{
 		// 이미 저장된 데이터가 있었는가에 대한 처우는 외부에서 알아서 처리
 		// 해당 내용은 리턴값이 1일때 외부에서 알아서 처리

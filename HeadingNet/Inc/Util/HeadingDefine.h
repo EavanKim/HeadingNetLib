@@ -33,19 +33,33 @@ namespace Heading
 	typedef uint16_t session_t;
 	typedef uint64_t packetType_t;
 	typedef uint32_t packetSize_t;
+	typedef uint64_t INTPTR;
+
+	template <typename T>
+	char* Util_CalcMemory(T* _ptr, uint64_t _seek)
+	{
+		// size 1로 강제변환
+		char* result = (char*)_ptr;
+
+		// size 1에 덧셈을 하면 포인터 연산이더라도 안전
+		result += _seek;
+
+		return result;
+	}
 
 #pragma pack(push, 1)
 	struct Header
 	{
 		Header( packetType_t _type, packetSize_t _length )
-			: type( _type )
-			, length( _length )
+			: length( _length )
+			, type( _type )
 		{
 
 		}
 
-		const packetType_t type;
+		// 0번 정보가 무조건 길이어야 편하니까 위치 바꿉니다.
 		const packetSize_t length;
+		const packetType_t type;
 	};
 
 	template<packetType_t _type, packetSize_t _buffersize>
@@ -89,20 +103,27 @@ namespace Heading
 	struct HeadingProtocol_t
 	{
 		HeadingProtocol_t( session_t _session, packetType_t _type, packetSize_t _size )
-			: type( _type )
-			, length( _size )
+			: length( _size )
+			, type( _type )
 			, session(_session)
 		{
 
 		}
 
-		const session_t		session;
-		const packetType_t	type;
+		// 0번 정보가 무조건 길이어야 편하니까 위치 바꿉니다.
 		const packetSize_t	length;
+		const packetType_t	type;
+		const session_t		session;
 	};
 #pragma pack(pop)
 
-	typedef std::queue<Header*>				packetBuff;
+#ifdef USE_NEW_PACKET
+	typedef HeadingProtocol_t packetHeader_t;
+#else
+	typedef Header packetHeader_t;
+#endif
+
+	typedef std::queue<packetHeader_t*>				packetBuff;
 	typedef std::vector<SOCKET>				SocketList;
 	typedef std::vector<CreatedSocketInfo>	NewSocketList;
 	typedef std::vector<WSAEVENT>			EventList;
@@ -110,6 +131,6 @@ namespace Heading
 	struct SessionData
 	{
 		WSAEVENT m_sessionKey = INVALID_HANDLE_VALUE;
-		Header* m_message = nullptr;
+		packetHeader_t* m_message = nullptr;
 	};
 }

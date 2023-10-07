@@ -20,7 +20,7 @@ namespace Heading
 
 		while ( m_size > seek )
 		{
-			Header* headerData = (Header*)m_data[seek];
+			packetHeader_t* headerData = (packetHeader_t*)m_data[seek];
 			seek += headerData->length;
 		}
 
@@ -34,11 +34,11 @@ namespace Heading
 		return false;
 	}
 
-	bool CPacketDecoder::getData(Header*& _get)
+	bool CPacketDecoder::getData(packetHeader_t*& _get)
 	{
 		if ( m_size > m_seek )
 		{
-			_get = (Header*) & m_data[m_seek];
+			_get = (packetHeader_t*) & m_data[m_seek];
 			m_seek += _get->length;
 
 			return true;

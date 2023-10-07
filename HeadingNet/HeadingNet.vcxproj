@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -150,8 +150,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Inc\CSessionStorage_v2.h" />
     <ClInclude Include="Inc\CPacketRecvWorker.h" />
-    <ClInclude Include="Inc\CPacketStorage.h" />
+    <ClInclude Include="Inc\CSessionStorage.h" />
     <ClInclude Include="Inc\CSimpleThreadLock.h" />
     <ClInclude Include="Inc\CSimpleLock_Win.h" />
     <ClInclude Include="Inc\CPacketSendWorker.h" />
@@ -198,9 +199,10 @@
     <ClCompile Include="CPacketEncoder.cpp" />
     <ClCompile Include="CPacketHandler.cpp" />
     <ClCompile Include="CPacketRecvWorker.cpp" />
-    <ClCompile Include="CPacketStorage.cpp" />
+    <ClCompile Include="CSessionStorage.cpp" />
     <ClCompile Include="CPacketSendWorker.cpp" />
     <ClCompile Include="CSessionRouter.cpp" />
+    <ClCompile Include="CSessionStorage_v2.cpp" />
     <ClCompile Include="CSimpleCallback.cpp" />
     <ClCompile Include="CSimpleLock_Win.cpp" />
     <ClCompile Include="CSimpleState.cpp" />
