@@ -12,8 +12,12 @@ namespace Heading
 
 	char* CSessionStorage_v2::getBuffer()
 	{
+		//혹시 m_start가 걸리면 용량 없음 처리합니다.
+		if ( m_start < ( MAXIMUM_PACKET_DATA_LENGTH + m_end ) )
+			return NULL;
+
 		// 혹시 마지막 데이터로부터 새로 전해줄 데이터가
-		// 예정된 마지막을 넘어갔다면
+		// 예정된 마지막을 넘어갔는데
 		if ( RINGBUFFER_LIMIT < ( MAXIMUM_PACKET_DATA_LENGTH + m_end ) )
 		{
 			// 밀려난 만큼 마지막을 밀어냅니다.
