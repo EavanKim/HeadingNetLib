@@ -2,7 +2,7 @@
 
 namespace Heading
 {
-	class CEventSelecter
+	class CEventSelecter : public CHeadingObject
 	{
 	public:
 		CEventSelecter( );

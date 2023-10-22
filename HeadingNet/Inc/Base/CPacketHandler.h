@@ -27,7 +27,7 @@ namespace Heading
 		packet_Callback callback = nullptr;
 	};
 
-	class CPacketHandler
+	class CPacketHandler : public CHeadingObject
 	{
 	public:
 		CPacketHandler(packet_Callback _nullCallback);

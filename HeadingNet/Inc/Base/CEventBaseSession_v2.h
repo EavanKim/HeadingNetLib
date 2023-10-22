@@ -17,7 +17,7 @@ namespace Heading
 
 	// Session은 그저 호출만 당할 뿐
 	// 유저 상태를 관리하는 객체
-	class CEventBaseSession_v2
+	class CEventBaseSession_v2 : public CHeadingObject
 	{
 	public:
 						CEventBaseSession_v2	( CSimpleSocket* _sock ); // Accept 된 대상으로 Session을 만드니까 socket 을 받아서 생성합니다.

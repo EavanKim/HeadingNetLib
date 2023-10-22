@@ -3,7 +3,8 @@
 namespace Heading
 {
 	CEventBaseSession_v2::CEventBaseSession_v2( CSimpleSocket* _sock )
-		: m_sock( _sock )
+		: CHeadingObject()
+		, m_sock( _sock )
 	{
 	}
 

@@ -2,7 +2,8 @@
 
 namespace Heading
 {
-	CSimpleState::CSimpleState( )
+	CSimpleState::CSimpleState()
+		: CHeadingObject()
 	{
 	}
 

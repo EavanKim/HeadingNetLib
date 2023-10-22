@@ -3,7 +3,8 @@
 namespace Heading
 {
 	CEventBaseSession::CEventBaseSession( SOCKET _sock )
-		: m_sock ( _sock )
+		: CHeadingObject()
+		, m_sock ( _sock )
 	{ 
 
 		const int on = 1;

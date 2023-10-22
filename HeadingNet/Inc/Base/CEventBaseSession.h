@@ -2,7 +2,7 @@
 
 namespace Heading
 {
-	class CEventBaseSession
+	class CEventBaseSession : public CHeadingObject
 	{
 	public:
 		CEventBaseSession( SOCKET _sock );

@@ -2,7 +2,7 @@
 
 namespace Heading
 {
-	class CSimpleState
+	class CSimpleState : public CHeadingObject
 	{
 	public:
 		CSimpleState();

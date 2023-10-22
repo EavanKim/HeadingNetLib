@@ -3,7 +3,8 @@
 namespace Heading
 {
 	CPacketHandler::CPacketHandler( packet_Callback _nullCallback )
-		: m_nullCallback( _nullCallback )
+		: CHeadingObject()
+		, m_nullCallback( _nullCallback )
 	{
 		ZeroMemory(m_callbackArray, sizeof(PacketCallback) * PACKET_HANDLER_SIZE);
 	}

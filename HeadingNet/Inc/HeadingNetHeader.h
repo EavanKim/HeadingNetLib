@@ -17,6 +17,7 @@
 #include <stdexcept>
 
 #include <thread>
+#include "pthread.h"
 #include <vector>
 #include <unordered_map>
 #include <string>
@@ -27,6 +28,8 @@
 #include <concurrent_priority_queue.h>
 
 #include <condition_variable>
+
+#include "Base/CHeadingObject.h"
 
 #include "Util/HeadingDefine.h"
 

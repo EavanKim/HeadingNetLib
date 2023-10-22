@@ -23,7 +23,7 @@ namespace Heading
 	};
 
 	// 연결을 관리하는 객체
-	class CSimpleSocket
+	class CSimpleSocket : public CHeadingObject
 	{
 	public:
 		CSimpleSocket		( SOCKET _sock );
