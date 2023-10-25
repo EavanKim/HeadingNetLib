@@ -3,7 +3,7 @@
 namespace Heading
 {
 	CSimpleSocket::CSimpleSocket( SOCKET _sock )
-		: CHeadingObject()
+		: CHeadingObject(true)
 		, m_sock( _sock )
 	{
 

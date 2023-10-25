@@ -161,7 +161,7 @@
     <ClInclude Include="Inc\CSimpleLock_Win.h" />
     <ClInclude Include="Inc\CPacketSendWorker.h" />
     <ClInclude Include="Inc\CSessionRouter.h" />
-    <ClInclude Include="EventManager_v2.h" />
+    <ClInclude Include="Inc\EventManager_v2.h" />
     <ClInclude Include="Inc\Base\CPacketEncoder.h" />
     <ClInclude Include="Inc\Base\CPacketDecoder.h" />
     <ClInclude Include="Inc\Base\CSimpleCallback.h" />

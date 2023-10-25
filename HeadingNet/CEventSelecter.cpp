@@ -3,7 +3,7 @@
 namespace Heading
 {
 	CEventSelecter::CEventSelecter( )
-		: CHeadingObject()
+		: CHeadingObject(true)
 	{
 	}
 

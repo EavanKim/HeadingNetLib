@@ -93,7 +93,7 @@
     <ClInclude Include="Inc\CSessionMgr.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="EventManager_v2.h">
+    <ClInclude Include="Inc\EventManager_v2.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Inc\CSessionRouter.h">

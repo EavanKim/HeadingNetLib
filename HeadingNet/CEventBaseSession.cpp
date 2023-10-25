@@ -3,7 +3,7 @@
 namespace Heading
 {
 	CEventBaseSession::CEventBaseSession( SOCKET _sock )
-		: CHeadingObject()
+		: CHeadingObject(true)
 		, m_sock ( _sock )
 	{ 
 
