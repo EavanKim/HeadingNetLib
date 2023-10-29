@@ -153,81 +153,38 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Inc\CConnector.h" />
+    <ClInclude Include="Inc\Data\HeadingServerInfo.h" />
+    <ClInclude Include="Inc\HeadingSession.h" />
+    <ClInclude Include="Inc\Interface\IMessage.h" />
+    <ClInclude Include="Inc\Interface\ISession.h" />
+    <ClInclude Include="Inc\CDefaultSelecter.h" />
     <ClInclude Include="Inc\Base\CHeadingObject.h" />
-    <ClInclude Include="Inc\CSessionStorage_v2.h" />
-    <ClInclude Include="Inc\CPacketRecvWorker.h" />
-    <ClInclude Include="Inc\CSessionStorage.h" />
-    <ClInclude Include="Inc\CSimpleThreadLock.h" />
-    <ClInclude Include="Inc\CSimpleLock_Win.h" />
-    <ClInclude Include="Inc\CPacketSendWorker.h" />
-    <ClInclude Include="Inc\CSessionRouter.h" />
-    <ClInclude Include="Inc\EventManager_v2.h" />
-    <ClInclude Include="Inc\Base\CPacketEncoder.h" />
-    <ClInclude Include="Inc\Base\CPacketDecoder.h" />
-    <ClInclude Include="Inc\Base\CSimpleCallback.h" />
     <ClInclude Include="Inc\Base\CSimpleState.h" />
     <ClInclude Include="Inc\Base\CSimpleSocket.h" />
     <ClInclude Include="Inc\Base\CEventBaseSession_v2.h" />
-    <ClInclude Include="Inc\CWorkerBase.h" />
-    <ClInclude Include="Inc\CAcceptThread.h" />
-    <ClInclude Include="Inc\Array_WSAEvent.h" />
-    <ClInclude Include="Inc\CAccepter.h" />
-    <ClInclude Include="Inc\CAcceptThread_v2.h" />
-    <ClInclude Include="Inc\CClientSession.h" />
-    <ClInclude Include="Inc\CConnector.h" />
-    <ClInclude Include="Inc\Base\CEventBaseSession.h" />
-    <ClInclude Include="Inc\Base\CEventSelecter.h" />
-    <ClInclude Include="Inc\Base\CPacketHandler.h" />
+    <ClInclude Include="Inc\Interface\IHeadingSelecter.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="Inc\Base\HeadingBuffer.h" />
-    <ClInclude Include="Inc\CLoginSocket.h" />
-    <ClInclude Include="Inc\CLoginWaiter.h" />
+    <ClInclude Include="Inc\HeadingNetHeader.h" />
+    <ClInclude Include="Inc\Interface\ISocket.h" />
     <ClInclude Include="Inc\Util\HeadingDefine.h" />
     <ClInclude Include="Inc\Util\HeadingFunction.h" />
-    <ClInclude Include="Inc\HeadingNetHeader.h" />
-    <ClInclude Include="Inc\HeadingSession.h" />
     <ClInclude Include="pch.h" />
-    <ClInclude Include="Inc\CSessionMgr.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Array_WSAEvent.cpp" />
-    <ClCompile Include="CAcceptThread.cpp" />
-    <ClCompile Include="CAccepter.cpp" />
-    <ClCompile Include="CClientSession.cpp" />
     <ClCompile Include="CConnector.cpp" />
-    <ClCompile Include="CEventBaseSession.cpp" />
+    <ClCompile Include="CDefaultSelecter.cpp" />
     <ClCompile Include="CEventBaseSession_v2.cpp" />
-    <ClCompile Include="CEventSelecter.cpp" />
-    <ClCompile Include="CLoginWaiter.cpp" />
-    <ClCompile Include="CPacketDecoder.cpp" />
-    <ClCompile Include="CPacketEncoder.cpp" />
-    <ClCompile Include="CPacketHandler.cpp" />
-    <ClCompile Include="CPacketRecvWorker.cpp" />
-    <ClCompile Include="CSessionStorage.cpp" />
-    <ClCompile Include="CPacketSendWorker.cpp" />
-    <ClCompile Include="CSessionRouter.cpp" />
-    <ClCompile Include="CSessionStorage_v2.cpp" />
-    <ClCompile Include="CSimpleCallback.cpp" />
-    <ClCompile Include="CSimpleLock_Win.cpp" />
-    <ClCompile Include="CSimpleState.cpp" />
-    <ClCompile Include="CSimpleSocket.cpp" />
-    <ClCompile Include="CSimpleThreadLock.cpp" />
-    <ClCompile Include="EventManager_v2.cpp" />
-    <ClCompile Include="HeadingBuffer.cpp" />
-    <ClCompile Include="HeadingFunction.cpp" />
-    <ClCompile Include="CAcceptThread_v2.cpp" />
-    <ClCompile Include="CLoginSocket.cpp" />
     <ClCompile Include="CHeadingObject.cpp" />
+    <ClCompile Include="CSimpleSocket.cpp" />
+    <ClCompile Include="HeadingBuffer.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="CSessionMgr.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="note.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

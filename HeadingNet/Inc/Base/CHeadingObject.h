@@ -9,7 +9,7 @@ namespace Heading
 	{
 	protected:
 		CHeadingObject(bool _isNeedCheackLifeCycleIsSameThread = false);
-		~CHeadingObject();
+		virtual ~CHeadingObject();
 
 		// 데드락이 걸리지 않게 주의하면서 잘 쓰기.
 		void Lock_Write();

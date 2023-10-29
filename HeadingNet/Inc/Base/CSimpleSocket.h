@@ -33,14 +33,9 @@ namespace Heading
 		void setLINGLE		( bool _state = false
 							, u_short _timeout = 0 );
 
-		// 콜백을 지울 땐 타입만 넣으면 됩니다,
-		void setCallback	( E_SOCKET_CALLBACK_TYPE _type
-							, fnCallback _fn = nullptr
-							, void* _reserveParam = nullptr );
-
 		// 6만 byte 전송은 선 넘는 일이니까 16으로 충분하리라 생각합니다.
-		void send			( char* _data
-							, uint16_t _length);
+		void send			( char*				_data
+							, unsigned short	_length);
 		void recv			( Buffer& _buffer);
 
 	public:
@@ -49,10 +44,6 @@ namespace Heading
 		// 소켓을 꺼낼 필요가 생겼는데 소캣 래퍼에서 소켓을 꺼낼 거면
 		// 어차피 private는 의미 없는 것 같아서 protected화
 	protected:
-		CSimpleCallback	onError;
-		// 비동기 위치에서 리시브 하게 되면 데이터가 완성 된 순간의 콜백을 받도록 합니다.
-		CSimpleCallback	onReceive;
-		CSimpleCallback	onSend;
 
 		Buffer			m_recvBuffer;
 

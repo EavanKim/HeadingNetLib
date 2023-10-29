@@ -47,25 +47,7 @@ namespace Heading
 		setsockopt(m_sock, SOL_SOCKET, SO_LINGER, (CHAR*)&ling, sizeof(ling));
 	}
 
-	void CSimpleSocket::setCallback( E_SOCKET_CALLBACK_TYPE _type, fnCallback _fn, void* _reserveParam /*= nullptr*/ )
-	{
-		switch( _type )
-		{
-			case E_SOCKET_CALLBACK_TYPE::E_SOCKET_CALLBACK_ERROR:
-				onError(_fn, _reserveParam);
-				break;
-			case E_SOCKET_CALLBACK_TYPE::E_SOCKET_CALLBACK_RECEIVE:
-				onReceive(_fn, _reserveParam);
-				break;
-			case E_SOCKET_CALLBACK_TYPE::E_SOCKET_CALLBACK_SEND:
-				onSend(_fn, _reserveParam );
-				break;
-			default:
-				break;
-		}
-	}
-
-	void CSimpleSocket::send( char* _data, uint16_t _length )
+	void CSimpleSocket::send( char* _data, unsigned short _length )
 	{
 		int sendResult = ::send( m_sock, _data, _length, 0 );
 
@@ -75,8 +57,6 @@ namespace Heading
 			if( WSAEWOULDBLOCK == WSAGetLastError( ) )
 				m_state.setState( true, HS_WOULDBLOCK );
 
-			onError( this );
-
 			return;
 		}
 
@@ -84,12 +64,8 @@ namespace Heading
 		{
 			// 발송 실패 == terminate
 			m_state.setState(true, HS_SOCKETDOWN);
-			onError( this );
-
 			return;
 		}
-
-		onSend( this );
 	}
 
 	void CSimpleSocket::recv( Buffer& _buffer )
@@ -104,8 +80,6 @@ namespace Heading
 			{
 				// Error Flag 설정하기
 				m_state.setState(true, HS_ERROR);
-				onError( this );
-
 				return;
 			}
 
@@ -115,8 +89,6 @@ namespace Heading
 				// size 0을 연결 확인으로 사용하는 경우도 있다고 하시니 넘겨봅니다.
 				return;
 			}
-
-			onReceive( this );
 		}
 	}
 }
