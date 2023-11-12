@@ -44,7 +44,6 @@ namespace Heading
 		// 소켓을 꺼낼 필요가 생겼는데 소캣 래퍼에서 소켓을 꺼낼 거면
 		// 어차피 private는 의미 없는 것 같아서 protected화
 	protected:
-
 		Buffer			m_recvBuffer;
 
 		SOCKET			m_sock		= INVALID_SOCKET;

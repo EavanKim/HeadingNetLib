@@ -7,6 +7,8 @@ namespace Heading
 	// 해당 내용물을 받거나 세팅해서 보내거나 받기만 하기
 	struct IMessage
 	{
+		virtual ~IMessage() {}
+
 		virtual unsigned int	GetType( )						= 0;
 		virtual unsigned int	GetSize( )						= 0;
 		virtual char*			GetData( )						= 0;

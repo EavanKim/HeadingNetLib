@@ -28,6 +28,7 @@ namespace Heading
 
 	private:
 		std::vector<WSAEVENT> m_WSALists = {};
+		CSession_Router m_router;
 	};
 }
 

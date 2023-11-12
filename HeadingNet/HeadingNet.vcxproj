@@ -153,9 +153,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Inc\Base\CDefaultSession.h" />
     <ClInclude Include="Inc\CConnector.h" />
+    <ClInclude Include="Inc\CSession_Router.h" />
     <ClInclude Include="Inc\Data\HeadingServerInfo.h" />
     <ClInclude Include="Inc\HeadingSession.h" />
+    <ClInclude Include="Inc\Base\SConnInfo.h" />
     <ClInclude Include="Inc\Interface\IMessage.h" />
     <ClInclude Include="Inc\Interface\ISession.h" />
     <ClInclude Include="Inc\CDefaultSelecter.h" />
@@ -167,6 +170,7 @@
     <ClInclude Include="framework.h" />
     <ClInclude Include="Inc\Base\HeadingBuffer.h" />
     <ClInclude Include="Inc\HeadingNetHeader.h" />
+    <ClInclude Include="Inc\Interface\ISessionFectory.h" />
     <ClInclude Include="Inc\Interface\ISocket.h" />
     <ClInclude Include="Inc\Util\HeadingDefine.h" />
     <ClInclude Include="Inc\Util\HeadingFunction.h" />
@@ -175,10 +179,13 @@
   <ItemGroup>
     <ClCompile Include="CConnector.cpp" />
     <ClCompile Include="CDefaultSelecter.cpp" />
+    <ClCompile Include="CDefaultSession.cpp" />
     <ClCompile Include="CEventBaseSession_v2.cpp" />
     <ClCompile Include="CHeadingObject.cpp" />
     <ClCompile Include="CSimpleSocket.cpp" />
     <ClCompile Include="HeadingBuffer.cpp" />
+    <ClCompile Include="CSession_Router.cpp" />
+    <ClCompile Include="SConnInfo.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

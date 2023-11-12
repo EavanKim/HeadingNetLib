@@ -3,6 +3,7 @@
 namespace Heading
 {
 	CDefaultSelecter::CDefaultSelecter()
+		: m_router(nullptr)
 	{
 
 	}
@@ -29,7 +30,7 @@ namespace Heading
 	
 	void CDefaultSelecter::Update()
 	{
-
+		select();
 	}
 	
 	void CDefaultSelecter::Stop()

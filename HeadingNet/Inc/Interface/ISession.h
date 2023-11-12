@@ -2,9 +2,13 @@
 
 namespace Heading
 {
+	typedef uint64_t sessionKey_t;
+
 	struct ISession
 	{
-		virtual void				Set( Heading::connectionInfo& _info )	= 0;
+		virtual ~ISession() {}
+
+		virtual void				Set( connectionInfo& _info )	= 0;
 
 		virtual SOCKADDR_IN&		GetInfo	( )								= 0;
 
