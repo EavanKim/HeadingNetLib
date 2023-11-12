@@ -1,18 +1,18 @@
-#pragma once
+﻿#pragma once
 
 namespace Heading
 {
 	class CDefaultSession : public ISession
 	{
 	public:
-		SOCKADDR_IN& GetInfo() override;
+		const SOCKADDR_IN*	GetInfo	( )						override;
 
-		void Set(connectionInfo& _info) override;
-		void Set(IMessage& _message) override;
-		IMessage& Get() override;
+		void				Set		( ISocket*	_sock )		override;
+		void				Set		( IMessage&	_message )	override;
+		void				Get		( IMessage&	_message )	override;
 
 	private:
-
+		ISocket* m_sock = nullptr;
 	};
 }
 

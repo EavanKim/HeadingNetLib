@@ -2,21 +2,31 @@
 
 namespace Heading
 {
-	void CDefaultSession::Set(connectionInfo& _info)
+	const SOCKADDR_IN* CDefaultSession::GetInfo()
 	{
+		if (nullptr != m_sock)
+		{
+			return m_sock->GetInfo();
+		}
+		
+		return nullptr;
 	}
 
-	SOCKADDR_IN& CDefaultSession::GetInfo()
+	void CDefaultSession::Set(ISocket* _sock)
 	{
-		// TODO: insert return statement here
+		m_sock = _sock;
 	}
 
 	void CDefaultSession::Set(IMessage& _message)
 	{
+		if (nullptr != m_sock)
+		{
+			m_sock->Send( _message );
+		}
 	}
 
-	IMessage& CDefaultSession::Get()
+	void CDefaultSession::Get(IMessage& _message)
 	{
-		// TODO: insert return statement here
+
 	}
 }

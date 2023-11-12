@@ -6,8 +6,8 @@ namespace Heading
 	{
 		virtual ~ISocket() {}
 
-		virtual void 			Send( char*				_send
-									, unsigned short	_size ) = 0;
-		virtual unsigned int	Recv( char*				_recv ) = 0;
+		virtual const SOCKADDR_IN*	GetInfo	( )					= 0;
+		virtual void				Send	( IMessage&	_send )	= 0;
+		virtual void				Recv	( IMessage& _recv )	= 0;
 	};
 }
