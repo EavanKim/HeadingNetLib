@@ -7,11 +7,14 @@ namespace Heading
 	public:
 		const SOCKADDR_IN*	GetInfo	( )						override;
 
-		void				Set		( ISocket*	_sock )		override;
-		void				Set		( IMessage&	_message )	override;
-		void				Get		( IMessage&	_message )	override;
+		void				Set		( ISocket*		_sock )		override;
+		bool				Set		( IMessage*		_message )	override;
+		void				Get		( IMessage*&	_message )	override;
+
+		void Update() override;
 
 	private:
+		std::queue<IMessage*> m_sendQueue;
 		ISocket* m_sock = nullptr;
 	};
 }
