@@ -28,7 +28,9 @@ namespace Heading
 
 	private:
 		std::vector<WSAEVENT> m_WSALists = {};
-		CSession_Router m_router;
+		CRouter_Session* m_router = nullptr;
+		fd_set m_read;
+		fd_set m_send;
 	};
 }
 

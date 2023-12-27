@@ -30,7 +30,8 @@ namespace Heading
 	
 	void CDefaultSelecter::Update()
 	{
-		select();
+		int result = select(CPU_SETSIZE, &m_read, NULL, NULL, NULL);
+
 	}
 	
 	void CDefaultSelecter::Stop()

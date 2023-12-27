@@ -14,7 +14,6 @@ namespace Heading
 
 	void CConnector::newConnect( connectionInfo& _info )
 	{
-		
 		addrinfo info = {};
 		ZeroMemory( &info, sizeof( addrinfo ) );
 		info.ai_family = AF_INET;
@@ -24,7 +23,6 @@ namespace Heading
 		int fnResult = getaddrinfo( _info.ip.c_str( ), _info.port.c_str( ), &info, &_info.info );
 		if( S_OK != fnResult )
 		{
-			// 로그 남겨볼 위치...? 혹은 이벤트 처리 위치.
 			_info.sock = INVALID_SOCKET;
 			return;
 		}
