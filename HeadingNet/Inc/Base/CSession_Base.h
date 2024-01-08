@@ -5,6 +5,9 @@ namespace Heading
 	class CSession_Base : public ISession
 	{
 	public:
+		CSession_Base(ISocket* _socket);
+		virtual ~CSession_Base();
+
 		virtual void				Release	(	)						override;
 		virtual void				Reset	(	)						override;
 

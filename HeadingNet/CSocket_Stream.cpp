@@ -75,9 +75,13 @@ namespace Heading
         return nullptr;
     }
 
-    bool CSocket_Stream::Send(IMessage* _send)
+    bool CSocket_Stream::Send(CCache_Line* _dataCache)
     {
-        int sendResult = ::send(m_sock, _send->GetData(), _send->GetSize(), 0);
+        char* dataPtr;
+        uint64_t size;
+        CLock_Read ReadLock(_dataCache->GetCacheData(dataPtr, size));
+
+        int sendResult = ::send(m_sock, dataPtr, size, 0);
 
         if (SOCKET_ERROR == sendResult)
         {
@@ -97,34 +101,26 @@ namespace Heading
 
         return true;
     }
-
-    // 내가 고민 한 부분
-    // 가장 빠른 수동 동적할당을 통해
-    // 버퍼가 부족한 일 없이 계속 받게할 수 있을까?
-    // 하지만 결국 스팸성 발신까지 올라가면 한도끝도 없으니 발신량 자체를 제한할 수 밖에 없을 것.
-    // 발신량 테스트는 일단 기존 구현에서 먼저 테스트해보기
-    // 이 부분은 돌려보면서 테스트하자.
-    void CSocket_Stream::Recv(IMessage* _recv)
+    void CSocket_Stream::Recv(CCache_Line* _dataCache)
     {
-        char* dataPtr = nullptr;
-        int length = 0;
-        if (m_recvBuffer.get_buffer(&dataPtr, &length))
+        char* dataPtr;
+        uint64_t size;
+        CLock_Write WriteLock(_dataCache->SetCacheData(dataPtr, size));
+
+        int recvResult = ::recv(m_sock, dataPtr, size, 0);
+
+        if (SOCKET_ERROR == recvResult)
         {
-            int recvResult = ::recv(m_sock, dataPtr, length, 0);
+            // Error Flag 설정하기
+            m_state.setState(true, HS_ERROR);
+            return;
+        }
 
-            if (SOCKET_ERROR == recvResult)
-            {
-                // Error Flag 설정하기
-                m_state.setState(true, HS_ERROR);
-                return;
-            }
-
-            if (0 == recvResult)
-            {
-                // Error Flag 설정하기
-                // size 0을 연결 확인으로 사용하는 경우도 있다고 하시니 넘겨봅니다.
-                return;
-            }
+        if (0 == recvResult)
+        {
+            // Error Flag 설정하기
+            // size 0을 연결 확인으로 사용하는 경우도 있다고 하시니 넘겨봅니다.
+            return;
         }
     }
 }

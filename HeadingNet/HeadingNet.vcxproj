@@ -153,6 +153,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Inc\CLock_User.h" />
+    <ClInclude Include="Inc\CCache_Line.h" />
+    <ClInclude Include="Inc\CCache_Router.h" />
+    <ClInclude Include="Inc\CSelect_Simple_Win.h" />
     <ClInclude Include="Inc\CRouter_Session.h" />
     <ClInclude Include="Inc\Base\CSocket_Stream.h" />
     <ClInclude Include="Inc\CSession_Client.h" />
@@ -163,6 +167,7 @@
     <ClInclude Include="Inc\HeadingSession.h" />
     <ClInclude Include="Inc\Base\SConnInfo.h" />
     <ClInclude Include="Inc\Interface\IMessage.h" />
+    <ClInclude Include="Inc\Interface\ISelect.h" />
     <ClInclude Include="Inc\Interface\ISession.h" />
     <ClInclude Include="Inc\CDefaultSelecter.h" />
     <ClInclude Include="Inc\Base\CHeadingObject.h" />
@@ -181,9 +186,13 @@
     <ClInclude Include="pch.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="CCache_Line.cpp" />
     <ClCompile Include="CConnector.cpp" />
     <ClCompile Include="CDefaultSelecter.cpp" />
-    <ClCompile Include="CDefaultSession.cpp" />
+    <ClCompile Include="CLock_User.cpp" />
+    <ClCompile Include="CRoute_Buffer.cpp" />
+    <ClCompile Include="CSelect_Simple_Win.cpp" />
+    <ClCompile Include="CSession_Base.cpp" />
     <ClCompile Include="CEventBaseSession_v2.cpp" />
     <ClCompile Include="CHeadingObject.cpp" />
     <ClCompile Include="CRouter_Session.cpp" />
@@ -191,8 +200,8 @@
     <ClCompile Include="CSessionFactory_Conn.cpp" />
     <ClCompile Include="CSocket_Stream.cpp" />
     <ClCompile Include="HeadingBuffer.cpp" />
-    <ClCompile Include="CListenSession.cpp" />
-    <ClCompile Include="CConnSession.cpp" />
+    <ClCompile Include="CSession_Client.cpp" />
+    <ClCompile Include="CCache_Router.cpp" />
     <ClCompile Include="SConnInfo.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>

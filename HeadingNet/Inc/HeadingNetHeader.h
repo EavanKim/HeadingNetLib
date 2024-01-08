@@ -35,6 +35,12 @@
 
 #include "Util/HeadingDefine.h"
 
+#ifdef _WIN32 || _WIN64
+#include "CLock_User.h"
+#endif
+
+#include "CCache_Line.h"
+
 #include "Base/HeadingBuffer.h"
 #include "HeadingSession.h"
 
@@ -49,9 +55,6 @@
 #include "Base/SConnInfo.h"
 #include "Interface/ISessionFectory.h"
 
-#include "CSession_Client.h"
-
-
 #include "Util/HeadingDefine.h"
 
 #include "Base/HeadingBuffer.h"
@@ -59,6 +62,8 @@
 #include "Base/CSimpleState.h"
 
 #include "CConnector.h"
+
+#include "CCache_Router.h"
 
 // ===================[Message]===================
 
@@ -74,6 +79,7 @@
 #include "Base/CEventBaseSession_v2.h"
 #include "CSessionFactory_Conn.h"
 #include "Base/CSession_Base.h"
+#include "CSession_Client.h"
 
 // ===================[Session Rounter]===================
 
@@ -81,7 +87,12 @@
 
 // ===================[Selecter]===================
 
+#include "Interface/ISelect.h"
 #include "CDefaultSelecter.h"
+
+#ifdef _WIN32 || _WIN64
+#include "CSelect_Simple_Win.h"
+#endif
 
 // ===================[Utils For CPP File]===================
 

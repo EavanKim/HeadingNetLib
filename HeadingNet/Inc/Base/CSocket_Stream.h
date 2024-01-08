@@ -25,9 +25,9 @@ namespace Heading
 		void setLINGLE(bool _state = false, u_short _timeout = 0);
 
 		// ISocket을(를) 통해 상속됨
-		const SOCKADDR_IN* GetInfo() override;
-		bool Send(IMessage* _send) override;
-		void Recv(IMessage* _recv) override;
+		virtual const SOCKADDR_IN* GetInfo() override;
+		virtual bool Send(CCache_Line* _dataCache) override;
+		virtual void Recv(CCache_Line* _dataCache) override;
 
 	public:
 		CSimpleState	m_state = {};

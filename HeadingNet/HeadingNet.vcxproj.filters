@@ -93,6 +93,21 @@
     <ClInclude Include="Inc\Base\CSocket_Stream.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="Inc\Interface\ISelect.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\CSelect_Simple_Win.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\CCache_Router.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\CCache_Line.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\CLock_User.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -119,22 +134,34 @@
     <ClCompile Include="SConnInfo.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="CDefaultSession.cpp">
+    <ClCompile Include="CSession_Base.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="CSessionFactory_Conn.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="CListenSession.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="CConnSession.cpp">
+    <ClCompile Include="CSession_Client.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="CRouter_Session.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="CSocket_Stream.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="CSelect_Simple_Win.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="CRoute_Buffer.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="CCache_Line.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="CLock_User.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="CCache_Router.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
